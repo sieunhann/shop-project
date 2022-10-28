@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AdminLTE 3 | Dashboard</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css" />
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css" />
+
+    <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="/admin/dist/css/style.css">
+    <style>
+        .image-item {
+            border: 2px solid #eee;
+        }
+
+        .btn-delete-img{
+            width:100%;
+            background-color: #dc3545;
+            color: #fff;
+            border: 1px solid #dc3545;
+            border-radius: 5px;
+            padding-bottom: 2px;
+            padding-top: 2px;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul th:replace="~{/admin/menu :: #left-navbar}"></ul>
+
+        <!-- Right navbar links -->
+        <ul th:replace="~{/admin/menu :: #right-navbar}"></ul>
+    </nav>
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <div th:replace="~{/admin/menu :: #logo}"></div>
+
+        <!-- Sidebar -->
+        <div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-basket-shopping"></i>
+                            <p>
+                                Quản lý bán hàng
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../orders/admin-orders.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tất cả đơn hàng</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/admin/customers}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Khách hàng</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-store"></i>
+                            <p>
+                                Quản lý sản phẩm
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../products/admin-products.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tất cả sản phẩm</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../products/admin-categories.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nhóm sản phẩm</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-laptop"></i>
+                            <p>
+                                Quản lý account
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a th:href="@{/admin/accounts}"  class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh sách tài khoản</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/admin/roles}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nhóm tài khoản</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">Sản phẩm</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Tạo sản phẩm
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row py-2 justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/admin/products">
+                                    <button type="button" class="btn btn-default">
+                                        <i class="fas fa-chevron-left"></i> Quay lại
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-info px-4" id="create-product">
+                                    Lưu
+                                </button>
+                            </div>
+
+                            <div class="col-6 d-flex justify-content-end">
+                                <button type="button" class="btn btn-danger px-4">
+                                    Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-11">
+                                        <div class="text-bold" style="font-size: 18px;">Thông tin chung</div>
+                                        <hr>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Tên sản phẩm</label>
+                                                    <input type="text" class="form-control" id="name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Nhóm sản phẩm</label>
+                                                    <div class="select2-purple">
+                                                        <select class="select2 form-control" multiple="multiple" id="category">
+                                                            <th:block th:each="category:${categories}">
+                                                                <option th:value="${category.id}" th:text="${category.name}">
+                                                                    Java
+                                                                </option>
+                                                            </th:block>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Mô tả sản phẩm</label>
+                                            <textarea id="content"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Mô tả ngắn</label>
+                                            <textarea id="description" class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-11">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-11">
+                                        <div class="text-bold" style="font-size: 18px;">Hình ảnh sản phẩm</div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <!-- <div class="thumbnail-preview-container mb-3">
+                                              <img src="" alt="" id="thumbnail">
+                                            </div> -->
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <label for="input-file" class="btn btn-warning btn-flat font-weight-normal" style="border-radius: 0.25rem;">
+                                                        Upload ảnh</label>
+                                                    <input type="file" id="input-file" class="d-none" multiple>
+                                                </div>
+                                            </div>
+
+                                            <div class="image-container mt-4 mb-4" style="">
+                                                <output class="row" id="result"></output>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-11">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-11">
+                                        <div class="text-bold" style="font-size: 18px;">Phiên bản sản phẩm</div>
+                                        <hr>
+                                        <div class="form-group" id="variants">
+
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-info px-4" id="add-variant">
+                                                Thêm phiên bản
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="/admin/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- overlayScrollbars -->
+<script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="/admin/dist/js/adminlte.js"></script>
+
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+
+<script src="/admin/plugins/select2/js/select2.full.min.js"></script>
+
+<!--link axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="/admin/custom/js/product-create.js"></script>
+
+</body>
+
+</html>

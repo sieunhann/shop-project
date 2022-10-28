@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>AdminLTE 3 | Dashboard</title>
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/admin/dist/css/adminlte.min.css" />
+	<!-- overlayScrollbars -->
+	<link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+
+	<!--validation-->
+	<link rel="stylesheet" href="/admin/custom/css/validation.css">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<!-- Navbar -->
+		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+			<!-- Left navbar links -->
+			<ul th:replace="~{/admin/menu :: #left-navbar}"></ul>
+
+			<!-- Right navbar links -->
+			<ul th:replace="~{/admin/menu :: #right-navbar}"></ul>
+		</nav>
+
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<div th:replace="~{/admin/menu :: #logo}"></div>
+
+			<!-- Sidebar -->
+			<div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
+				<!-- Sidebar Menu -->
+				<nav class="mt-2">
+					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+						data-accordion="false">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-basket-shopping"></i>
+								<p>
+									Quản lý bán hàng
+									<i class="right fas fa-angle-left"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="../orders/admin-orders.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Tất cả đơn hàng</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{/admin/customers}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Khách hàng</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-store"></i>
+								<p>
+									Quản lý sản phẩm
+									<i class="fas fa-angle-left right"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="../products/admin-products.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Tất cả sản phẩm</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="../products/admin-categories.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Nhóm sản phẩm</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-laptop"></i>
+								<p>
+									Quản lý account
+									<i class="fas fa-angle-left right"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/admin/accounts}"  class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Danh sách tài khoản</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{/admin/roles}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Nhóm tài khoản</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">Dashboard</a>
+								</li>
+								<li class="breadcrumb-item active">
+									Danh sách khách hàng
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row py-2">
+						<div class="col-12">
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+									data-target="#modal-default" id="register">
+								<i class="fas fa-plus"></i> Tạo khách hàng
+							</button>
+							<a href="/admin/customers">
+								<button type="button" class="btn btn-info">
+									<i class="fas fa-redo"></i> Refresh
+								</button>
+							</a>
+						</div>
+					</div>
+					<!-- Create form-->
+					<div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Thông tin khách hàng</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group input-row pt-2">
+										<label for="createName">Họ và tên</label>
+										<input type="text" class="form-control" id="createName" placeholder="Enter name">
+										<small>error message</small>
+									</div>
+									<div class="form-group input-row pt-2">
+										<label for="createPhone">Số điện thoại</label>
+										<input type="text" class="form-control" id="createPhone" placeholder="Enter phone">
+										<small>error message</small>
+									</div>
+									<div class="form-group input-row pt-2">
+										<label for="createEmail">Email</label>
+										<input type="email" class="form-control" id="createEmail" placeholder="Enter email">
+										<small>error message</small>
+									</div>
+									<div class="form-group input-row pt-2">
+										<label for="createPassword">Mật khẩu</label>
+										<input type="password" class="form-control" id="createPassword" placeholder="Enter password">
+										<small>error message</small>
+									</div>
+									<div class="form-group pt-2">
+										<label for="createAddress">Địa chỉ</label>
+										<input type="text" class="form-control" id="createAddress" placeholder="Enter address">
+									</div>
+									<div class="form-group pt-2">
+										<label>City</label>
+										<select class="py-1" id="select-province" style="width: 100%;"></select>
+									</div>
+								</div>
+								<div class="modal-footer justify-content-between">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+									<button type="button" class="btn btn-primary" id="create-customer">Lưu</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row py-3">
+						<div class="col-3">
+							<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+								<option selected>Tất cả</option>
+								<option value="1">Sắp xếp theo thành phố: A - Z</option>
+								<option value="2">Sắp xếp theo thành phố: Z - A</option>
+								<option value="3">Sắp xếp theo tên: A - Z</option>
+								<option value="3">Sắp xếp theo tên: Z - A</option>
+							  </select>
+						</div>
+						<div class="col-9">
+							<form action="">
+								<div class="form-row align-items-center">
+									<div class="col-10">
+										<input type="text" class="form-control" id="search-customer" placeholder="Nhập số điện thoại">
+									</div>
+									<div class="col-auto">
+										<button type="button" class="btn btn-secondary" id="search-customer-btn">Tìm kiếm</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Khách hàng</th>
+												<th>Email</th>
+												<th>Số điện thoại</th>
+												<th>Thành phố</th>
+												<th>Ngày đăng kí</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="customer : ${customerPage.content}">
+												<td>
+													<a href="" th:text="${customer.name}"></a>
+												</td>
+												<td th:text="${customer.email}"></td>
+												<td th:text="${customer.phone}"></td>
+												<td th:text="${customer.city}"></td>
+												<td th:text="${#temporals.format(customer.createdAt,'dd-MM-yyyy')}">06-07-2022</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="d-flex justify-content-center mt-3" id="pagination">
+										<ul class="pagination mb-0" id="pagination-all">
+											<li class="paginate_button page-item previous"
+												id="example2_previous"
+												th:classappend="${currentPage == 1} ? 'disabled' : '' ">
+												<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
+												   class="page-link" th:onclick="|preNextPage(event,-1)|">Previous</a>
+											</li>
+											<th:block th:each="pageNumber : ${pageNumbers}">
+												<li class="paginate_button page-item page-number" th:data-value="${pageNumber}">
+													<a href="" aria-controls="example2" data-dt-idx="1" tabindex="0"
+													   class="page-link" th:text="${pageNumber}" th:onclick="|changePage(event,${pageNumber})|">1</a>
+												</li>
+											</th:block>
+											<li class="paginate_button page-item next" id="example2_next"
+												th:classappend="${currentPage == customerPage.getTotalPages()} ? 'disabled' : '' ">
+												<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0"
+												   class="page-link" th:onclick="|preNextPage(event,1)|">Next</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="/admin/plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap 4 -->
+	<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- overlayScrollbars -->
+	<script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/admin/dist/js/adminlte.js"></script>
+	<!--link axios-->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<!--validation-->
+	<script src="/admin/custom/js/customers.js"></script>
+	<script src="/admin/custom/js/validation.js"></script>
+</body>
+
+</html>

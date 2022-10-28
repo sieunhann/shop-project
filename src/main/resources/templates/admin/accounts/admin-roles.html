@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>AdminLTE 3 | Dashboard</title>
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/admin/dist/css/adminlte.min.css" />
+	<!-- overlayScrollbars -->
+	<link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<!-- Navbar -->
+		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+			<!-- Left navbar links -->
+			<ul th:replace="~{/admin/menu :: #left-navbar}"></ul>
+
+			<!-- Right navbar links -->
+			<ul th:replace="~{/admin/menu :: #right-navbar}"></ul>
+		</nav>
+
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<div th:replace="~{/admin/menu :: #logo}"></div>
+
+			<!-- Sidebar -->
+			<div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
+				<!-- Sidebar Menu -->
+				<nav class="mt-2">
+					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+						data-accordion="false">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-basket-shopping"></i>
+								<p>
+									Quản lý bán hàng
+									<i class="right fas fa-angle-left"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="../orders/admin-orders.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Tất cả đơn hàng</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{/admin/customers}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Khách hàng</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-store"></i>
+								<p>
+									Quản lý sản phẩm
+									<i class="fas fa-angle-left right"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="../products/admin-products.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Tất cả sản phẩm</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="../products/admin-categories.html" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Nhóm sản phẩm</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-laptop"></i>
+								<p>
+									Quản lý account
+									<i class="fas fa-angle-left right"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/admin/accounts}"  class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Danh sách tài khoản</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{/admin/roles}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Nhóm tài khoản</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">Dashboard</a>
+								</li>
+								<li class="breadcrumb-item active">
+									Danh sách nhóm tài khoản
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+<!--					<div class="row py-2">-->
+<!--						<div class="col-12">-->
+<!--							<button type="button" class="btn btn-primary">-->
+<!--								<i class="fas fa-plus"></i> Tạo nhóm tài khoản-->
+<!--							</button>-->
+<!--							<button type="button" class="btn btn-info">-->
+<!--								<i class="fas fa-redo"></i> Refresh-->
+<!--							</button>-->
+<!--						</div>-->
+<!--					</div>-->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>STT</th>
+												<th>Mã nhóm</th>
+												<th>Tên nhóm</th>
+												<th>Ngày tạo</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="role,state:${rolePage.content}">
+												<td th:text="${state.index + 1}"></td>
+												<td th:text="R + ${role.id}"></td>
+												<td>
+													<a href="#" th:text="${role.name}">John Doe</a>
+												</td>
+												<td th:text="${#temporals.format(role.createdAt,'dd-MM-yyyy')}"></td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="d-flex justify-content-center mt-3" id="pagination">
+										<ul class="pagination mb-0" id="pagination-all">
+											<li class="paginate_button page-item previous"
+												id="example2_previous"
+												th:classappend="${currentPage == 1} ? 'disabled' : '' ">
+												<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
+												   class="page-link" th:onclick="|preNextPage(event,-1)|">Previous</a>
+											</li>
+											<th:block th:each="pageNumber : ${pageNumbers}">
+												<li class="paginate_button page-item page-number" th:data-value="${pageNumber}">
+													<a href="" aria-controls="example2" data-dt-idx="1" tabindex="0"
+													   class="page-link" th:text="${pageNumber}" th:onclick="|changePage(event,${pageNumber})|">1</a>
+												</li>
+											</th:block>
+											<li class="paginate_button page-item next" id="example2_next"
+												th:classappend="${currentPage == rolePage.getTotalPages()} ? 'disabled' : '' ">
+												<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0"
+												   class="page-link" th:onclick="|preNextPage(event,1)|">Next</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="/admin/plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap 4 -->
+	<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- overlayScrollbars -->
+	<script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/admin/dist/js/adminlte.js"></script>
+
+	<!-- mine -->
+	<script src="/admin/custom/js/roles.js"></script>
+</body>
+
+</html>
