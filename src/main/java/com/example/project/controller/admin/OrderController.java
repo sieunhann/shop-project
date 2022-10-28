@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class OrderController {
@@ -25,7 +27,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/api/v1/admin/order")
-    public ResponseEntity<?> createOrder(OrderCreateRequest request){
+    public ResponseEntity<?> createOrder(@RequestBody OrderCreateRequest request){
         return ResponseEntity.ok(orderService.createOrder(request));
     }
 }
