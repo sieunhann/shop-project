@@ -200,10 +200,10 @@
 												<td th:text="${order.customerName}">
 													<a href="#">06-07-2022</a>
 												</td>
-												<td th:text="${order.total}">150000</td>
-												<td th:text="${order.status}" >Hoàn tất</td>
-												<td th:text="${order.payment}">Đã thanh toán</td>
-												<td th:text="${order.fulfillment}" >Đang vận chuyển</td>
+												<td class="d-flex justify-content-end" th:text="${order.total}">150000</td>
+												<td th:text="${order.status.getCode()}" >Hoàn tất</td>
+												<td th:text="${order.payment.getCode()}">Đã thanh toán</td>
+												<td th:text="${order.fulfillment.getCode()}" >Đang vận chuyển</td>
 											</tr>
 										</tbody>
 									</table>

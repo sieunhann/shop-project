@@ -1,5 +1,7 @@
 package com.example.project.entity;
 
+import java.util.stream.Stream;
+
 public enum OrderStatus {
     NEW("Mới"), CONFIRMED("Xác thực"), CANCELED("Hủy") ,COMPLETED("Thành công");
 
@@ -15,5 +17,12 @@ public enum OrderStatus {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public static OrderStatus of(String status){
+        return Stream.of(OrderStatus.values())
+                .filter(os -> os.getCode().equals(status))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

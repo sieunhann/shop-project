@@ -1,6 +1,5 @@
 package com.example.project.entity;
 
-import com.example.project.config.OrderStatusConverter;
 import com.example.project.dto.OrderDto;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -72,8 +71,8 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "total")
     private Double total;
 
-    @Convert(converter = OrderStatusConverter.class)
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @Column(name = "payment")
