@@ -1,19 +1,22 @@
 package com.example.project.service;
 
+import com.example.project.dto.OrderDto;
 import com.example.project.entity.*;
-import com.example.project.repository.AccountRepository;
-import com.example.project.repository.OrderItemRepository;
-import com.example.project.repository.OrderRepository;
-import com.example.project.repository.ShippingAddressRepository;
+import com.example.project.repository.*;
 import com.example.project.request.OrderCreateRequest;
 import com.example.project.security.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class OrderService {
@@ -23,14 +26,28 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private OrderItemRepository orderItemRepository;
-
     @Autowired
     private AccountRepository accountRepository;
-
     @Autowired
     private ShippingAddressRepository shippingAddressRepository;
+    @Autowired
+    private VariantRepository variantRepository;
 
+    // Lấy danh sách đơn hàng (phân trang)
+    public Page<OrderDto> getOrderPage(String query, Pageable pageable){
+        return orderRepository.getOrderDtosPage(query, pageable);
+    }
+
+    // Lấy danh sách các trang
+    public List<Integer> getPageNumbers(int totalPages){
+        return IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public OrderEntity createOrder(OrderCreateRequest request){
+        // Tạo đơn hàng
         OrderEntity order = OrderEntity.builder()
                 .note(request.getNote())
                 .total(request.getTotal())
@@ -47,9 +64,12 @@ public class OrderService {
         List<OrderItemEntity> items = request.getOrderItems();
         items.forEach(item -> {
             item.setOrderEntity(order);
+            VariantEntity variant = variantRepository.findById(item.getVariantId()).get();
+            int varQty = (int) variant.getQuantity();
+            int iteQty = (int) item.getQuantity();
+            variant.setQuantity(varQty-iteQty);
             orderItemRepository.save(item);
         });
-
 
         return order;
     }

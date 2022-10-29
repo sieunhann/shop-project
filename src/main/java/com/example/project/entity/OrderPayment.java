@@ -1,5 +1,5 @@
 package com.example.project.entity;
 
-public enum EnumPayment {
+public enum OrderPayment {
      UNPAID, PAID, REFUNDED, PARTIALLY_REFUND
 }

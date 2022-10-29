@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +23,6 @@ public class ShippingAddressEntity {
     private String name;
 
     @Column(name = "email")
-    @Pattern(regexp = "^[a-zA-Z][\\w]+@([\\w]+\\.[\\w]{2,}|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$")
     private String email;
 
     @Column(name = "phone", nullable = false)
@@ -35,6 +35,7 @@ public class ShippingAddressEntity {
     @Column(name = "city", nullable = false)
     private String city;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "order_id")
     private OrderEntity orderEntity;

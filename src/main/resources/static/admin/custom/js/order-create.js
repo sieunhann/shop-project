@@ -164,6 +164,7 @@ createOrderBtn.addEventListener("click", async () => {
                 orderItems: getOrderItems(),
                 shippingAddress: getShippingAddress()
             })
+        window.location.href = "/admin/orders";
     } catch (e) {
         console.log(e.response.data.message)
     }

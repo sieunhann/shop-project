@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="utf-8" />
@@ -192,20 +192,18 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+											<tr th:each="order : ${orderPage.content}">
 												<td>
-													<a href="./blog-detail.html">Khai giảng khóa</a>
+													<a href="#" th:text="${order.id}"></a>
 												</td>
-												<td>
+												<td th:text="${#temporals.format(order.createdAt,'dd-MM-yyyy')}"></td>
+												<td th:text="${order.customerName}">
 													<a href="#">06-07-2022</a>
 												</td>
-												<td>
-													John
-												</td>
-												<td>150000</td>
-												<td>Hoàn tất</td>
-												<td>Đã thanh toán</td>
-												<td>Đang vận chuyển</td>
+												<td th:text="${order.total}">150000</td>
+												<td th:text="${order.status}" >Hoàn tất</td>
+												<td th:text="${order.payment}">Đã thanh toán</td>
+												<td th:text="${order.fulfillment}" >Đang vận chuyển</td>
 											</tr>
 										</tbody>
 									</table>
