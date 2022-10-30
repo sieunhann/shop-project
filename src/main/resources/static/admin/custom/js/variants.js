@@ -1,3 +1,9 @@
+// format sang tiền Việt
+const formatVND = (obj) => {
+    obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    return obj;
+}
+
 //Chuyển page
 
 const params = new URLSearchParams(window.location.search);
@@ -45,10 +51,11 @@ async function updateVariant(id) {
 
 // Hiển thị lại sau update
 function renderUpdate(id, newPrice, newQuantity){
+    console.log(formatVND(newPrice))
     const variantRow = document.getElementById(`${id}`);
     const priceCol = variantRow.querySelector(".varPrice")
     const quantityCol = variantRow.querySelector(".varQuantity")
-    priceCol.innerText = newPrice;
+    priceCol.innerHTML= formatVND(+newPrice);
     quantityCol.innerText = newQuantity;
 }
 

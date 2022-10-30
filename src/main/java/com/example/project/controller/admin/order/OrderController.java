@@ -4,6 +4,7 @@ import com.example.project.dto.AccountDto;
 import com.example.project.dto.OrderDto;
 import com.example.project.repository.OrderRepository;
 import com.example.project.request.OrderCreateRequest;
+import com.example.project.request.OrderUpdateRequest;
 import com.example.project.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,6 +63,13 @@ public class OrderController {
     @GetMapping("/api/v1/order/{id}")
     public ResponseEntity<?> getOrder(@PathVariable String id){
         return ResponseEntity.ok(orderService.getById(id));
+    }
+
+    // Cập nhật đơn hàng
+    @PutMapping("/api/v1/order/{id}")
+    public ResponseEntity<?> updateOrder(@PathVariable String id,
+                                         @RequestBody OrderUpdateRequest request){
+        return ResponseEntity.ok(orderService.updateOrder(id, request));
     }
 
 }

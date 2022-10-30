@@ -8,6 +8,13 @@ const easyMDE = new EasyMDE({
     },
 });
 
+// format sang tiền Việt
+const formatVND = (obj) => {
+    obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    return obj;
+}
+
+
 // Query string tren url (id)
 const URL = "/admin/product/"
 const params = window.location.pathname;
@@ -104,7 +111,7 @@ const renderVariant = (arr) => {
             </div>
             <div class="col-3">
                 <label>Giá bán</label>
-                <input type="text" class="form-control price" value="${el.price}" disabled/>
+                <input type="text" class="form-control price" value="${formatVND(el.price)}" disabled/>
             </div>
             <div class="col-1 d-flex align-items-end">
                 <button class="btn btn-danger btn-flat btn-delete-variant" onclick="removeVariant(${el.id})"

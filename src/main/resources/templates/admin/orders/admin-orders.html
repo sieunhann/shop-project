@@ -148,9 +148,11 @@
 									<i class="fas fa-plus"></i> Tạo đơn hàng
 								</button>
 							</a>
-							<button type="button" class="btn btn-info">
-								<i class="fas fa-redo"></i> Refresh
-							</button>
+							<a href="/admin/orders">
+								<button type="button" class="btn btn-info">
+									<i class="fas fa-redo"></i> Refresh
+								</button>
+							</a>
 						</div>
 					</div>
 					<div class="row py-3">
@@ -200,7 +202,7 @@
 												<td th:text="${order.customerName}">
 													<a href="#">06-07-2022</a>
 												</td>
-												<td class="d-flex justify-content-end" th:text="${order.total}">150000</td>
+												<td class="d-flex justify-content-end" th:text="${#numbers.formatInteger(order.total,3,'POINT')} + ' VND'">150000</td>
 												<td th:text="${order.status.getCode()}" >Hoàn tất</td>
 												<td th:text="${order.payment.getCode()}">Đã thanh toán</td>
 												<td th:text="${order.fulfillment.getCode()}" >Đang vận chuyển</td>

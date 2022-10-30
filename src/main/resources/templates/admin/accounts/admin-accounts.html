@@ -44,11 +44,6 @@
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
 			<div th:replace="~{/admin/menu :: #logo}"></div>
-<!--			<a href="../index.html" class="brand-link">-->
-<!--				<img src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
-<!--					style="opacity: 0.8" />-->
-<!--				<span class="brand-text font-weight-light">Admin</span>-->
-<!--			</a>-->
 
 			<!-- Sidebar -->
 			<div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
@@ -252,6 +247,7 @@
 												<th>Nhóm tài khoản</th>
 												<th>Ngày khởi tạo</th>
 												<th>Ngày cập nhật</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -265,22 +261,51 @@
 												.generateRoleString(account.roles)}">Công khai</td>
 												<td th:text="${#temporals.format(account.createdAt,'dd-MM-yyyy')}"></td>
 												<td th:text="${#temporals.format(account.updatedAt,'dd-MM-yyyy')}"></td>
+												<td>
+													<button th:value="${account.id}" type="button"
+															class="btn btn-block btn-primary"
+															data-toggle="modal"
+															th:attr="data-target='#modal-update-'+${account.id}">Update
+													</button>
+													<!-- Create form-->
+													<div class="modal fade" th:id="modal-update- + ${account.id}" style="display: none;" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Thông tin nhân viên</h4>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="form-group input-row pt-2">
+																		<label for="createName">Họ và tên</label>
+																		<input type="text" class="form-control" id="createName" placeholder="Enter name">
+																		<small>error message</small>
+																	</div>
+																	<div class="form-group input-row pt-2">
+																		<label for="createPhone">Số điện thoại</label>
+																		<input type="text" class="form-control" id="createPhone" placeholder="Enter phone">
+																		<small>error message</small>
+																	</div>
+																	<div class="form-group input-row pt-2">
+																		<label for="createEmail">Email</label>
+																		<input type="email" class="form-control" id="createEmail" placeholder="Enter email">
+																		<small>error message</small>
+																	</div>
+
+																</div>
+																<div class="modal-footer justify-content-between">
+																	<button type="button" class="btn btn-default" data-dismiss="modal" id="delete-account">Xóa</button>
+																	<button type="button" class="btn btn-primary" data-dismiss="modal" id="update-account">Lưu</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</td>
 											</tr>
 										</tbody>
 									</table>
-<!--									<nav aria-label="Page navigation example" class="mt-2">-->
-<!--										<ul class="pagination justify-content-center pagination-sm">-->
-<!--											<li  th:if="${accountPage.totalPages > 0}" class="page-link"-->
-<!--												 th:each="pageNumber : ${pageNumbers}">-->
-<!--												<a th:href="@{/admin/accounts/(page=${pageNumber}, limit=${accountPage.size})}"-->
-<!--												   th:text="${pageNumber}"-->
-<!--												   th:class="${pageNumber==accountPage.number + 1} ? active"-->
-<!--												   class="page-link"-->
-<!--												></a>-->
-<!--											</li>-->
-<!--										</ul>-->
-<!--									</nav>-->
-
 									<div class="d-flex justify-content-center mt-3" id="pagination">
 										<ul class="pagination mb-0" id="pagination-all">
 											<li class="paginate_button page-item previous"

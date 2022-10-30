@@ -3,6 +3,12 @@ const URL = "/admin/order/"
 const params = window.location.pathname;
 const paramId = params.replace(URL, "");
 
+// format sang tiền Việt
+const formatVND = (obj) => {
+    obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    return obj;
+}
+
 // ============= SHIPPING ADDRESS =============
 let shipObj;
 
@@ -267,10 +273,84 @@ const renderOrderItem = (arr) => {
                 </td>
                 <td class ="line_qty" data-qty="${el.quantity}">${el.quantity}
                 </td>
-                <td class="line_price" data-price="${el.price}">${el.price}</td>
-                <td class="line_total">${el.total}</td>
+                <td class="line_price" data-price="${el.price}">${formatVND(el.price)}</td>
+                <td class="line_total">${formatVND(el.total)}</td>
             </tr>
             `
     })
     itemList.innerHTML = html;
 }
+
+// ============= ORDER =============
+// ============= RENDER =============
+const noteEl = document.getElementById("note");
+const statusEl = document.getElementById("select-status")
+const paymentEl = document.getElementById("select-payment")
+const fulfillmentEl = document.getElementById("select-fulfillment")
+const totalEl = document.getElementById("order-total")
+
+// 1. Lấy thông tin
+const getOrder = async () => {
+    try {
+        let order = await axios.get(`/api/v1/order/${paramId}`);
+        renderOrder(order.data);
+        console.log("successful")
+    } catch (e){
+        console.log(e.response.data.message);
+    }
+}
+
+getOrder();
+
+// 2. Hiển thị thông tin
+const renderOrder = (obj) => {
+    noteEl.value = obj.note;
+    renderSelect(statusEl, obj.status);
+    renderSelect(paymentEl, obj.payment);
+    renderSelect(fulfillmentEl, obj.fulfillment);
+    totalEl.innerHTML = `<div>${formatVND(obj.total)}</div>`
+
+}
+
+// 3. Hiển thị trạng thái
+const renderSelect = (obj, result) => {
+    let optionEl = obj.querySelectorAll("option");
+    optionEl.forEach(el => {
+        if(el.value === result){
+            el.selected = true;
+        }
+    })
+}
+
+// ============= UPDATE =============
+
+// 1. Lấy trạng thái được update
+const updateSelect = (obj) => {
+    let result;
+    let optionEl = obj.querySelectorAll("option");
+    optionEl.forEach(el => {
+        if(el.selected){
+            result = el.value;
+        }
+    })
+    return result;
+}
+
+// 2. Cập nhật đơn hàng
+const updateOrderBtn = document.getElementById("btn-update-order");
+
+updateOrderBtn.addEventListener("click", async () => {
+    try {
+        await axios.put(`/api/v1/order/${paramId}`,
+            {
+                note: noteEl.value,
+                status: updateSelect(statusEl),
+                payment: updateSelect(paymentEl),
+                fulfillment: updateSelect(fulfillmentEl)
+            })
+            console.log("successful");
+            getOrder();
+    } catch (e) {
+        console.log(e.response.data.message)
+    }
+})

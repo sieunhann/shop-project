@@ -54,7 +54,7 @@ const selectProduct = (ids) => {
         <td>
             <input type="number" class="line_qty" id="quantity" min="0" max="${varEl.varQuantity}" value="0" onchange="changeNumber(this)">
         </td>
-        <td class="line_price" data-price="${varEl.varPrice}">${varEl.varPrice}</td>
+        <td class="line_price" data-price="${varEl.varPrice}">${formatVND(varEl.varPrice)}</td>
         <td class="line_total">0</td>
         <td>
             <a href="javascript:void(0)" onclick="removeProduct(${varEl.varId})">Xóa</a>
@@ -70,7 +70,7 @@ function changeNumber(el){
     let qty = $(el).val();
     let price = $(el).closest(".line_item").find(".line_price").attr("data-price");
     let total = qty * price;
-    $(el).closest(".line_item").find(".line_total").attr("data-total", total).html(total);
+    $(el).closest(".line_item").find(".line_total").attr("data-total", total).html(formatVND(total));
     changeTotal();
 
 }
@@ -82,7 +82,7 @@ function changeTotal(){
     toltalEl.forEach(el => orderTotal += +el.dataset.total);
     let orderTotalEl = document.getElementById("order-total");
     orderTotalEl.setAttribute("data-total", `${orderTotal}`)
-    orderTotalEl.innerHTML = `<div class="text-bold">${orderTotal}</div>`
+    orderTotalEl.innerHTML = `<div class="text-bold">${formatVND(orderTotal)}</div>`
 }
 
 // Xóa sản phẩm đã chọn trong đơn hàng
@@ -209,4 +209,10 @@ const getOrderItems = () => {
     })
     console.log(orderItems);
     return orderItems;
+}
+
+// format sang tiền Việt
+const formatVND = (obj) => {
+    obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+    return obj;
 }

@@ -5,6 +5,7 @@ import com.example.project.entity.*;
 import com.example.project.exception.NotFoundException;
 import com.example.project.repository.*;
 import com.example.project.request.OrderCreateRequest;
+import com.example.project.request.OrderUpdateRequest;
 import com.example.project.security.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,5 +118,18 @@ public class OrderService {
         return orderRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Đơn hàng không tồn tại");
         });
+    }
+
+    // Cập nhật đơn hàng
+    public OrderEntity updateOrder(String id, OrderUpdateRequest request) {
+        OrderEntity order = orderRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Đơn hàng không tồn tại");
+        });
+        order.setNote(request.getNote());
+        order.setStatus(OrderStatus.valueOf(request.getStatus()));
+        order.setPayment(OrderPayment.valueOf(request.getPayment()));
+        order.setFulfillment(OrderFulfillment.valueOf(request.getFulfillment()));
+        orderRepository.save(order);
+        return order;
     }
 }
