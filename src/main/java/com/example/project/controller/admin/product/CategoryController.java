@@ -1,4 +1,4 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.product;
 
 import com.example.project.entity.CategoryEntity;
 import com.example.project.request.CategoryRequest;

@@ -1,7 +1,7 @@
 const searchProductBtn = document.getElementById("search-product-btn")
 const searchProductInput = document.getElementById("search-product-input")
 const productSelectList = document.getElementById("list-product-chose")
-const productList = document.getElementById("list-products")
+const itemList = document.getElementById("list-items")
 
 let varArr = []
 
@@ -44,7 +44,7 @@ const selectProduct = (ids) => {
     let varEl = varArr.find((el) => {
         return el.varId === ids;
     })
-    html = productList.innerHTML;
+    html = itemList.innerHTML;
     html += `
     <tr id="${varEl.varId}" class="line_item">
         <td class="line_product" data-pro="${varEl.proId}" data-vari="${varEl.varId}">
@@ -61,7 +61,7 @@ const selectProduct = (ids) => {
         </td>
     </tr>
     `
-    productList.innerHTML = html;
+    itemList.innerHTML = html;
     document.getElementById(`chose-btn-${ids}`).innerHTML = "<p>Đã chọn</p>";
 }
 

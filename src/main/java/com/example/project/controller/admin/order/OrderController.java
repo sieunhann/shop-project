@@ -1,4 +1,4 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.order;
 
 import com.example.project.dto.AccountDto;
 import com.example.project.dto.OrderDto;
@@ -22,7 +22,7 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
-
+    // Trang tất cả đơn hàng
     @GetMapping("/admin/orders")
     public String getOrdersPage(Model model,
                                 @RequestParam(name = "query", required = false) String query,
@@ -39,14 +39,29 @@ public class OrderController {
         return "/admin/orders/admin-orders";
     }
 
+    // Trang tạo đơn hàng
     @GetMapping("/admin/order/create")
     public String getOrderCreatePage(){
         return "/admin/orders/admin-order-create";
     }
 
+
+    // Tạo đơn hàng
     @PostMapping(value = "/api/v1/admin/order")
     public ResponseEntity<?> createOrder(@RequestBody OrderCreateRequest request){
         return ResponseEntity.ok(orderService.createOrder(request));
+    }
+
+    // Trang chi tiết đơn hàng
+    @GetMapping("/admin/order/{id}")
+    public String getOrderPage(@PathVariable String id){
+        return "admin/orders/admin-order";
+    }
+
+    // Lấy thông tin đơn hàng theo id
+    @GetMapping("/api/v1/order/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable String id){
+        return ResponseEntity.ok(orderService.getById(id));
     }
 
 }

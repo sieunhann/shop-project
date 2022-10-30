@@ -1,4 +1,4 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.product;
 
 import com.example.project.dto.VariantDto;
 import com.example.project.entity.ProductEntity;
@@ -34,6 +34,7 @@ public class VariantController {
         return "/admin/products/admin-variants";
     }
 
+    // Lấy tất cả phiên bản sp cho order
     @GetMapping("/api/v1/order/variant")
     public ResponseEntity<?> getVariantsList(@RequestParam(value = "query", required = false) String query){
         return ResponseEntity.ok(variantService.getVariantDtos(query));
@@ -58,6 +59,7 @@ public class VariantController {
         return ResponseEntity.noContent().build();
     }
 
+    // Cập nhật phiên bản sp
     @PutMapping("/api/v1/variant/{id}")
     public ResponseEntity<?> updateVariant(@PathVariable Long id,
                                            @RequestBody VariantRequest request){

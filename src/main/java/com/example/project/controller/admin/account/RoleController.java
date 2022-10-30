@@ -1,4 +1,4 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.account;
 
 import com.example.project.dto.AccountDto;
 import com.example.project.entity.RoleEntity;

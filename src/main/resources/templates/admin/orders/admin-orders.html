@@ -169,7 +169,7 @@
 										<input type="text" class="form-control" id="search-order" placeholder="Nhập mã đơn hàng">
 									</div>
 									<div class="col-auto">
-										<button type="button" class="btn btn-secondary">Tìm kiếm</button>
+										<button type="button" class="btn btn-secondary" id="search-order-btn">Tìm kiếm</button>
 									</div>
 								</div>
 							</form>
@@ -194,7 +194,7 @@
 										<tbody>
 											<tr th:each="order : ${orderPage.content}">
 												<td>
-													<a href="#" th:text="${order.id}"></a>
+													<a th:href="@{/admin/order/{id} (id=${order.id})}" th:text="${order.id}"></a>
 												</td>
 												<td th:text="${#temporals.format(order.createdAt,'dd-MM-yyyy')}"></td>
 												<td th:text="${order.customerName}">
@@ -209,39 +209,23 @@
 									</table>
 
 									<div class="d-flex justify-content-center mt-3" id="pagination">
-										<ul class="pagination mb-0">
-											<li class="paginate_button page-item previous disabled"
-												id="example2_previous">
+										<ul class="pagination mb-0" id="pagination-all">
+											<li class="paginate_button page-item previous"
+												id="example2_previous"
+												th:classappend="${currentPage == 1} ? 'disabled' : '' ">
 												<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-													class="page-link">Previous</a>
+												   class="page-link" th:onclick="|preNextPage(event,-1)|">Previous</a>
 											</li>
-											<li class="paginate_button page-item active">
-												<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0"
-													class="page-link">1</a>
-											</li>
-											<li class="paginate_button page-item">
-												<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0"
-													class="page-link">2</a>
-											</li>
-											<li class="paginate_button page-item">
-												<a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0"
-													class="page-link">3</a>
-											</li>
-											<li class="paginate_button page-item">
-												<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0"
-													class="page-link">4</a>
-											</li>
-											<li class="paginate_button page-item">
-												<a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0"
-													class="page-link">5</a>
-											</li>
-											<li class="paginate_button page-item">
-												<a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0"
-													class="page-link">6</a>
-											</li>
-											<li class="paginate_button page-item next" id="example2_next">
+											<th:block th:each="pageNumber : ${pageNumbers}">
+												<li class="paginate_button page-item page-number" th:data-value="${pageNumber}">
+													<a href="" aria-controls="example2" data-dt-idx="1" tabindex="0"
+													   class="page-link" th:text="${pageNumber}" th:onclick="|changePage(event,${pageNumber})|">1</a>
+												</li>
+											</th:block>
+											<li class="paginate_button page-item next" id="example2_next"
+												th:classappend="${currentPage == orderPage.getTotalPages()} ? 'disabled' : '' ">
 												<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0"
-													class="page-link">Next</a>
+												   class="page-link" th:onclick="|preNextPage(event,1)|">Next</a>
 											</li>
 										</ul>
 									</div>
@@ -266,6 +250,8 @@
 	<script src="/admin/dist/js/adminlte.js"></script>
 	<!--link axios-->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!--mine-->
+	<script src="/admin/custom/js/orders.js"></script>
 </body>
 
 </html>

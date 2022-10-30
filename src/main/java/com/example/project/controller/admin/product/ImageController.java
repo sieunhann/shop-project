@@ -1,4 +1,4 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.product;
 
 import com.example.project.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;

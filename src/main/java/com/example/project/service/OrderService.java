@@ -2,6 +2,7 @@ package com.example.project.service;
 
 import com.example.project.dto.OrderDto;
 import com.example.project.entity.*;
+import com.example.project.exception.NotFoundException;
 import com.example.project.repository.*;
 import com.example.project.request.OrderCreateRequest;
 import com.example.project.security.JwtUtils;
@@ -32,6 +33,8 @@ public class OrderService {
     private ShippingAddressRepository shippingAddressRepository;
     @Autowired
     private VariantRepository variantRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     // Lấy danh sách đơn hàng (phân trang)
     public Page<OrderDto> getOrderPage(String query, Pageable pageable){
@@ -61,19 +64,34 @@ public class OrderService {
         shippingAddressRepository.save(shippingAddress);
 
         // Tạo order items
+        createOrderItems(request, order);
+
+        return order;
+    }
+
+    // Tạo order items
+    public List<OrderItemEntity> createOrderItems(OrderCreateRequest request, OrderEntity order){
         List<OrderItemEntity> items = request.getOrderItems();
         items.forEach(item -> {
-            item.setOrderEntity(order);
+            ProductEntity product = productRepository.findById(item.getProductId()).get();
             VariantEntity variant = variantRepository.findById(item.getVariantId()).get();
+
+            item.setOrderEntity(order);
+            item.setProductName(product.getName());
+            item.setVariantSku(variant.getSku());
+            item.setVariantColor(variant.getColor());
+            item.setVariantSize(variant.getSize());
+
+            // Cập nhật tồn kho phiên bản sp
             int varQty = (int) variant.getQuantity();
             int iteQty = (int) item.getQuantity();
             variant.setQuantity(varQty-iteQty);
             orderItemRepository.save(item);
         });
-
-        return order;
+        return items;
     }
 
+    // Set khách hàng cho order
     public void setCustomer(HttpServletRequest request, OrderCreateRequest orderRequest){
         // Lấy token từ trong header của request
         String token = jwtUtils.getTokenFromCookie(request);
@@ -92,5 +110,12 @@ public class OrderService {
         } else {
             orderRequest.setCustomer(null);
         }
+    }
+
+    // Tìm đơn hàng theo id
+    public OrderEntity getById(String id) {
+        return orderRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Đơn hàng không tồn tại");
+        });
     }
 }

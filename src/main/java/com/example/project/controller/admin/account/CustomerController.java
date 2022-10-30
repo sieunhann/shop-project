@@ -1,13 +1,16 @@
-package com.example.project.controller.admin;
+package com.example.project.controller.admin.account;
 
 import com.example.project.dto.AccountDto;
+import com.example.project.entity.AccountEntity;
 import com.example.project.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,8 +38,14 @@ public class CustomerController {
         return "admin/accounts/admin-customers";
     }
 
+    // Trang chi tiết khách hàng
     @GetMapping("/admin/customer")
     public String getCustomer(){
         return "admin/accounts/admin-customer";
+    }
+
+    @GetMapping("/api/v1/order/{id}/customer")
+    public ResponseEntity<?> getByOrder(@PathVariable String id){
+        return ResponseEntity.ok(accountService.getByOrder(id));
     }
 }

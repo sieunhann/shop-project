@@ -21,8 +21,20 @@ public class OrderItemEntity {
     @Column(name = "product_id")
     private Long productId;
 
+    @Column(name = "product_name")
+    private String productName;
+
     @Column(name = "variant_id")
     private Long variantId;
+
+    @Column(name = "variant_sku")
+    private String variantSku;
+
+    @Column(name = "variant_color")
+    private String variantColor;
+
+    @Column(name = "variant_size")
+    private String variantSize;
 
     @Column(name = "price")
     private Double price;

@@ -138,7 +138,7 @@
                                 <a href="#">Quản lý đơn hàng</a>
                             </li>
                             <li class="breadcrumb-item active">
-                                Tạo đơn hàng
+                                Chi tiết đơn hàng
                             </li>
                         </ol>
                     </div>
@@ -160,12 +160,6 @@
                                     Lưu
                                 </button>
                             </div>
-
-<!--                            <div class="col-6 d-flex justify-content-end">-->
-<!--                                <button type="button" class="btn btn-danger px-4">-->
-<!--                                    Xóa-->
-<!--                                </button>-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -178,84 +172,105 @@
                                     <div class="card-body">
                                         <div class="row justify-content-center">
                                             <div class="col-md-12">
-                                                <div class="text-bold" style="font-size: 18px;">Sản phẩm</div>
+                                                <div class="text-bold" style="font-size: 18px;">Thông tin khách hàng</div>
                                                 <hr>
+                                            </div>
+                                            <div class="col-md-12 my-2">
+                                                <div class="text-bold" style="font-size: 16px;">
+                                                    <u>Khách hàng</u>
+                                                </div>
                                                 <br>
+                                                <div class="row" id="customer-info">
+                                                    <div class="col-6">
+                                                        <div class="row">
+                                                            <div class="col-6 py-1">
+                                                                <label>Tên khách hàng:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Email:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Số điện thoại:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row">
+                                                            <div class="col-6 py-1">
+                                                                <label>Tỉnh/Thành phố:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Địa chỉ:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 my-2">
+                                                <hr>
                                                 <div class="row">
-
-                                                    <div class="col-12 pt-2">
-                                                        <table class="table table-bordered table-hover">
-                                                            <thead style="font-size: 14px; background-color: #ebeaea;">
-                                                            <th>Tên sản phẩm</th>
-                                                            <th>Số lượng</th>
-                                                            <th>Giá</th>
-                                                            <th>Thành tiền</th>
-                                                            <th></th>
-                                                            </thead>
-                                                            <tbody id="list-products">
-<!--                                                            <tr>-->
-<!--                                                                <td></td>-->
-<!--                                                                <td>-->
-<!--                                                                    <input type="number" id="quantity" min="0">-->
-<!--                                                                </td>-->
-<!--                                                                <td>150000</td>-->
-<!--                                                                <td>300000</td>-->
-<!--                                                                <td>-->
-<!--                                                                    <a href="javascript:void(0)">Xóa</a>-->
-<!--                                                                </td>-->
-<!--                                                            </tr>-->
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="col-9">
+                                                        <div class="text-bold" style="font-size: 16px;">
+                                                            <u>Người nhận</u>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="button" class="btn btn-info px-4" data-toggle="modal"
-                                                                data-target="#modal-default" id="search-products">
-                                                            Thêm sản phẩm
-                                                        </button>
+                                                    <div class="col-3">
+                                                        <a href="javascript:void(0)" data-toggle="modal"
+                                                           data-target="#modal-update-shipping" id="update-shipping">Chỉnh sửa</a>
                                                     </div>
+                                                </div>
+                                                <br>
+                                                <div class="row" id="shipping-info">
+                                                    <div class="col-6">
+                                                        <div class="row">
+                                                            <div class="col-6 py-1">
+                                                                <label>Tên người nhận:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
 
-                                                    <!-- add products form-->
-                                                    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content" style="width: 140%;">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">Tìm kiếm sản phẩm</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">×</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="">
-                                                                        <div class="form-row align-items-center">
-                                                                            <div class="col-10">
-                                                                                <input type="text" class="form-control" id="search-product-input"
-                                                                                       placeholder="Nhập tên sản phẩm hoặc Sku">
-                                                                            </div>
-                                                                            <div class="col-auto">
-                                                                                <button type="button" class="btn btn-secondary" id="search-product-btn">Tìm
-                                                                                    kiếm</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                    <div class="form-group input-row pt-2">
-                                                                        <table class="table table-bordered table-hover">
-                                                                            <thead style="font-size: 14px; background-color: #ebeaea;">
-                                                                                <th>Tên sản phẩm</th>
-                                                                                <th>Sku</th>
-                                                                                <th>Màu - size</th>
-                                                                                <th>Số lượng</th>
-                                                                                <th></th>
-                                                                            </thead>
-                                                                            <tbody id="list-product-chose">
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer justify-content-between">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="finish">Hoàn
-                                                                        tất</button>
-                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Email:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Số điện thoại:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row">
+                                                            <div class="col-6 py-1">
+                                                                <label>Tỉnh/Thành phố:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
+                                                            </div>
+                                                            <div class="col-6 py-1">
+                                                                <label>Địa chỉ:</label>
+                                                            </div>
+                                                            <div class="col-6 py-1">
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -271,10 +286,21 @@
                                     <div class="card-body">
                                         <div class="row justify-content-center">
                                             <div class="col-md-12">
-                                                <div class="text-bold" style="font-size: 18px;">Ghi chú đơn hàng</div>
+                                                <div class="text-bold" style="font-size: 18px;">Sản phẩm</div>
                                                 <hr>
-                                                <div class="form-group">
-                                                    <textarea id="note" class="form-control" rows="5"></textarea>
+                                                <div class="row">
+                                                    <div class="col-12 pt-2">
+                                                        <table class="table table-bordered table-hover">
+                                                            <thead style="font-size: 14px; background-color: #ebeaea;">
+                                                                <th>Tên sản phẩm</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Giá</th>
+                                                                <th>Thành tiền</th>
+                                                            </thead>
+                                                            <tbody id="list-items">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,41 +339,56 @@
                                     <div class="card-body">
                                         <div class="row justify-content-center">
                                             <div class="col-md-12">
-                                                <div class="text-bold" style="font-size: 18px;">Thông tin giao hàng</div>
+                                                <div class="text-bold" style="font-size: 18px;">Xử lý đơn hàng</div>
                                                 <hr>
-                                                <br>
-                                                <div class="row" id="delivery-information">
+                                                <div class="row" id="status-information">
                                                     <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label>Tên người nhận</label>
-                                                            <input type="text" class="form-control" id="shipping-name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label>Email</label>
-                                                            <input type="text" class="form-control" id="shipping-email" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label>Số điện thoại</label>
-                                                            <input type="text" class="form-control" id="shipping-phone" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label>Địa chỉ</label>
-                                                            <input type="text" class="form-control" id="shipping-address" />
+                                                        <div class="form-group pt-2">
+                                                            <label>Trạng thái</label>
+                                                            <select class="py-1" id="select-status" style="width: 80%;">
+                                                                <option value="NEW">Mới</option>
+                                                                <option value="CONFIRMED">Xác thực</option>
+                                                                <option value="COMPLETED">Thành công</option>
+                                                                <option value="CANCELED">Hủy</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group pt-2">
-                                                            <label>Thành phố</label>
-                                                            <select class="py-1" id="select-province" style="width: 100%;"></select>
+                                                            <label>Thanh toán</label>
+                                                            <select class="py-1" id="select-payment" style="width: 80%;">
+                                                                <option value="UNPAID">Chưa thanh toán</option>
+                                                                <option value="PAID">Đã thanh toán</option>
+                                                                <option value="REFUNDED">Hoàn trả</option>
+                                                                <option value="PARTIALLY_REFUND">Hoàn trả một phần</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-
+                                                    <div class="col-12">
+                                                        <div class="form-group pt-2">
+                                                            <label>Vận chuyển</label>
+                                                            <select class="py-1" id="select-fulfillment" style="width: 80%;">
+                                                                <option value="UNFULFILLED">Chờ xử lý</option>
+                                                                <option value="PARTIALLY_FULFILLED">Đang giao hàng</option>
+                                                                <option value="DONE">Giao hàng thành công</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-12">
+                                                <div class="text-bold" style="font-size: 18px;">Ghi chú đơn hàng</div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <textarea id="note" class="form-control" rows="5"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -360,25 +401,43 @@
             </div>
         </section>
 
-        <div class="modal fade" id="modal-xl" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+        <!-- chỉnh sửa địa chỉ nhận hàng -->
+        <div class="modal fade" id="modal-update-shipping" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Extra Large Modal</h4>
+                        <h4 class="modal-title">Thông tin giao hàng</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>One fine body…</p>
+                        <div class="form-group input-row pt-2">
+                            <label for="updateName">Họ và tên</label>
+                            <input type="text" class="form-control" id="updateName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group input-row pt-2">
+                            <label for="updatePhone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="updatePhone" placeholder="Enter phone">
+
+                        </div>
+                        <div class="form-group input-row pt-2">
+                            <label for="updateEmail">Email</label>
+                            <input type="email" class="form-control" id="updateEmail" placeholder="Enter email">
+
+                        </div>
+                        <div class="form-group pt-2">
+                            <label for="updateAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="updateAddress" placeholder="Enter address">
+                        </div>
+                        <div class="form-group pt-2">
+                            <label>City</label>
+                            <select class="py-1" id="select-province" style="width: 100%;"></select>
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            Save changes
-                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-update-shipping">Lưu</button>
                     </div>
                 </div>
             </div>
@@ -407,7 +466,7 @@
 <!--link axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script src="/admin/custom/js/order-create.js"></script>
+<script src="/admin/custom/js/order.js"></script>
 
 <script>
     //Initialize Select2 Elements

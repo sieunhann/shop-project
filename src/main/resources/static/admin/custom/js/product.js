@@ -8,7 +8,7 @@ const easyMDE = new EasyMDE({
     },
 });
 
-// Query string tren url
+// Query string tren url (id)
 const URL = "/admin/product/"
 const params = window.location.pathname;
 const paramId = params.replace(URL, "");
@@ -67,7 +67,7 @@ const getCategories = async (arr) => {
     }
 }
 
-// 2. Hiển thị danh sách sp
+// 2. Hiển thị danh sách nhóm sp
 const renderCategories = (res,arr) => {
         let html = "";
         res.forEach(el => {

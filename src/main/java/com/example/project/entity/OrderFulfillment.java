@@ -3,9 +3,9 @@ package com.example.project.entity;
 import java.util.stream.Stream;
 
 public enum OrderFulfillment {
-    UNFULFILLED("Chưa xử lý"),
-    PARTIALLY_FULFILLED("Xử lý một phần"),
-    DONE("Hoàn thành");
+    UNFULFILLED("Chờ xử lý"),
+    PARTIALLY_FULFILLED("Đang giao hàng"),
+    DONE("Giao hàng thành công");
     // chưa, fulfill 1 phần, đã fulfill
 
     private String code;

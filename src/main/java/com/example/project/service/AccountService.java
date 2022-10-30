@@ -2,8 +2,11 @@ package com.example.project.service;
 
 import com.example.project.dto.AccountDto;
 import com.example.project.entity.AccountEntity;
+import com.example.project.entity.OrderEntity;
 import com.example.project.exception.BadRequestException;
+import com.example.project.exception.NotFoundException;
 import com.example.project.repository.AccountRepository;
+import com.example.project.repository.OrderRepository;
 import com.example.project.request.RegisterRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,10 @@ public class AccountService implements UserDetailsService {
     private MailService mailService;
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return accountRepository.findByEmail(email).orElseThrow(() -> {
@@ -64,5 +71,13 @@ public class AccountService implements UserDetailsService {
             return;
         }
             throw new BadRequestException("Email chưa được đăng kí");
+    }
+
+    // Lấy thông tin khách hàng của đơn hàng
+    public AccountEntity getByOrder(String id) {
+        OrderEntity order = orderRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Đơn hàng không tồn tại");
+        });
+        return order.getAccountEntity();
     }
 }
