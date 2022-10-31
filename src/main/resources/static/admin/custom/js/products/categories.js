@@ -59,7 +59,7 @@ searchBtn.addEventListener("click", async () => {
 // update category
 async function updateCategory(id) {
     try {
-        const modalUpdate = document.querySelector(`#modal-${id}`)
+        const modalUpdate = document.querySelector(`#modal-update-${id}`)
         const idUpdateEl = modalUpdate.querySelector(".updateId")
         const nameUpdateEl = modalUpdate.querySelector(".updateName")
         const descriptionUpdateEl = modalUpdate.querySelector(".updateDescription")

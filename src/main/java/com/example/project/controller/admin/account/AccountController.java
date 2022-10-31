@@ -90,4 +90,11 @@ public class AccountController {
                                             @RequestBody PasswordRequest passwordRequest){
         return ResponseEntity.ok(accountService.changePassword(request, passwordRequest));
     }
+
+    // Quên mật khẩu
+    @PutMapping("/api/v1/detail/forgot")
+    public ResponseEntity<?> forgotPassword(@RequestParam String email){
+        accountService.resetPassword(email);
+        return ResponseEntity.noContent().build();
+    }
 }

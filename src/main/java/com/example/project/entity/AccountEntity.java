@@ -202,9 +202,4 @@ public class AccountEntity extends BaseEntity implements UserDetails {
         this.city = city;
         this.roleEntities = roleEntities;
     }
-
-    @PrePersist
-    void prePersist(){
-        this.password = "1111";
-    }
 }

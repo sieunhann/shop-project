@@ -149,9 +149,10 @@ updateBtn.addEventListener("click", async () => {
             cusObj = res.data;
             console.log(cusObj)
             renderCustomer(cusObj);
+            toastr.success("Cập nhật thành công")
         }
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 });
 

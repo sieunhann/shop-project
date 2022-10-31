@@ -80,9 +80,10 @@ updateAccountBtn.addEventListener("click", async () => {
                 })
             console.log("successful")
             renderAccount(res.data);
+            toastr.success("Cập nhật thành công");
         }
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 })
 
@@ -154,6 +155,6 @@ deleteBtn.addEventListener("click", async () => {
         await axios.delete(`/api/v1/account/${paramId}`);
         window.location.href = "/admin/accounts";
     } catch (e) {
-        console.log(e.response.data.message);
+        toastr.error(e.response.data.message);
     }
 })

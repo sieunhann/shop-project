@@ -124,7 +124,6 @@ createBtn.addEventListener("click", async () => {
                     city: getMyProvince(),
                     roles: [1]
                 })
-            console.log("successful")
             window.location.href = "http://localhost:8686/admin/customers";
         }
     } catch (e){

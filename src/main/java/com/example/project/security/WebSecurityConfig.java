@@ -47,8 +47,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                    .antMatchers("/admin", "/api/v1/auth/**", "/openapi/**", "/admin/products").permitAll()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/admin", "/api/v1/auth/**", "/openapi/**", "/admin/plugins/**",
+                            "/admin/custom/**", "/admin/dist/**", "/api/v1/detail/forgot")
+                        .permitAll()
+                    .antMatchers("/admin/products/**", "/admin/product/**", "/api/v1/**",
+                            "/admin/categories/**", "/admin/variants", "/admin/detail/**")
+                        .hasAnyRole("INVENTORY", "ORDER", "CUSTOMER_CARE", "ADMIN")
+                    .antMatchers("/admin/orders/**", "/admin/order/**",
+                            "/admin/customer/**", "/admin/customers/**")
+                        .hasAnyRole( "ORDER", "CUSTOMER_CARE", "ADMIN")
+                    .antMatchers("/admin/**")
+                        .hasRole("ADMIN")
                 .and()
                     .exceptionHandling()
                     .authenticationEntryPoint(authenticationEntryPointCustom)

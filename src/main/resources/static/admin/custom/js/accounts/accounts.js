@@ -91,11 +91,10 @@ createBtn.addEventListener("click", async () => {
                     city: null,
                     roles: getRolesChose()
                 })
-            console.log("successful")
             window.location.href = "http://localhost:8686/admin/accounts";
         }
     } catch (e){
-        console.log(e)
+        toastr.error(e.response.data.message);
     }
 })
 

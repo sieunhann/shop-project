@@ -42,10 +42,10 @@ async function updateVariant(id) {
                 quantity: quantityInput.value
             })
         console.log(res.data);
-        console.log("successful");
+        toastr.success("Cập nhật thành công")
         renderUpdate(id, priceInput.value, quantityInput.value);
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 }
 
@@ -66,8 +66,9 @@ async function deleteVariant(id){
         console.log("successful");
         const variantRow = document.getElementById(`${id}`);
         variantRow.remove();
+        toastr.success("Xóa thành công")
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 }
 

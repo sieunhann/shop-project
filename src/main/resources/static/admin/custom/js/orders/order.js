@@ -125,12 +125,12 @@ updateShippingBtn.addEventListener("click", async () => {
                     address: updateAddressInput.value,
                     city: getMyProvince()
                 })
-            console.log("successful");
+            toastr.success("Cập nhật thành công");
             shipObj = res.data
             renderShipping(shipObj);
         }
     } catch (e){
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 })
 
@@ -358,23 +358,17 @@ const updateOrderBtn = document.getElementById("btn-update-order");
 
 updateOrderBtn.addEventListener("click", async () => {
     try {
-        Array.from(inputEles).map((ele) =>
-            ele.classList.remove('success', 'error')
-        );
-        let isCheck = checkValidate();
-        if(isCheck) {
-            await axios.put(`/api/v1/order/${paramId}`,
-                {
-                    note: noteEl.value,
-                    status: updateSelect(statusEl),
-                    payment: updateSelect(paymentEl),
-                    fulfillment: updateSelect(fulfillmentEl)
-                })
-            console.log("successful");
+        await axios.put(`/api/v1/order/${paramId}`,
+            {
+                note: noteEl.value,
+                status: updateSelect(statusEl),
+                payment: updateSelect(paymentEl),
+                fulfillment: updateSelect(fulfillmentEl)
+            })
+        toastr.success("Cập nhật thành công");
             getOrder();
-        }
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 })
 

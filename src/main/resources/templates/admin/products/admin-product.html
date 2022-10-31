@@ -15,6 +15,11 @@
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Theme style -->
     <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css" />
     <!-- overlayScrollbars -->
@@ -59,81 +64,6 @@
 
         <!-- Sidebar -->
         <div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-basket-shopping"></i>
-                            <p>
-                                Quản lý bán hàng
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="../orders/admin-orders.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Tất cả đơn hàng</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a th:href="@{/admin/customers}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Khách hàng</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-store"></i>
-                            <p>
-                                Quản lý sản phẩm
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="../products/admin-products.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Tất cả sản phẩm</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../products/admin-categories.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Nhóm sản phẩm</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-laptop"></i>
-                            <p>
-                                Quản lý account
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a th:href="@{/admin/accounts}"  class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách tài khoản</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a th:href="@{/admin/roles}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Nhóm tài khoản</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </aside>
 
@@ -365,6 +295,12 @@
 <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 
 <script src="/admin/plugins/select2/js/select2.full.min.js"></script>
+
+<!-- toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/admin/custom/js/toastr-config.js"></script>
 
 <!--link axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

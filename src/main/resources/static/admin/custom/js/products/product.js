@@ -147,10 +147,11 @@ createVariant.addEventListener("click", async () => {
             size: createSize.value,
             price: createPrice.value
         })
+        toastr.success("Thêm phiên bản thành công")
         productObj.variantEntities.push(newVar.data);
         renderVariant(productObj.variantEntities);
     } catch (e){
-        console.log(e.response.data.message);
+        toastr.error(e.response.data.message);
     }
 })
 
@@ -161,8 +162,9 @@ const removeVariant = async (id) => {
         productObj.variantEntities = productObj.variantEntities.filter(el => el.id !== id);
         const removeEl = document.getElementById(`${id}`);
         removeEl.remove();
+        toastr.success("Xóa phiên bản thành công")
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 }
 
@@ -206,9 +208,9 @@ updateProductBtn.addEventListener("click", async () => {
             description: descriptionEl.value,
             categoryId: getCategoriesChose()
         })
-        console.log(updatePro.data);
+        toastr.success("Cập nhật thành công");
     } catch (e) {
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 })
 
@@ -245,8 +247,9 @@ inputFileEl.addEventListener("change", async (e) => {
 
         console.log(productObj.imageEntities)
         renderImg(productObj.imageEntities)
+        toastr.success("Upload thành công");
     } catch (e){
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 })
 
@@ -258,8 +261,9 @@ const removeImgProduct = async (ids) => {
         productObj.imageEntities = productObj.imageEntities.filter(el => el.id !== ids)
         console.log(productObj.imageEntities)
         renderImg(productObj.imageEntities)
+        toastr.success("Xóa ảnh thành công");
     } catch (e){
-        console.log(e.response.data.message)
+        toastr.error(e.response.data.message)
     }
 }
 

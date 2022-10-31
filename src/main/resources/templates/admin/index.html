@@ -2,9 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Đăng nhập</title>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
   .input-row {
     margin-bottom: 1.5rem;
   }
@@ -95,7 +109,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <div class="form-group input-row">
+                      <div class="form-group input-row my-2">
                         <label for="forgot-email" style="font-size: 14px;">Nhập email của bạn để tiến hành lấy lại mật khẩu</label>
                         <input type="email" class="form-control mt-2" id="forgot-email" placeholder="Enter email">
                         <small>error message</small>
@@ -103,7 +117,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                      <button type="button" class="btn btn-primary">Lấy lại mật khẩu</button>
+                      <button type="button" class="btn btn-primary" id="forgot-password">Lấy lại mật khẩu</button>
                     </div>
                   </div>
                 </div>
@@ -114,70 +128,21 @@
     </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<!-- toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/admin/custom/js/toastr-config.js"></script>
+
 <!--link axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script th:inline="javascript">
-  const emailEl = document.getElementById("username");
-  const passwordEl = document.getElementById("password");
-  const btnLogin = document.getElementById("btn-login");
-
-  btnLogin && btnLogin.addEventListener("click", async () => {
-    try {
-      let res = await axios.post("api/v1/auth/login",
-              {
-                email: emailEl.value,
-                password: passwordEl.value
-              })
-      console.log("hi")
-      window.location.href = "/admin/products"
-    } catch (e){
-      console.log(e);
-    }
-  })
-
-  const emailForgotInput = document.getElementById("forgot-email")
-  console.log(emailForgotInput.value)
-  // Validate form
-  // Validate dữ liệu trong các ô input và highlight
-  function checkValidate() {
-    let emailValue = emailForgotInput.value;
-
-    let isCheck = true;
-
-    // Kiểm tra trường email
-    if (emailValue === '') {
-      setError(emailForgotInput, 'Email không được để trống');
-      isCheck = false;
-    } else if (!isEmail(emailValue)) {
-      setError(emailForgotInput, 'Email không đúng định dạng');
-      isCheck = false;
-    } else {
-      setSuccess(emailForgotInput);
-    }
-    return isCheck;
-  }
-
-  // Set hiển thị highlight ô input và message error
-  function setError(ele, message) {
-    let parentEle = ele.parentNode;
-    parentEle.classList.add('error');
-    parentEle.querySelector('small').innerText = message;
-  }
-
-  // Set hiển thị highlight ô input và message success
-  function setSuccess(ele) {
-    ele.parentNode.classList.add('success');
-  }
-
-  // Kiểm tra định dạng email
-  function isEmail(email) {
-    return /^[a-zA-Z][\w]+@([\w]+\.[\w]{2,}|[\w]+\.[\w]{2,}\.[\w]{2,})$/.test(email);
-  }
-</script>
+<script src="/admin/custom/js/index.js"></script>
 
 </body>
 </html>

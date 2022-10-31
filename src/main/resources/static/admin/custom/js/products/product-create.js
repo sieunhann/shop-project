@@ -126,69 +126,7 @@ const deleteImagePreview = (index) => {
 
     previewFiles(formData);
 }
-// let formData = new FormData();
-// const btnDeleteImage = document.getElementById("btn-delete-image");
 
-// 1. Render Ảnh khi select
-// function handleFileSelect() {
-//     if (window.File && window.FileList && window.FileReader) {
-//         let output = document.getElementById("result");
-//
-//         let files = event.target.files; //FileList object
-//
-//         for (let i = 0; i < files.length; i++) {
-//             formData.append("file[]",files[i]);
-//         }
-//         console.log(formData.getAll("file[]"));
-//         for (let i = 0; i < files.length; i++) {
-//             let file = files[i]
-//             console.log(file)
-//             if (!file.type.match('image')) continue;
-//             let picReader = new FileReader();
-//             picReader.addEventListener("load", function (event) {
-//                 let picFile = event.target;
-//                 let div = document.createElement("div");
-//
-//                 div.classList.add("image-item", "col-2", "m-2")
-//                 div.setAttribute("onclick", "choseImage(this)")
-//                 div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" + "title='" + picFile.name + "'/>";
-//                 console.log(file.name + '::' + file.size);
-//
-//                 output.insertBefore(div, null);
-//             });
-//             picReader.readAsDataURL(file);
-//         }
-//     } else {
-//         console.log("Your browser does not support File API");
-//     }
-// }
-// document.getElementById('files').addEventListener('change', handleFileSelect, false);
-//
-//
-// // 2. Chọn ảnh
-// // Chọn ảnh
-//
-// const choseImage = ele => {
-//     // Xoa het image chon truoc do
-//     const imageSelected = document.querySelector(".selected");
-//     if (imageSelected) {
-//         imageSelected.classList.remove("border-3", "border-primary", "selected");
-//     }
-//
-//     // Hightlight anh duoc click
-//     ele.classList.add("border-3", "border-primary", "selected");
-//     btnDeleteImage.disabled = false;
-// }
-
-// // Xóa ảnh
-// btnDeleteImage.addEventListener("click", function(){
-//     const imageSelected = document.querySelector(".selected");
-//     const imgSelected = imageSelected.querySelector("img")
-//     console.log(imgSelected)
-//     fileArr.filter(file => file.lastModified !== imgSelected.title)
-//     imageSelected.remove();
-//     console.log(fileArr.length)
-// })
 
 // Phiên bản sp
 // 1. Thêm phiên bản

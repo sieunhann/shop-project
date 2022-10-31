@@ -57,20 +57,19 @@ public class AccountService implements UserDetailsService {
 
     // Reset mật khẩu
     public void resetPassword(String email){
-        Optional<AccountEntity> accountOptional = accountRepository.findByEmail(email);
-        if(accountOptional.isPresent()){
+        System.out.println(email);
+        AccountEntity account = accountRepository.findByEmail(email).orElseThrow(() -> {
+            throw new BadRequestException("Email chưa được đăng kí");
+        });
             String newPassword = UUID.randomUUID().toString().substring(0, 10);
-            AccountEntity account = accountOptional.get();
-            account.setPassword(newPassword);
-            accountRepository.save(account);
             try {
                 mailService.send(email, "Mật khẩu đăng nhập mới", newPassword);
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                account.setPassword(encoder.encode(newPassword));
+                accountRepository.save(account);
             } catch (MessagingException e) {
                 throw new RuntimeException(e.getMessage());
             }
-            return;
-        }
-        throw new BadRequestException("Email chưa được đăng kí");
     }
 
     // ================ ACCOUNT ================
