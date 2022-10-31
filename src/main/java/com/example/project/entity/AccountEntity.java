@@ -131,7 +131,7 @@ public class AccountEntity extends BaseEntity implements UserDetails {
     @Pattern(regexp = "^(0|\\+84)[1-9][0-9]{8}$")
     private String phone;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     @Length(min = 3)
     private String password;
 
@@ -201,5 +201,10 @@ public class AccountEntity extends BaseEntity implements UserDetails {
         this.address = address;
         this.city = city;
         this.roleEntities = roleEntities;
+    }
+
+    @PrePersist
+    void prePersist(){
+        this.password = "1111";
     }
 }

@@ -9,8 +9,10 @@ import com.example.project.repository.AccountRepository;
 import com.example.project.repository.RoleRepository;
 import com.example.project.repository.TokenRepository;
 import com.example.project.request.LoginRequest;
+import com.example.project.request.PasswordRequest;
 import com.example.project.request.RegisterRequest;
 import com.example.project.security.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -181,4 +184,5 @@ public class AuthService {
 
         return "confirmed";
     }
+
 }

@@ -155,29 +155,35 @@ const createOrderBtn = document.getElementById("btn-create-order")
 createOrderBtn.addEventListener("click", async () => {
     const noteOrder = document.getElementById("note")
     const orderTotalEl = document.getElementById("order-total");
+    let isCheck = checkValidate();
+
     try {
-        console.log(getOrderItems())
-        await axios.post("/api/v1/admin/order",
-            {
-                note: noteOrder.value,
-                total: +orderTotalEl.dataset.total,
-                orderItems: getOrderItems(),
-                shippingAddress: getShippingAddress()
-            })
-        window.location.href = "/admin/orders";
+        Array.from(inputEles).map((ele) =>
+            ele.classList.remove('success', 'error')
+        );
+        if(isCheck) {
+            console.log(getOrderItems())
+            await axios.post("/api/v1/admin/order",
+                {
+                    note: noteOrder.value,
+                    total: +orderTotalEl.dataset.total,
+                    orderItems: getOrderItems(),
+                    shippingAddress: getShippingAddress()
+                })
+            window.location.href = "/admin/orders";
+        }
     } catch (e) {
         console.log(e.response.data.message)
     }
 })
 
 // 2. Lấy thông tin nhận hàng
+const shippingNameEL = document.getElementById("shipping-name");
+const shippingEmailEL = document.getElementById("shipping-email");
+const shippingPhoneEL = document.getElementById("shipping-phone");
+const shippingAddressEL = document.getElementById("shipping-address");
 
 const getShippingAddress = () => {
-    const shippingNameEL = document.getElementById("shipping-name");
-    const shippingEmailEL = document.getElementById("shipping-email");
-    const shippingPhoneEL = document.getElementById("shipping-phone");
-    const shippingAddressEL = document.getElementById("shipping-address");
-
     return {
         name: shippingNameEL.value,
         email: shippingEmailEL.value,
@@ -215,4 +221,63 @@ const getOrderItems = () => {
 const formatVND = (obj) => {
     obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
     return obj;
+}
+
+// 3. Kiểm tra thông tin
+// Validate form
+// Validate dữ liệu trong các ô input và highlight
+const inputEles = document.querySelectorAll('.input-row');
+
+function checkValidate() {
+    let nameValue = shippingNameEL.value;
+    let phoneValue = shippingPhoneEL.value;
+    let addressValue = shippingAddressEL.value;
+
+    let isCheck = true;
+
+    // Kiểm tra trường name
+    if (nameValue === '') {
+        setError(shippingNameEL, 'Tên không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(shippingNameEL);
+    }
+
+    // Kiểm tra trường phone
+    if (phoneValue === '') {
+        setError(shippingPhoneEL, 'Số điện thoại không được để trống');
+        isCheck = false;
+    } else if (!isPhone(phoneValue)) {
+        setError(shippingPhoneEL, 'Số điện thoại không đúng định dạng');
+        isCheck = false;
+    } else {
+        setSuccess(shippingPhoneEL);
+    }
+
+    // Kiểm tra trường name
+    if (addressValue === '') {
+        setError(shippingAddressEL, 'Địa chỉ không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(shippingAddressEL);
+    }
+
+    return isCheck;
+}
+
+// Set hiển thị highlight ô input và message error
+function setError(ele, message) {
+    let parentEle = ele.parentNode;
+    parentEle.classList.add('error');
+    parentEle.querySelector('small').innerText = message;
+}
+
+// Set hiển thị highlight ô input và message success
+function setSuccess(ele) {
+    ele.parentNode.classList.add('success');
+}
+
+// Kiểm tra định dạng sđt
+function isPhone(number) {
+    return /^(0|\+84)[1-9][0-9]{8}$/.test(number);
 }

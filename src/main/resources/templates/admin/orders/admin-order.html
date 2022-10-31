@@ -25,6 +25,9 @@
 
     <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="/admin/dist/css/style.css">
+
+    <!--validation-->
+    <link rel="stylesheet" href="/admin/custom/css/validation.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -415,11 +418,12 @@
                         <div class="form-group input-row pt-2">
                             <label for="updateName">Họ và tên</label>
                             <input type="text" class="form-control" id="updateName" placeholder="Enter name">
+                            <small>error</small>
                         </div>
                         <div class="form-group input-row pt-2">
                             <label for="updatePhone">Số điện thoại</label>
                             <input type="text" class="form-control" id="updatePhone" placeholder="Enter phone">
-
+                            <small>error</small>
                         </div>
                         <div class="form-group input-row pt-2">
                             <label for="updateEmail">Email</label>
@@ -429,6 +433,7 @@
                         <div class="form-group pt-2">
                             <label for="updateAddress">Địa chỉ</label>
                             <input type="text" class="form-control" id="updateAddress" placeholder="Enter address">
+                            <small>error</small>
                         </div>
                         <div class="form-group pt-2">
                             <label>City</label>
@@ -437,7 +442,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-update-shipping">Lưu</button>
+                        <button type="button" class="btn btn-primary" id="btn-update-shipping">Lưu</button>
                     </div>
                 </div>
             </div>

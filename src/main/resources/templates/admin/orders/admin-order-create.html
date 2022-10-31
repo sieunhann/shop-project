@@ -25,6 +25,9 @@
 
     <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="/admin/dist/css/style.css">
+
+    <!--validation-->
+    <link rel="stylesheet" href="/admin/custom/css/validation.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -315,34 +318,36 @@
                                             <div class="col-md-12">
                                                 <div class="text-bold" style="font-size: 18px;">Thông tin giao hàng</div>
                                                 <hr>
-                                                <br>
                                                 <div class="row" id="delivery-information">
                                                     <div class="col-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group input-row">
                                                             <label>Tên người nhận</label>
                                                             <input type="text" class="form-control" id="shipping-name" />
+                                                            <small>error</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group pt-2">
                                                             <label>Email</label>
                                                             <input type="text" class="form-control" id="shipping-email" />
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group input-row pt-2">
                                                             <label>Số điện thoại</label>
                                                             <input type="text" class="form-control" id="shipping-phone" />
+                                                            <small>error</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group input-row pt-2">
                                                             <label>Địa chỉ</label>
                                                             <input type="text" class="form-control" id="shipping-address" />
+                                                            <small>error</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="form-group pt-2">
+                                                        <div class="form-group pt-4">
                                                             <label>Thành phố</label>
                                                             <select class="py-1" id="select-province" style="width: 100%;"></select>
                                                         </div>

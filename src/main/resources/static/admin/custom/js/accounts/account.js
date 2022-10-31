@@ -10,6 +10,8 @@ const nameInput = document.getElementById("name");
 const phoneInput = document.getElementById("phone");
 const emailInput = document.getElementById("email");
 const roleSelect = document.getElementById("select-roles")
+const inputEles = document.querySelectorAll('.input-row');
+
 // ========= ACCOUNT =========
 
 // 1. Hiển thị thông tin nhân viên
@@ -64,14 +66,21 @@ const renderRole = (res, arr) => {
 const updateAccountBtn = document.getElementById("btn-update");
 updateAccountBtn.addEventListener("click", async () => {
     try {
-        let res = await axios.put(`/api/v1/account/${paramId}`,
-            {
-                name: nameInput.value,
-                phone: phoneInput.value,
-                roleEntities: getRoleSelect()
-            })
-        console.log("successful")
-        renderAccount(res.data);
+        Array.from(inputEles).map((ele) =>
+            ele.classList.remove('success', 'error')
+        );
+        let isCheck = checkValidate();
+        if(isCheck)
+        {
+            let res = await axios.put(`/api/v1/account/${paramId}`,
+                {
+                    name: nameInput.value,
+                    phone: phoneInput.value,
+                    roleEntities: getRoleSelect()
+                })
+            console.log("successful")
+            renderAccount(res.data);
+        }
     } catch (e) {
         console.log(e.response.data.message)
     }

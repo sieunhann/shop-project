@@ -112,23 +112,29 @@ const updateShippingBtn = document.getElementById("btn-update-shipping");
 
 updateShippingBtn.addEventListener("click", async () => {
     try {
-        let res = await axios.put(`/api/v1/order/${paramId}/shipping`,
-            {
-                name: updateNameInput.value,
-                phone: updatePhoneInput.value,
-                email: updateEmailInput.value,
-                address: updateAddressInput.value,
-                city: getMyProvince()
-            })
-        console.log("successful");
-        shipObj = res.data
-        renderShipping(shipObj);
+        Array.from(inputEles).map((ele) =>
+            ele.classList.remove('success', 'error')
+        );
+        let isCheck = checkValidate();
+        if(isCheck) {
+            let res = await axios.put(`/api/v1/order/${paramId}/shipping`,
+                {
+                    name: updateNameInput.value,
+                    phone: updatePhoneInput.value,
+                    email: updateEmailInput.value,
+                    address: updateAddressInput.value,
+                    city: getMyProvince()
+                })
+            console.log("successful");
+            shipObj = res.data
+            renderShipping(shipObj);
+        }
     } catch (e){
         console.log(e.response.data.message)
     }
 })
 
-// SHIPPING ADDRESS
+// =========== SHIPPING ADDRESS ===========
 const openModalUpdateBtn = document.getElementById("update-shipping");
 
 openModalUpdateBtn.addEventListener("click", () => {
@@ -352,16 +358,81 @@ const updateOrderBtn = document.getElementById("btn-update-order");
 
 updateOrderBtn.addEventListener("click", async () => {
     try {
-        await axios.put(`/api/v1/order/${paramId}`,
-            {
-                note: noteEl.value,
-                status: updateSelect(statusEl),
-                payment: updateSelect(paymentEl),
-                fulfillment: updateSelect(fulfillmentEl)
-            })
+        Array.from(inputEles).map((ele) =>
+            ele.classList.remove('success', 'error')
+        );
+        let isCheck = checkValidate();
+        if(isCheck) {
+            await axios.put(`/api/v1/order/${paramId}`,
+                {
+                    note: noteEl.value,
+                    status: updateSelect(statusEl),
+                    payment: updateSelect(paymentEl),
+                    fulfillment: updateSelect(fulfillmentEl)
+                })
             console.log("successful");
             getOrder();
+        }
     } catch (e) {
         console.log(e.response.data.message)
     }
 })
+
+// 3. Kiểm tra thông tin
+// Validate form
+// Validate dữ liệu trong các ô input và highlight
+const inputEles = document.querySelectorAll('.input-row');
+
+function checkValidate() {
+    let nameValue = updateNameInput.value;
+    let phoneValue = updatePhoneInput.value;
+    let addressValue = updateAddressInput.value;
+
+    let isCheck = true;
+
+    // Kiểm tra trường name
+    if (nameValue === '') {
+        setError(updateNameInput, 'Tên không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(updateNameInput);
+    }
+
+    // Kiểm tra trường phone
+    if (phoneValue === '') {
+        setError(updatePhoneInput, 'Số điện thoại không được để trống');
+        isCheck = false;
+    } else if (!isPhone(phoneValue)) {
+        setError(updatePhoneInput, 'Số điện thoại không đúng định dạng');
+        isCheck = false;
+    } else {
+        setSuccess(updatePhoneInput);
+    }
+
+    // Kiểm tra trường name
+    if (addressValue === '') {
+        setError(updateAddressInput, 'Địa chỉ không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(updateAddressInput);
+    }
+
+    return isCheck;
+}
+
+// Set hiển thị highlight ô input và message error
+function setError(ele, message) {
+    let parentEle = ele.parentNode;
+    parentEle.classList.add('error');
+    parentEle.querySelector('small').innerText = message;
+}
+
+// Set hiển thị highlight ô input và message success
+function setSuccess(ele) {
+    ele.parentNode.classList.add('success');
+}
+
+// Kiểm tra định dạng sđt
+function isPhone(number) {
+    return /^(0|\+84)[1-9][0-9]{8}$/.test(number);
+}

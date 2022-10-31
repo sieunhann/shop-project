@@ -137,16 +137,19 @@ const updateBtn = document.getElementById("btn-update-customer");
 
 updateBtn.addEventListener("click", async () => {
     try {
-        let res = await axios.put(`/api/v1/customer/${paramId}`,
-            {
-                name: nameInput.value,
-                phone: phoneInput.value,
-                address: addressInput.value,
-                city: getMyProvince()
-            })
-        cusObj = res.data;
-        console.log(cusObj)
-        renderCustomer(cusObj);
+        let isCheck = checkValidate();
+        if(isCheck) {
+            let res = await axios.put(`/api/v1/customer/${paramId}`,
+                {
+                    name: nameInput.value,
+                    phone: phoneInput.value,
+                    address: addressInput.value,
+                    city: getMyProvince()
+                })
+            cusObj = res.data;
+            console.log(cusObj)
+            renderCustomer(cusObj);
+        }
     } catch (e) {
         console.log(e.response.data.message)
     }

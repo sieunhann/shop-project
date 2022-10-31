@@ -34,4 +34,5 @@ public class AuthController {
     public String confirm(@RequestParam("token") String token) {
         return authService.confirmToken(token);
     }
+
 }
