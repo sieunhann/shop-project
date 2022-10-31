@@ -6,6 +6,7 @@ import com.example.project.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
 public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/roles")
-    public String getAllRoles(Model model,
+    @GetMapping("/admin/roles")
+    public String getRolesPage(Model model,
                               @RequestParam("page")Optional<Integer> page,
                               @RequestParam("limit") Optional<Integer> size){
         int currentPage = page.orElse(1);
@@ -36,5 +36,10 @@ public class RoleController {
             model.addAttribute("pageNumbers", roleService.getPageNumbers(totalPages));
         }
         return "admin/accounts/admin-roles";
+    }
+
+    @GetMapping("/api/v1/roles")
+    public ResponseEntity<?> getAllRoles(){
+        return ResponseEntity.ok(roleService.getAllRoles());
     }
 }

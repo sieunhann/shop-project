@@ -1,6 +1,7 @@
 package com.example.project.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class TokenEntity {
     @Column(name = "confirmed_at")
     private LocalDateTime confirmedAt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id")
     private AccountEntity accountEntity;

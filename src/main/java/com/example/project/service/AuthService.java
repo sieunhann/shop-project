@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -140,8 +141,13 @@ public class AuthService {
         tokenRepository.save(token);
 
         // Gửi email
-        String link = "http://localhost:8686/api/v1/auth/confirm?token=" + tokenString;
-        mailService.send(account.getEmail(), "Xác thực tài khoản", link);
+        String link = "<a href=\"" + "http://localhost:8686/api/v1/auth/confirm?token="
+                + tokenString + "\"> Kích hoạt tài khoản </a>";
+        try {
+            mailService.send(account.getEmail(), "Xác thực tài khoản", link);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
         return link;
     }

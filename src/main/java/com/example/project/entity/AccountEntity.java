@@ -10,9 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 // Lấy danh sách nhân viên (Account) và phân trang
 @NamedNativeQuery(
@@ -152,6 +150,9 @@ public class AccountEntity extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "accountEntity", orphanRemoval = true)
     private List<OrderEntity> orderEntities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "accountEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TokenEntity> tokenEntities = new LinkedHashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

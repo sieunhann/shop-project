@@ -25,21 +25,9 @@
 
     <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="/admin/dist/css/style.css">
-    <style>
-        .image-item {
-            border: 2px solid #eee;
-        }
 
-        .btn-delete-img{
-            width:100%;
-            background-color: #dc3545;
-            color: #fff;
-            border: 1px solid #dc3545;
-            border-radius: 5px;
-            padding-bottom: 2px;
-            padding-top: 2px;
-        }
-    </style>
+    <!--validation-->
+    <link rel="stylesheet" href="/admin/custom/css/validation.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -143,17 +131,17 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row mb-2 ">
                     <div class="col-sm-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="#">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="#">Sản phẩm</a>
+                                <a href="#">Quản lý đơn hàng</a>
                             </li>
                             <li class="breadcrumb-item active">
-                                Tạo sản phẩm
+                                Chi tiết đơn hàng
                             </li>
                         </ol>
                     </div>
@@ -165,117 +153,113 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row py-2 justify-content-center">
-                    <div class="col-11">
+                    <div class="col-10">
                         <div class="row">
                             <div class="col-6">
-                                <a href="/admin/products">
+                                <a href="/admin/accounts">
                                     <button type="button" class="btn btn-default">
                                         <i class="fas fa-chevron-left"></i> Quay lại
                                     </button>
                                 </a>
-                                <button type="button" class="btn btn-info px-4" id="create-product">
+                                <button type="button" class="btn btn-info px-4" id="btn-update">
                                     Lưu
                                 </button>
                             </div>
-
                             <div class="col-6 d-flex justify-content-end">
-                                <button type="button" class="btn btn-danger px-4">
+                                <button type="button" class="btn btn-danger px-4"
+                                        data-toggle="modal" data-target="#delete-account">
                                     Xóa
                                 </button>
+                                <!-- Xóa tài khoản -->
+                                <div class="modal fade" id="delete-account" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Xóa nhân viên</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Tài khoản đã xóa không thể khôi phục</p>
+                                                <p>Bạn có chắc chắn muốn xóa tài khoản nhân viên này?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn btn-primary" id="btn-delete-account">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-11">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-11">
-                                        <div class="text-bold" style="font-size: 18px;">Thông tin chung</div>
-                                        <hr>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Tên sản phẩm</label>
-                                                    <input type="text" class="form-control" id="name" />
-                                                </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-12">
+                                                <div class="text-bold" style="font-size: 18px;">Hồ sơ nhân viên</div>
+                                                <hr>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Nhóm sản phẩm</label>
-                                                    <div class="select2-purple">
-                                                        <select class="select2 form-control" multiple="multiple" id="category">
-                                                            <th:block th:each="category:${categories}">
-                                                                <option th:value="${category.id}" th:text="${category.name}">
-                                                                    Java
-                                                                </option>
-                                                            </th:block>
-                                                        </select>
+                                            <div class="col-md-12 my-2">
+                                                <div class="row" id="account-info">
+                                                    <div class="col-5 mx-4 my-2">
+                                                        <div class="form-group input-row pt-2">
+                                                            <label for="name">Name</label>
+                                                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                                                            <small>error message</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-5 mx-4 my-2">
+                                                        <div class="form-group input-row pt-2">
+                                                            <label for="email">Email</label>
+                                                            <input type="text" class="form-control" id="email" placeholder="Enter email" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-5 mx-4 my-2">
+                                                        <div class="form-group input-row pt-2">
+                                                            <label for="phone">Phone</label>
+                                                            <input type="text" class="form-control" id="phone" placeholder="Enter phone">
+                                                            <small>error message</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-10 mx-4 my-3" style="line-height: 30px">
+                                                        <b><i>Lưu ý: Không thể thay đổi thông tin email. Nếu muốn thay đổi, hãy xóa tài khoản hiện tại và tạo lập một tài khoản mới.</i></b>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label>Mô tả sản phẩm</label>
-                                            <textarea id="content"></textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Mô tả ngắn</label>
-                                            <textarea id="description" class="form-control" rows="3"></textarea>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-11">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-11">
-                                        <div class="text-bold" style="font-size: 18px;">Hình ảnh sản phẩm</div>
-                                        <hr>
-                                        <div class="form-group">
-                                            <!-- <div class="thumbnail-preview-container mb-3">
-                                              <img src="" alt="" id="thumbnail">
-                                            </div> -->
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <label for="input-file" class="btn btn-warning btn-flat font-weight-normal" style="border-radius: 0.25rem;">
-                                                        Upload ảnh</label>
-                                                    <input type="file" id="input-file" class="d-none" multiple>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-11">
+                                                <div class="text-bold" style="font-size: 18px;">Nhóm tài khoản</div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label>Nhóm tài khoản</label>
+                                                    <div class="select2-purple">
+                                                        <select class="select2" multiple="multiple"
+                                                                data-placeholder="Select roles" style="width: 80%;" id="select-roles">
+                                                        </select>
+                                                    </div>
+                                                    <br>
+                                                    <div>
+                                                        <b><i>Lưu ý: Nhóm tài khoản sẽ quyết định các quyền hạn của tài khoản (quyền truy cập, quyền thay đổi dữ liệu,...)</i></b>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="image-container mt-4 mb-4" style="">
-                                                <output class="row" id="result"></output>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-11">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-11">
-                                        <div class="text-bold" style="font-size: 18px;">Phiên bản sản phẩm</div>
-                                        <hr>
-                                        <div class="form-group" id="variants">
-
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="button" class="btn btn-info px-4" id="add-variant">
-                                                Thêm phiên bản
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -285,6 +269,7 @@
                 </div>
             </div>
         </section>
+
     </div>
 </div>
 
@@ -309,7 +294,7 @@
 <!--link axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script src="/admin/custom/js/products/product-create.js"></script>
+<script src="/admin/custom/js/accounts/account.js"></script>
 
 </body>
 

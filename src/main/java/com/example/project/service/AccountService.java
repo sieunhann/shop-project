@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -67,7 +68,11 @@ public class AccountService implements UserDetailsService {
             AccountEntity account = accountOptional.get();
             account.setPassword(newPassword);
             accountRepository.save(account);
-            mailService.send(email, "Mật khẩu đăng nhập mới", newPassword);
+            try {
+                mailService.send(email, "Mật khẩu đăng nhập mới", newPassword);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e.getMessage());
+            }
             return;
         }
             throw new BadRequestException("Email chưa được đăng kí");
@@ -79,5 +84,25 @@ public class AccountService implements UserDetailsService {
             throw new NotFoundException("Đơn hàng không tồn tại");
         });
         return order.getAccountEntity();
+    }
+
+    // Tìm nvien theo id
+    public AccountEntity getById(Long id) {
+        return accountRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Tài khoản không tồn tại");
+        });
+    }
+
+    public AccountEntity updateAccount(Long id, AccountEntity request) {
+        AccountEntity account = getById(id);
+        account.setName(request.getName());
+        account.setPhone(request.getPhone());
+        account.setRoleEntities(request.getRoleEntities());
+        accountRepository.save(account);
+        return account;
+    }
+
+    public void deleteAccount(Long id) {
+        accountRepository.deleteById(id);
     }
 }
