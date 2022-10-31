@@ -1,6 +1,7 @@
 package com.example.project.entity;
 
 import com.example.project.dto.AccountDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -148,6 +149,7 @@ public class AccountEntity extends BaseEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleEntity> roleEntities = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "accountEntity", orphanRemoval = true)
     private List<OrderEntity> orderEntities = new ArrayList<>();
 

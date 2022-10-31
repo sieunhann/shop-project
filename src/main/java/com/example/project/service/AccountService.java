@@ -48,18 +48,6 @@ public class AccountService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
-    // Lấy danh sách toàn bộ nhân viên và phân trang
-    public Page<AccountDto> getAccounts(String name, Pageable pageable){
-        return accountRepository.findAccountDtos(name, pageable);
-    }
-
-
-    // Lấy danh sách khách hàng + phân trang
-    public Page<AccountDto> getAllCustomers(String phone, Pageable pageable){
-        return accountRepository.findCustomers(phone, pageable);
-    }
-
-
     // Reset mật khẩu
     public void resetPassword(String email){
         Optional<AccountEntity> accountOptional = accountRepository.findByEmail(email);
@@ -75,7 +63,43 @@ public class AccountService implements UserDetailsService {
             }
             return;
         }
-            throw new BadRequestException("Email chưa được đăng kí");
+        throw new BadRequestException("Email chưa được đăng kí");
+    }
+
+    // ================ ACCOUNT ================
+
+    // Lấy danh sách toàn bộ nhân viên và phân trang
+    public Page<AccountDto> getAccounts(String name, Pageable pageable){
+        return accountRepository.findAccountDtos(name, pageable);
+    }
+
+    // Tìm nvien theo id
+    public AccountEntity getById(Long id) {
+        return accountRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Tài khoản không tồn tại");
+        });
+    }
+
+    // Cập nhật thông tin nhân viên
+    public AccountEntity updateAccount(Long id, AccountEntity request) {
+        AccountEntity account = getById(id);
+        account.setName(request.getName());
+        account.setPhone(request.getPhone());
+        account.setRoleEntities(request.getRoleEntities());
+        accountRepository.save(account);
+        return account;
+    }
+
+    // Xóa tài khoản nhân viên
+    public void deleteAccount(Long id) {
+        accountRepository.deleteById(id);
+    }
+
+    // ================ CUSTOMER ================
+
+    // Lấy danh sách khách hàng + phân trang
+    public Page<AccountDto> getAllCustomers(String phone, Pageable pageable){
+        return accountRepository.findCustomers(phone, pageable);
     }
 
     // Lấy thông tin khách hàng của đơn hàng
@@ -86,23 +110,13 @@ public class AccountService implements UserDetailsService {
         return order.getAccountEntity();
     }
 
-    // Tìm nvien theo id
-    public AccountEntity getById(Long id) {
-        return accountRepository.findById(id).orElseThrow(() -> {
-            throw new NotFoundException("Tài khoản không tồn tại");
-        });
-    }
-
-    public AccountEntity updateAccount(Long id, AccountEntity request) {
+    public AccountEntity updateCustomer(Long id, AccountEntity request) {
         AccountEntity account = getById(id);
         account.setName(request.getName());
         account.setPhone(request.getPhone());
-        account.setRoleEntities(request.getRoleEntities());
+        account.setAddress(request.getAddress());
+        account.setCity(request.getCity());
         accountRepository.save(account);
         return account;
-    }
-
-    public void deleteAccount(Long id) {
-        accountRepository.deleteById(id);
     }
 }

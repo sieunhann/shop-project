@@ -87,6 +87,7 @@ public class OrderService {
             int varQty = (int) variant.getQuantity();
             int iteQty = (int) item.getQuantity();
             variant.setQuantity(varQty-iteQty);
+            variantRepository.save(variant);
             orderItemRepository.save(item);
         });
         return items;
@@ -129,7 +130,32 @@ public class OrderService {
         order.setStatus(OrderStatus.valueOf(request.getStatus()));
         order.setPayment(OrderPayment.valueOf(request.getPayment()));
         order.setFulfillment(OrderFulfillment.valueOf(request.getFulfillment()));
+
+        if(OrderStatus.valueOf(request.getStatus()) == OrderStatus.CANCELED){
+            cancelOrder(order);
+        }
+
         orderRepository.save(order);
         return order;
+    }
+
+    // Tìm đơn hàng theo khách hàng và phân trang
+    public Page<OrderEntity> getByCustomerPagination(Long id, Pageable pageable){
+        return orderRepository.findByCustomerPagination(id, pageable);
+    }
+
+    // Hủy đơn hàng
+    public void cancelOrder(OrderEntity order){
+        List<OrderItemEntity> items = order.getOrderItemEntities();
+        items.forEach(item -> {
+            VariantEntity variant = variantRepository.findById(item.getVariantId()).get();
+
+            // Cập nhật tồn kho phiên bản sp
+            int varQty = (int) variant.getQuantity();
+            int iteQty = (int) item.getQuantity();
+            variant.setQuantity(varQty + iteQty);
+            variantRepository.save(variant);
+            orderItemRepository.save(item);
+        });
     }
 }

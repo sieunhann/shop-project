@@ -9,6 +9,13 @@ const formatVND = (obj) => {
     return obj;
 }
 
+const formatInfo = (result) => {
+    if(result === undefined){
+        return "";
+    }
+    return result;
+}
+
 // ============= SHIPPING ADDRESS =============
 let shipObj;
 
@@ -38,38 +45,38 @@ const renderShipping = (obj) => {
     shippingInfo.innerHTML = `
         <div class="col-6">
             <div class="row">
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Tên người nhận:</label>
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-7 py-1">
                     ${obj.name}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Email:</label>
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-7 py-1">
                     ${obj.email}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Số điện thoại:</label>
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-7 py-1">
                     ${obj.phone}
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="row">
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Tỉnh/Thành phố:</label>
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-7 py-1">
                     ${obj.city}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Địa chỉ:</label>
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-7 py-1">
                     ${obj.address}
                 </div>
             </div>
@@ -205,39 +212,39 @@ const renderCustomer = (obj) => {
     customerInfo.innerHTML = `
         <div class="col-6">
             <div class="row">
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Tên khách hàng:</label>
                 </div>
-                <div class="col-6 py-1">
-                    ${obj.name}
+                <div class="col-7 py-1">
+                    ${formatInfo(obj.name)}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Email:</label>
                 </div>
-                <div class="col-6 py-1">
-                    ${obj.email}
+                <div class="col-7 py-1">
+                    ${formatInfo(obj.email)}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Số điện thoại:</label>
                 </div>
-                <div class="col-6 py-1">
-                    ${obj.phone}
+                <div class="col-7 py-1">
+                    ${formatInfo(obj.phone)}
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="row">
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Tỉnh/Thành phố:</label>
                 </div>
-                <div class="col-6 py-1">
-                    ${obj.city}
+                <div class="col-7 py-1">
+                    ${formatInfo(obj.city)}
                 </div>
-                <div class="col-6 py-1">
+                <div class="col-5 py-1">
                     <label>Địa chỉ:</label>
                 </div>
-                <div class="col-6 py-1">
-                    ${obj.address}
+                <div class="col-7 py-1">
+                    ${formatInfo(obj.address)}
                 </div>
             </div>
         </div>                             
@@ -304,7 +311,7 @@ getOrder();
 
 // 2. Hiển thị thông tin
 const renderOrder = (obj) => {
-    noteEl.value = obj.note;
+    noteEl.value = formatInfo(obj.note);
     renderSelect(statusEl, obj.status);
     renderSelect(paymentEl, obj.payment);
     renderSelect(fulfillmentEl, obj.fulfillment);
@@ -314,6 +321,10 @@ const renderOrder = (obj) => {
 
 // 3. Hiển thị trạng thái
 const renderSelect = (obj, result) => {
+    if(result === "CANCELED"){
+        console.log("true");
+        updateOrderBtn.remove();
+    }
     let optionEl = obj.querySelectorAll("option");
     optionEl.forEach(el => {
         if(el.value === result){

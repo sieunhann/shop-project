@@ -53,7 +53,7 @@ public class AccountController {
     }
 
     @PutMapping("/api/v1/account/{id}")
-    public ResponseEntity<?> getAccount(@PathVariable Long id,
+    public ResponseEntity<?> updateAccount(@PathVariable Long id,
                                         @RequestBody AccountEntity request){
         return ResponseEntity.ok(accountService.updateAccount(id, request));
     }

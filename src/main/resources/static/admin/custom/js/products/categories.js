@@ -1,24 +1,3 @@
-//Chuyển page
-// const paginationEl = document.getElementById("pagination-all")
-// paginationEl.addEventListener("click", function (e) {
-//     const pageNumberEl = paginationEl.querySelectorAll(".page-number");
-//
-//     if (e.target) {
-//         // e.preventDefault();
-//         const pageTarget = e.target.parentElement;
-//         const urlParams = new URL(window.location.href);
-//         console.log(urlParams.href)
-//         if (window.location.search === "") {
-//             urlParams.searchParams.set('page', pageTarget.value);
-//             urlParams.searchParams.set('limit', 10);
-//             console.log(urlParams.href)
-//         } else {
-//             urlParams.searchParams.set('page', pageTarget.value);
-//         }
-//
-//         window.history.pushState({path: urlParams.href}, '', urlParams.href);
-//     }
-// })
 
 //Chuyển page
 
