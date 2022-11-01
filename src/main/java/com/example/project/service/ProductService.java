@@ -138,4 +138,17 @@ public class ProductService {
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }
+
+
+    // ======================================== SHOP ======================================== //
+
+    // Lấy danh sách sản phẩm theo nhóm sp
+    public List<ProductEntity> getNewProducts(Long cateId, int limit){
+        return productRepository.findNewProductsByCategory(cateId, limit);
+    }
+
+    // Lấy danh sách sp và phân trang
+    public Page<ProductEntity> getProductsPage(Long cateId, String color, String size, Double minPrice, Double maxPrice, Pageable pageable){
+        return productRepository.findByCategoryPage(cateId, color, size, minPrice, maxPrice, pageable);
+    }
 }

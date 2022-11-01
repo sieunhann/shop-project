@@ -48,7 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                     .antMatchers("/admin", "/api/v1/auth/**", "/openapi/**", "/admin/plugins/**",
-                            "/admin/custom/**", "/admin/dist/**", "/api/v1/detail/forgot")
+                            "/admin/custom/**", "/admin/dist/**", "/api/v1/detail/forgot",
+                            "/api/v1/product/images/**", "/shop/**")
                         .permitAll()
                     .antMatchers("/admin/products/**", "/admin/product/**", "/api/v1/**",
                             "/admin/categories/**", "/admin/variants", "/admin/detail/**")

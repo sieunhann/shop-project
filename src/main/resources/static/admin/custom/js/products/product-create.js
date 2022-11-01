@@ -85,7 +85,7 @@ inputFileEl.addEventListener("change", (e) => {
     console.log(files)
     for (const file of files) {
         file.preview = URL.createObjectURL(file)
-        formData.append("files", file)
+        formData.append("file[]", file)
     }
 
     previewFiles(formData);
@@ -96,7 +96,7 @@ const previewFiles = files => {
     output.innerHTML = "";
 
     let html = "";
-    files.getAll("files").forEach((file, index) => {
+    files.getAll("file[]").forEach((file, index) => {
         html += `
                 <div class="col-2 m-2">
                     <div class="row">
@@ -116,12 +116,12 @@ const previewFiles = files => {
 
 // Xóa ảnh preview
 const deleteImagePreview = (index) => {
-    const files = formData.getAll("files")
+    const files = formData.getAll("file[]")
         .filter((file, i) => i !== index);
 
-    formData.delete("files");
+    formData.delete("file[]");
     for (const file of files) {
-        formData.append("files", file)
+        formData.append("file[]", file)
     }
 
     previewFiles(formData);
