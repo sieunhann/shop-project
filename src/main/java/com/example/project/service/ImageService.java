@@ -67,7 +67,8 @@ public class ImageService {
         // Tao fileId
         String fileId = String.valueOf(System.currentTimeMillis());
         File serverFile = new File(rootPath + "/" + fileId);
-
+        // todo
+        //file.transferTo(serverFile);
         try {
             // Sử dụng Buffer để lưu dữ liệu từ file
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));

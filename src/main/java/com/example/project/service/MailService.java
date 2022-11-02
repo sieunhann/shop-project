@@ -17,8 +17,8 @@ public class MailService {
     public void send(String email, String subject, String content) throws MessagingException {
         // Create a Simple MailMessage.
         // SimpleMailMessage message = new SimpleMailMessage();
-        MimeMessage message=emailSender.createMimeMessage();
-        MimeMessageHelper helper= new MimeMessageHelper (message, true);
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setTo(email);
         helper.setSubject(subject);
