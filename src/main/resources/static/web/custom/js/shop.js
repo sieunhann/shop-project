@@ -11,7 +11,6 @@ const renderNewProductPrice = (obj) => {
     return formatVND(priceMin)
 }
 
-
 // Lấy danh sách các sản phẩm
 const getProducts = async () => {
     try {
@@ -80,4 +79,3 @@ const getProductsPage = async (page) => {
     window.history.replaceState(page, "page", `?${urlParams}`)
     getProducts(page);
 }
-

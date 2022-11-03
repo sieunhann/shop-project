@@ -4,13 +4,6 @@ const formatVND = (obj) => {
     return obj;
 }
 
-// Hiển thị giá sp = giá phiên bản đầu tiên
-const renderNewProductPrice = (obj) => {
-    let arr = obj.variantEntities;
-    let priceMin = arr[0].price;
-    return formatVND(priceMin)
-}
-
 // Query string tren url (id)
 const URL = "/shop/products/"
 const params = window.location.pathname;
@@ -62,13 +55,24 @@ const renderProductImg = (obj) => {
 }
 
 const renderProductInfo = (obj) => {
-    const desEl = document.querySelector(".product__details__description");
-    desEl.textContent = proObj.description;
-
-    const contentEl = document.querySelector("#tabs-1 p");
-    contentEl.textContent = proObj.content;
-    
+    renderContentAndDes(obj);
     renderSize(obj);
+    renderProductImg(obj);
+    setImgProduct();
+}
+
+const renderContentAndDes = (obj) => {
+    const desEl = document.querySelector(".product__details__description");
+    desEl.textContent = obj.description;
+
+    const contentEl = document.querySelector("#tabs-1");
+    let arr = obj.content.split("\n")
+
+    arr.forEach(el => {
+        const para = document.createElement("p");
+        para.innerText = el;
+        contentEl.appendChild(para)
+    })
 }
 
 const renderSize = (obj) => {
@@ -102,6 +106,7 @@ const renderSize = (obj) => {
     sizeBtn.innerHTML = html;
     getColor();
     renderPrice();
+    renderNameAndSku();
 }
 
 const activeSize = (el) => {
@@ -113,6 +118,7 @@ const activeSize = (el) => {
     console.log(el.dataset.size)
     getColor();
     renderPrice();
+    renderNameAndSku();
 }
 
 const getColor = () => {
@@ -159,12 +165,10 @@ const activeColor = (el) => {
     })
     el.classList.add("active");
     renderPrice();
+    renderNameAndSku();
 }
 
-const renderPrice = () => {
-    const priceEl = document.querySelector(".product__details__price");
-    priceEl.innerHTML = "";
-
+const getVariant = () => {
     let color;
     let size;
 
@@ -185,9 +189,139 @@ const renderPrice = () => {
     let varArr = proObj.variantEntities;
     let res = varArr.find(el => el.size === size && el.color === color);
 
+    return res;
+}
+
+const renderPrice = () => {
+    let res = getVariant();
+    const priceEl = document.querySelector(".product__details__price");
+    priceEl.innerHTML = "";
+
     console.log(res.price)
     priceEl.innerHTML = `<div>${formatVND(res.price)}</div>`;
+}
+
+const renderNameAndSku = () => {
+    let res = getVariant();
 
     const detailName = document.querySelector(".product__details__name");
-    detailName.innerHTML = `<h3 style="font-size: 25px">${proObj.name}<span>SKU: ${res.sku}</span></h3>`;
+    detailName.innerHTML = `<h3 style="font-size: 25px">${proObj.name}
+                                <span class="variant__sku" data-var-id="${res.id}">SKU: ${res.sku}</span>
+                            </h3>`;
+    console.log($(".variant__sku").data("var-id"))
 }
+
+function setHotProductItems (el){
+    return `
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg">
+                            <img src="/api/v1/product/images/${el.imageEntities[0].url}" alt="">
+                            <div class="label new">New</div>
+                            <ul class="product__hover">
+                                <li><a href="/api/v1/product/images/${el.imageEntities[0].url}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="/shop/products/${el.id}">${el.name}</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">${formatVND(el.variantEntities[0].price)}</div>
+                        </div>
+                    </div>
+                </div>`
+}
+
+function createCartItem(res){
+    $.ajax({
+        url: "/api/v1/shop/cart/item",
+        type: "POST",
+        dataType: "json",
+        async: true,
+        contentType: "application/json",
+        data:JSON.stringify({
+            variantId: $(".variant__sku").data("var-id"),
+            quantity: $(".pro-qty input").val(),
+            cartEntity: res
+        }),
+        success: function (result){
+            console.log(result)
+            toastr.success("Thêm sản phẩm vào giỏ hàng");
+        },
+        error: function (e){
+            console.log(e)
+        }
+    })
+}
+
+function createCart () {
+    $.ajax({
+        url: "/api/v1/shop/cart",
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            note: ""
+        }),
+        async: true,
+        success: function (res){
+            createCartItem(res)
+            localStorage.setItem("cart_id", res.id);
+            console.log(res)
+        },
+        error: function (e){
+            console.log(e)
+        }
+    })
+}
+
+// const addItemToCart = () => {
+//     $.ajax({
+//         url: "",
+//         type: "PUT",
+//         dataType: "json",
+//         contentType: "application/json",
+//     })
+// }
+
+$(document).ready(()=>{
+    $.ajax({
+        url: `/api/v1/shop/products/new?query=15&limit=4`,
+        type: "GET",
+        dataType: "json",
+        async: true,
+        success: function (res){
+            let html = `
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>HOT PRODUCTS</h5>
+                </div>
+            </div>`
+            res.forEach(el => {
+                html += setHotProductItems(el)
+            })
+            $(".hot-products").html(html);
+        },
+        error: function (e){
+            console.log(e)
+        }
+    });
+
+    $(".cart-btn").on("click", function () {
+        let cart_id = localStorage.getItem("cart_id");
+
+        if(cart_id === null){
+            createCart();
+        } else {
+            console.log("error")
+        }
+    })
+})
+

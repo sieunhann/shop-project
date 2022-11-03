@@ -19,9 +19,6 @@ public class CartEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "total")
-    private Double total;
-
     @Column(name = "note", columnDefinition = "TEXT")
     private String note;
 

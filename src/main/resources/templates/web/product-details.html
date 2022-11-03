@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="/web/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/web/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/web/css/style.css" type="text/css">
+    <!-- toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .product__details__widget ul li .color__checkbox label.active {
             color: #ca1515;
@@ -72,10 +76,10 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="/shop">Home</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
+                            <li class="active"><a href="/shop/products">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Product Details</a></li>
@@ -152,10 +156,10 @@
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
-                                <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
-                                <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
-                                <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
+                                <img data-hash="product-1" class="product__big__img" src="/api/v1/product/images/1666704525347" alt="">
+                                <img data-hash="product-2" class="product__big__img" src="/api/v1/product/images/1666704525347" alt="">
+                                <img data-hash="product-3" class="product__big__img" src="/api/v1/product/images/1666704525347" alt="">
+                                <img data-hash="product-4" class="product__big__img" src="/api/v1/product/images/1666704525347" alt="">
                             </div>
                         </div>
                     </div>
@@ -178,12 +182,12 @@
                         magni lores eos qui ratione voluptatem sequi nesciunt.</p>
                         <div class="product__details__button">
                             <div class="quantity">
-                                <span>Quantity:</span>
+                                <span>Số lượng:</span>
                                 <div class="pro-qty">
                                     <input type="text" value="1">
                                 </div>
                             </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <a href="javascript:void(0)" class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ</a>
                         </div>
                         <div class="product__details__widget">
                             <ul>
@@ -221,131 +225,38 @@
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Mô tả sản phẩm</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Đổi trả</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <h6>Mô tả sản phẩm</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <h6>Specification</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
+                                <h6>Đổi trả</h6>
+                                <p>1. YÊU CẦU CHO SẢN PHẨM ĐỔI</p>
+                                <p>- Sản phẩm còn mới chưa qua sử dụng, còn nguyên tag, mác và hóa đơn mua sản phẩm.</p>
+                                <p>- Lưu ý: Không áp dụng đổi hàng cho sản phẩm thuộc chương trình khuyến mại (giảm giá sản phẩm trên 20%…)</p>
+                                <p>2. THỜI GIAN ĐỔI SẢN PHẨM</p>
+                                <p>- Khách hàng được quyền đổi sản phẩm để lấy bất kỳ sản phẩm khác 01 lần duy nhất trong vòng 03 ngày kể từ ngày xuất hoá đơn.</p>
+                                <p>3. PHƯƠNG THỨC ĐỔI SẢN PHẨM</p>
+                                <p>- Khách hàng vui lòng liên hệ với Shop qua Fanpage hoặc hotline để được hướng dẫn về
+                                    phương thức đổi hàng và xác nhận trường hợp đủ điều kiện theo chính sách công ty.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row hot-products">
                 <div class="col-lg-12 text-center">
                     <div class="related__title">
-                        <h5>RELATED PRODUCTS</h5>
+                        <h5>HOT PRODUCTS</h5>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
-                            <div class="label new">New</div>
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Buttons tweed blazer</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Flowy striped skirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 49.0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
-                            <div class="label stockout">out of stock</div>
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Cotton T-Shirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Slim striped pocket shirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -415,7 +326,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="./index.html"><img src="/web/img/logo.png" alt=""></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         cilisis.</p>
@@ -502,6 +413,12 @@
     <script src="/web/js/owl.carousel.min.js"></script>
     <script src="/web/js/jquery.nicescroll.min.js"></script>
     <script src="/web/js/main.js"></script>
+
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/admin/custom/js/toastr-config.js"></script>
 
     <!--link axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

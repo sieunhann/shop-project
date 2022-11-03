@@ -19,14 +19,8 @@ public class CartItemEntity {
     @Column(name = "variant_id")
     private Long variantId;
 
-    @Column(name = "price")
-    private Double price;
-
     @Column(name = "quantity")
     private Integer quantity;
-
-    @Column(name = "total")
-    private Double total;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
