@@ -3,7 +3,9 @@ package com.example.project.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -23,6 +25,6 @@ public class CartEntity {
     private String note;
 
     @OneToMany(mappedBy = "cartEntity", orphanRemoval = true)
-    private Set<CartItemEntity> cartItemEntities = new LinkedHashSet<>();
+    private List<CartItemEntity> cartItemEntities = new ArrayList<>();
 
 }

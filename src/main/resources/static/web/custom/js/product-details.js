@@ -1,3 +1,37 @@
+$(document).ready(()=>{
+    getProduct();
+
+    getHotProduct();
+
+    $(".cart-btn").on("click", function () {
+        addToCart();
+    })
+})
+
+function getHotProduct(){
+    $.ajax({
+        url: `/api/v1/shop/products/new?query=15&limit=4`,
+        type: "GET",
+        dataType: "json",
+        async: true,
+        success: function (res){
+            let html = `
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>HOT PRODUCTS</h5>
+                </div>
+            </div>`
+            res.forEach(el => {
+                html += setHotProductItems(el)
+            })
+            $(".hot-products").html(html);
+        },
+        error: function (e){
+            console.log(e)
+        }
+    });
+}
+
 // format sang tiền Việt
 const formatVND = (obj) => {
     obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
@@ -21,8 +55,6 @@ const getProduct = async () => {
         console.log(e.response.data.message);
     }
 }
-
-getProduct();
 
 const renderProductImg = (obj) => {
     const imgLeft = document.querySelector(".product__details__pic__left");
@@ -239,89 +271,29 @@ function setHotProductItems (el){
                 </div>`
 }
 
-function createCartItem(res){
-    $.ajax({
-        url: "/api/v1/shop/cart/item",
-        type: "POST",
-        dataType: "json",
-        async: true,
-        contentType: "application/json",
-        data:JSON.stringify({
-            variantId: $(".variant__sku").data("var-id"),
-            quantity: $(".pro-qty input").val(),
-            cartEntity: res
-        }),
-        success: function (result){
-            console.log(result)
-            toastr.success("Thêm sản phẩm vào giỏ hàng");
-        },
-        error: function (e){
-            console.log(e)
-        }
-    })
-}
-
-function createCart () {
+const addToCart = () => {
+    let cart_id = localStorage.getItem("cart_id");
     $.ajax({
         url: "/api/v1/shop/cart",
         type: "POST",
         dataType: "json",
+        async: true,
         contentType: "application/json",
         data: JSON.stringify({
-            note: ""
+            cartId: +cart_id,
+            note: "",
+            variantId: $(".variant__sku").data("var-id"),
+            quantity: $(".pro-qty input").val()
         }),
-        async: true,
         success: function (res){
-            createCartItem(res)
-            localStorage.setItem("cart_id", res.id);
-            console.log(res)
+            toastr.success("Sản phẩm đã được thêm vào giỏ");
+            localStorage.setItem("cart_id", res.cartId);
         },
         error: function (e){
-            console.log(e)
+            console.log(e);
+            toastr.error("Thêm sản phẩm thất bại");
         }
     })
 }
 
-// const addItemToCart = () => {
-//     $.ajax({
-//         url: "",
-//         type: "PUT",
-//         dataType: "json",
-//         contentType: "application/json",
-//     })
-// }
-
-$(document).ready(()=>{
-    $.ajax({
-        url: `/api/v1/shop/products/new?query=15&limit=4`,
-        type: "GET",
-        dataType: "json",
-        async: true,
-        success: function (res){
-            let html = `
-            <div class="col-lg-12 text-center">
-                <div class="related__title">
-                    <h5>HOT PRODUCTS</h5>
-                </div>
-            </div>`
-            res.forEach(el => {
-                html += setHotProductItems(el)
-            })
-            $(".hot-products").html(html);
-        },
-        error: function (e){
-            console.log(e)
-        }
-    });
-
-    $(".cart-btn").on("click", function () {
-        let cart_id = localStorage.getItem("cart_id");
-
-        if(cart_id === null){
-            createCart();
-        } else {
-            console.log("error")
-        }
-    })
-})
 

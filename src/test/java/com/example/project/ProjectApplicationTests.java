@@ -1,8 +1,10 @@
 package com.example.project;
 
 import com.example.project.entity.AccountEntity;
+import com.example.project.entity.CartItemEntity;
 import com.example.project.entity.RoleEntity;
 import com.example.project.repository.AccountRepository;
+import com.example.project.repository.CartItemRepository;
 import com.example.project.repository.CategoryRepository;
 import com.example.project.repository.RoleRepository;
 import com.example.project.request.CategoryRequest;
@@ -34,6 +36,9 @@ class ProjectApplicationTests {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @Test
     void save_role() {
@@ -103,17 +108,10 @@ class ProjectApplicationTests {
         }
     }
 
-//    @Test
-//    void create_product(){
-//        ProductCreateRequest request = ProductCreateRequest.builder()
-//                .name("Áo T-Shirt nữ cổ tròn tay bồng")
-//                .content("Áo T-Shirt  nữ cổ tròn tay bồng\n" +
-//                        "\n" +
-//                        "- Áo T-shirt chất liệu cotton nhẹ, co dãn 4 chiều.\n" +
-//                        "- Thiết kế phom basic dễ mặc, thoải mái trong mọi hoạt động.\n" +
-//                        "- Kiểu dáng và màu sắc trẻ trung, hiện đại phù hợp với cô nàng năng động.")
-//                .description("Áo T-Shirt cổ tim dáng ngắn")
-//                .categoryId(List.of(2L, 4L)).build();
-//        productService.createProduct(request);
-//    }
+    @Test
+    void delete_cart_item(){
+        CartItemEntity item = cartItemRepository.findById(9L).get();
+        cartItemRepository.delete(item);
+    }
+
 }

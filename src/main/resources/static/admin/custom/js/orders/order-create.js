@@ -72,7 +72,6 @@ function changeNumber(el){
     let total = qty * price;
     $(el).closest(".line_item").find(".line_total").attr("data-total", total).html(formatVND(total));
     changeTotal();
-
 }
 
 // Thay đổi tổng giá trị đơn hàng

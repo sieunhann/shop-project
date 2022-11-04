@@ -12,10 +12,6 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/shop")
-    public String getHomePage(){
-        return "web/index";
-    }
 
     @GetMapping("/api/v1/shop/products/new")
     public ResponseEntity<?> getNewProducts(@RequestParam(name = "query", defaultValue = "4") Long query,

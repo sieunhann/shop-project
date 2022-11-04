@@ -20,18 +20,6 @@ public class WebProductController {
     @Autowired
     private ProductService productService;
 
-    // Truy cập trang nhóm sp
-    @GetMapping("/shop/products")
-    public String getProductsPage(){
-        return "web/shop";
-    }
-
-    // Truy cập trang chi tiết sp
-    @GetMapping("/shop/products/{id}")
-    public String getProductPage(@PathVariable(value = "id") Long id){
-        return "web/product-details";
-    }
-
     // Lấy danh sách sp
     @GetMapping("/api/v1/shop/products")
     public ResponseEntity<?> getProducts(@RequestParam(value = "category", required = false) Long cateId,

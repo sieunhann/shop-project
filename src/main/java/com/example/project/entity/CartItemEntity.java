@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class CartItemEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private CartEntity cartEntity;

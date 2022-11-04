@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Builder
 public class VariantDto {
     private Long varId;
-
     private Long proId;
     private String proName;
     private String varSku;
