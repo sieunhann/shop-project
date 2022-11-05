@@ -2,6 +2,7 @@ package com.example.project.service;
 
 import com.example.project.dto.OrderDto;
 import com.example.project.entity.*;
+import com.example.project.exception.BadRequestException;
 import com.example.project.exception.NotFoundException;
 import com.example.project.repository.*;
 import com.example.project.request.OrderCreateRequest;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -94,7 +94,7 @@ public class OrderService {
     }
 
     // Set khách hàng cho order
-    public void setCustomer(HttpServletRequest request, OrderCreateRequest orderRequest){
+    public AccountEntity getCustomer(HttpServletRequest request){
         // Lấy token từ trong header của request
         String token = jwtUtils.getTokenFromCookie(request);
 
@@ -106,11 +106,13 @@ public class OrderService {
             String userName = claims.getSubject();
 
             // Lấy thông tin khách hàng qua email
-            AccountEntity customer = accountRepository.findByEmail(userName).get();
+            AccountEntity customer = accountRepository.findByEmail(userName).orElseThrow(() -> {
+                throw new NotFoundException("User không tồn tại");
+            });
 
-            orderRequest.setCustomer(customer);
+            return customer;
         } else {
-            orderRequest.setCustomer(null);
+            return null;
         }
     }
 
@@ -156,6 +158,46 @@ public class OrderService {
             variant.setQuantity(varQty + iteQty);
             variantRepository.save(variant);
             orderItemRepository.save(item);
+        });
+    }
+
+    @Transactional
+    public OrderEntity createOrderWeb(HttpServletRequest request, OrderCreateRequest orderRequest) {
+
+        OrderEntity order = OrderEntity.builder()
+                .note(orderRequest.getNote())
+                .total(orderRequest.getTotal())
+                .accountEntity(getCustomer(request))
+                .build();
+        orderRepository.save(order);
+
+        createOderItem(order, orderRequest);
+
+        ShippingAddressEntity shippingAddress = orderRequest.getShippingAddress();
+        shippingAddress.setOrderEntity(order);
+        shippingAddressRepository.save(shippingAddress);
+
+        return order;
+    }
+
+    public void createOderItem(OrderEntity order, OrderCreateRequest orderRequest){
+        List<OrderItemEntity> orderItems = orderRequest.getOrderItems();
+        orderItems.forEach(item -> {
+            VariantEntity variant = variantRepository.findById(item.getVariantId()).orElseThrow(() -> {
+                throw new NotFoundException("Không tồn tại " + item.getVariantId());
+            });
+            int varQty = (int) variant.getQuantity();
+            int itemQty = (int) item.getQuantity();
+            if(itemQty > varQty){
+                throw new BadRequestException("Số lượng tồn kho của sản phẩm" + item.getProductName()
+                        + "(" + item.getVariantSize() + "/" + item.getVariantColor() + ") không đủ");
+            } else {
+                variant.setQuantity(varQty - itemQty);
+                variantRepository.save(variant);
+
+                item.setOrderEntity(order);
+                orderItemRepository.save(item);
+            }
         });
     }
 }

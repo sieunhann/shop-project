@@ -41,7 +41,7 @@ import java.util.List;
 @SqlResultSetMapping(
         name = "countOrderDtos",
         classes = @ConstructorResult(
-                targetClass = java.lang.String.class,
+                targetClass = java.lang.Long.class,
                 columns = {
                         @ColumnResult(name = "count", type = Long.class)
                 }

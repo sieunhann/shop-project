@@ -1,9 +1,14 @@
 $(document).ready(() => {
     getCart();
 
+    let t;
     $("#cart__note").keyup(function (){
         let cart_id = localStorage.getItem("cart_id")
-        updateCart(cart_id);
+
+        clearTimeout(t);
+        t = setTimeout(function (){
+            updateCartNote(cart_id);
+        }, 500)
     });
 })
 
@@ -16,7 +21,7 @@ const formatVND = (obj) => {
 function getCart(){
     let cart_id = localStorage.getItem("cart_id")
     $.ajax({
-        url: `/api/v1/shop/cart/${cart_id}`,
+        url: `/api/v1/shop/cart/${+cart_id}`,
         type: "GET",
         dataType: "json",
         async: true,
@@ -35,8 +40,9 @@ function getCart(){
 
 function renderItem(arr){
     let html = "";
-    arr.forEach(obj => {
-        html += `
+    if(arr != null) {
+        arr.forEach(obj => {
+            html += `
         <tr>
             <td class="cart__product__item">
                <img class="cart__product__img" src="/api/v1/product/images/${obj.imageUrl}" alt="">
@@ -59,11 +65,22 @@ function renderItem(arr){
            <td class="cart__close" onclick="deleteCartItem(${obj.itemId}, this)"><span class="icon_close"></span></td>
         </tr>
         `
-    })
+        })
 
-    $(".cart__items").html(html);
-    setQtyBtn();
-    changeCartTotal();
+        $(".cart__items").html(html);
+        setQtyBtn();
+        changeCartTotal();
+    } else {
+        html = `<div class="row justify-content-center">
+        <div class="col-5 d-flex justify-content-center text-center">
+            <div style="font-size: 25px;">Chưa có sản phẩm nào được thêm vào giỏ hàng</div>
+        </div>
+        <div class="col-12 pt-3 d-flex justify-content-center">
+            <a href="/shop/products">>> Tiếp tục mua hàng <<</a>
+        </div>
+    </div>`;
+        $(".shop-cart").html(html);
+    }
 }
 
 function setQtyBtn(){
@@ -86,31 +103,18 @@ function setQtyBtn(){
         }
         $button.parent().find('input').val(newVal);
         let el = $button.parent().data("item");
-        console.log(el + " - " + typeof newVal);
-        updateCartItem(el, newVal);
-        changeItemTotal($button.parent(), newVal);
+        updateCartItem($button.parent());
     });
 }
 
-function changeItemTotal(el, newVal){
-    let ele = $(el).parent()
-    let price = $(ele).parent().find(".cart__price").attr("data-item-price")
-    console.log($(el).parent())
-    console.log(price)
-    let total = newVal*price;
-    $(ele).parent().find(".cart__total").attr("data-total", total).html(formatVND(total));
-    changeCartTotal();
+function updateCartItem(el){
+    updateCartItemAPI(el);
+    changeItemTotal(el);
 }
 
-function changeCartTotal(){
-    let res = 0;
-    const itemTotalEl = document.querySelectorAll(".cart__total");
-    itemTotalEl.forEach(el => res += +el.dataset.total)
-    $(".cart__price_total").find("span").html(formatVND(res));
-    console.log(res)
-}
-
-function updateCartItem(id, newVal){
+function updateCartItemAPI(el){
+    let id = el.data("item");
+    let newVal = el.find('input').val()
     $.ajax({
         url: `/api/v1/shop/cart/items/${id}`,
         type: "PUT",
@@ -130,6 +134,25 @@ function updateCartItem(id, newVal){
     })
 }
 
+function changeItemTotal(el){
+    let newVal = el.find('input').val()
+    let ele = $(el).parent()
+    let price = $(ele).parent().find(".cart__price").attr("data-item-price")
+    console.log($(el).parent())
+    console.log(price)
+    let total = newVal*price;
+    $(ele).parent().find(".cart__total").attr("data-total", total).html(formatVND(total));
+    changeCartTotal();
+}
+
+function changeCartTotal(){
+    let res = 0;
+    const itemTotalEl = document.querySelectorAll(".cart__total");
+    itemTotalEl.forEach(el => res += +el.dataset.total)
+    $(".cart__price_total").find("span").html(formatVND(res));
+    console.log(res)
+}
+
 function deleteCartItem(id, el){
     $.ajax({
         url: `/api/v1/shop/cart/items/${id}`,
@@ -147,7 +170,7 @@ function deleteCartItem(id, el){
     })
 }
 
-function updateCart(id){
+function updateCartNote(id){
     $.ajax({
         url: `/api/v1/shop/cart/${id}`,
         type: "PUT",
@@ -165,10 +188,4 @@ function updateCart(id){
     })
 }
 
-function createOrder(){
-    $.ajax({
-        url: "",
-
-    })
-}
 

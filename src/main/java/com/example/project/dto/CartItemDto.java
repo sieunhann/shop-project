@@ -11,6 +11,7 @@ import lombok.*;
 public class CartItemDto {
     private Long itemId;
     private String imageUrl;
+    private Long productId;
     private String productName;
     private Integer quantity;
     private VariantEntity variant;

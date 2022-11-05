@@ -38,20 +38,25 @@ public class CartService {
     }
 
     public CartDto getCartDto(Long id) {
-        CartEntity cart = getById(id);
-        List<CartItemEntity> items = cart.getCartItemEntities();
-        List<CartItemDto> itemDtos = new ArrayList<>();
+        if(id == 0){
+            return new CartDto();
+        }
+        else {
+            CartEntity cart = getById(id);
+            List<CartItemEntity> items = cart.getCartItemEntities();
+            List<CartItemDto> itemDtos = new ArrayList<>();
 
-        items.forEach(item -> {
-            if(getCartItemDto(item) != null){
-                itemDtos.add(getCartItemDto(item));
-            }
-        });
+            items.forEach(item -> {
+                if (getCartItemDto(item) != null) {
+                    itemDtos.add(getCartItemDto(item));
+                }
+            });
 
-        return CartDto.builder()
-                .note(cart.getNote())
-                .items(itemDtos)
-                .build();
+            return CartDto.builder()
+                    .note(cart.getNote())
+                    .items(itemDtos)
+                    .build();
+        }
     }
 
     // Lấy CartItemDto theo CartItemEntity
@@ -70,6 +75,7 @@ public class CartService {
             CartItemDto item = CartItemDto.builder()
                     .itemId(cartItem.getId())
                     .imageUrl(url)
+                    .productId(product.getId())
                     .productName(product.getName())
                     .quantity(cartItem.getQuantity())
                     .variant(variant)
@@ -129,4 +135,5 @@ public class CartService {
             throw new BadRequestException("Cập nhật thất bại");
         }
     }
+
 }
