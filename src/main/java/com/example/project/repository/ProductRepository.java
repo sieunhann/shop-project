@@ -42,13 +42,13 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
                     "INNER JOIN product_category pc ON p.id = pc.product_id INNER JOIN variant v ON p.id = v.product_id " +
                     "WHERE (:cateId IS NULL OR pc.category_id = :cateId) AND (:color IS NULL OR v.color LIKE :color) " +
                     "AND (:size IS NULL OR v.size LIKE :size) AND (:minPrice IS NULL OR v.price > :minPrice)" +
-                    "AND (:maxPrice IS NULL OR v.price < :maxPrice) GROUP BY p.id ORDER BY p.created_at DESC ",
+                    "AND (:maxPrice IS NULL OR v.price <= :maxPrice) GROUP BY p.id ORDER BY p.created_at DESC ",
 
             countQuery = "SELECT COUNT(p.id) FROM product p INNER JOIN product_category pc ON p.id = pc.product_id " +
                     "INNER JOIN variant v ON p.id = v.product_id " +
                     "WHERE (:cateId IS NULL OR pc.category_id = :cateId) AND (:color IS NULL OR v.color LIKE :color) " +
                     "AND (:size IS NULL OR v.size LIKE :size) AND (:minPrice IS NULL OR v.price > :minPrice)" +
-                    "AND (:maxPrice IS NULL OR v.price < :maxPrice) GROUP BY p.id ORDER BY p.created_at DESC ")
+                    "AND (:maxPrice IS NULL OR v.price <= :maxPrice) GROUP BY p.id ORDER BY p.created_at DESC ")
     Page<ProductEntity> findByCategoryPage(@Param("cateId") Long cateId,
                                            @Param("color") String color,
                                            @Param("size") String size,

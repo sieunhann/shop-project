@@ -11,8 +11,7 @@ btnLogin && btnLogin.addEventListener("click", async () => {
                 email: emailEl.value,
                 password: passwordEl.value
             })
-        console.log("hi")
-        window.location.href = "/admin/products"
+        window.location.href = "/shop"
     } catch (e){
         console.log(e);
     }

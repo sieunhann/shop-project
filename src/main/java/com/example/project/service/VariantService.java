@@ -74,4 +74,14 @@ public class VariantService {
         variantRepository.save(variant);
         return variant;
     }
+
+    // Lấy các loại màu sắc
+    public List<String> getColor(){
+        return variantRepository.getVariantColor();
+    }
+
+    // Lấy các loại kích thước
+    public List<String> getSize(){
+        return variantRepository.getVariantSize();
+    }
 }

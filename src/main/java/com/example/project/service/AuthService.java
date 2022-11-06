@@ -131,6 +131,7 @@ public class AuthService {
 
     // SINH TOKEN - SEND MAIL
     private String generateTokenAndSendMail(AccountEntity account) {
+
         // Sinh ra token
         String tokenString = UUID.randomUUID().toString();
 
@@ -153,6 +154,7 @@ public class AuthService {
         }
 
         return link;
+
     }
 
     // VERIFY TOKEN

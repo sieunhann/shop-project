@@ -1,6 +1,6 @@
 $(document).ready(() => {
     console.log(localStorage.getItem("cart_id"))
-    getProvince();
+    getProvinces();
     getCartInfo();
     $("#create-order").on("click", function (event){
         event.preventDefault();
@@ -17,46 +17,46 @@ const formatVND = (obj) => {
 
 // =========== CITY ===========
 
-const provinceEl = document.querySelector("#select-province");
-let provinceArr = [];
+const provinceElement = document.querySelector("#city");
+let provinceArray = [];
 
 // Lay danh sach tỉnh thành phố
-const getProvince = async () => {
+const getProvinces = async () => {
     try {
         let res = await axios.get("https://provinces.open-api.vn/api/p/")
         console.log(res);
 
-        renderProvince(res.data);
+        renderProvinces(res.data);
     } catch (error) {
         console.log(error);
     }
 }
 
 // Hien thi thanh pho
-const renderProvince = arr => {
-    provinceEl.innerHTML = "";
+const renderProvinces = arr => {
+    provinceElement.innerHTML = "";
 
     let html = "<option hidden>--Select Province</option>";
     arr.forEach(p => {
-        provinceArr.push({code: p.code, name: p.name});
+        provinceArray.push({code: p.code, name: p.name});
         html += `<option value=${p.code}>${p.name}</option>`;
     });
-    provinceEl.innerHTML = html;
+    provinceElement.innerHTML = html;
 }
 
-provinceEl.addEventListener("change", () => {
-    let provinceCode = provinceEl.value;
+provinceElement.addEventListener("change", () => {
+    let provinceCode = provinceElement.value;
     console.log(provinceCode)
 })
 
-const getMyProvince = () => {
+const getMyProvinces = () => {
     let pCode;
     let pValue;
-    let provinceOptionEl = provinceEl.querySelectorAll("option");
+    let provinceOptionEl = provinceElement.querySelectorAll("option");
     provinceOptionEl.forEach(el => {
         if(el.selected){
             pCode = +el.value;
-            pValue = provinceArr.find(proEl => proEl.code === pCode);
+            pValue = provinceElement.find(proEl => proEl.code === pCode);
         }
     })
     if(pValue === undefined){
@@ -129,7 +129,7 @@ function getShippingAddress(){
         phone: $("#phone").val(),
         email: $("#email").val(),
         address: $("#address").val(),
-        city: getMyProvince()
+        city: getMyProvinces()
     };
 }
 

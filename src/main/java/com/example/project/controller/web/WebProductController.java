@@ -1,8 +1,10 @@
 package com.example.project.controller.web;
 
 import com.example.project.dto.WebProductDto;
+import com.example.project.dto.WebProductFilter;
 import com.example.project.entity.ProductEntity;
 import com.example.project.service.ProductService;
+import com.example.project.service.VariantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,9 @@ import java.util.List;
 public class WebProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private VariantService variantService;
 
     // Lấy danh sách sp
     @GetMapping("/api/v1/shop/products")
@@ -39,8 +44,19 @@ public class WebProductController {
         WebProductDto productDto = WebProductDto.builder().
                 productPage(productPage)
                 .currentPage(currentPage)
-                .pageNumbers(pageNumbers).build();
+                .pageNumbers(pageNumbers)
+                .build();
         return ResponseEntity.ok(productDto);
+    }
+
+    // Lấy danh sách bộ lọc
+    @GetMapping("/api/v1/shop/products/filter")
+    public ResponseEntity<?> getFilter(){
+        WebProductFilter filter = WebProductFilter.builder()
+                .colorList(variantService.getColor())
+                .sizeList(variantService.getSize())
+                .build();
+        return ResponseEntity.ok(filter);
     }
 
     // Lấy thông tin sản phẩm

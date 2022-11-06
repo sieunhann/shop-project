@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="/web/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/web/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/web/css/style.css" type="text/css">
+    <!-- toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -32,80 +36,13 @@
     </div>
 
     <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="web/img/logo.png" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
+    <div th:replace="~{/web/header-footer :: .offcanvas-menu-overlay}" class="offcanvas-menu-overlay"></div>
+    <div th:replace="~{/web/header-footer :: .offcanvas-menu-wrapper}" class="offcanvas-menu-wrapper">
     </div>
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="/shop">Home</a></li>
-                            <li><a href="/shop/products?category=2">Women’s</a></li>
-                            <li><a href="/shop/products?category=1">Men’s</a></li>
-                            <li id="shop-all" class="active"><a href="/shop/products">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="/shop/cart"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
+    <header th:replace="~{/web/header-footer :: .header}" class="header">
     </header>
     <!-- Header Section End -->
 
@@ -115,8 +52,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="/shop"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="/shop"><i class="fa fa-home"></i> Trang chủ</a>
+                        <span>Nhóm sản phẩm</span>
                     </div>
                 </div>
             </div>
@@ -132,44 +69,64 @@
                     <div class="shop__sidebar">
                         <div class="sidebar__categories">
                             <div class="section-title">
-                                <h4>Categories</h4>
+                                <h4>Nhóm sản phẩm</h4>
                             </div>
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-heading ">
-                                            <a >Women</a>
+                                            <a href="/shop/products">Tất cả</a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-heading ">
+                                            <a href="/shop/products?category=2">Nữ</a>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-heading">
-                                            <a>Men</a>
+                                            <a href="/shop/products?category=1">Nam</a>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-heading">
-                                            <a>Kids</a>
+                                            <a href="/shop/products?category=13">Trẻ em</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__filter">
+                        <div class="sidebar__price">
                             <div class="section-title">
-                                <h4>Shop by price</h4>
+                                <h4>Mức giá</h4>
                             </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
-                                    </div>
-                                </div>
+                            <div class="price__list">
+                                <label for="all">
+                                    Tất cả
+                                    <input name="price" type="radio" id="all" data-minval="all" data-maxval="all">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="200k">
+                                    Dưới 200.000 VND
+                                    <input name="price" type="radio" id="200k" data-minval="0" data-maxval="200000">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="500k">
+                                    200.000 VND - 500.000 VND
+                                    <input name="price" type="radio" id="500k" data-minval="200000" data-maxval="500000">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="1m">
+                                    500.000 VND - 1.000.000 VND
+                                    <input name="price" type="radio" id="1m" data-minval="500000" data-maxval="1000000">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for=">1m">
+                                    Trên 1.000.000 VND
+                                    <input name="price" type="radio" id=">1m" data-minval="1000000" data-maxval="">
+                                    <span class="checkmark"></span>
+                                </label>
                             </div>
-                            <a href="#">Filter</a>
                         </div>
                         <div class="sidebar__sizes">
                             <div class="section-title">
@@ -220,47 +177,12 @@
                         </div>
                         <div class="sidebar__color">
                             <div class="section-title">
-                                <h4>Shop by size</h4>
+                                <h4>Màu sắc</h4>
                             </div>
-                            <div class="size__list color__list">
+                            <div class="color__list">
                                 <label for="black">
                                     Blacks
-                                    <input type="checkbox" id="black">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="whites">
-                                    Whites
-                                    <input type="checkbox" id="whites">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="reds">
-                                    Reds
-                                    <input type="checkbox" id="reds">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greys">
-                                    Greys
-                                    <input type="checkbox" id="greys">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="blues">
-                                    Blues
-                                    <input type="checkbox" id="blues">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="beige">
-                                    Beige Tones
-                                    <input type="checkbox" id="beige">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greens">
-                                    Greens
-                                    <input type="checkbox" id="greens">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="yellows">
-                                    Yellows
-                                    <input type="checkbox" id="yellows">
+                                    <input name="color" type="checkbox" id="black">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -485,142 +407,17 @@
     <!-- Shop Section End -->
 
     <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div th:replace="~{/web/header-footer :: .instagram}" class="instagram">
     </div>
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="/web/img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="/web/img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="/web/img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="/web/img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="/web/img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="/web/img/payment/payment-5.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
-        </div>
+    <footer th:replace="~{/web/header-footer :: .footer}" class="footer">
     </footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
+    <div th:replace="~{/web/header-footer :: .search-model}" class="search-model">
     </div>
     <!-- Search End -->
 
@@ -637,6 +434,12 @@
     <script src="/web/js/main.js"></script>
     <!--link axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/admin/custom/js/toastr-config.js"></script>
+    <script src="/web/custom/js/header-footer.js"></script>
     <script src="/web/custom/js/shop.js"></script>
 </body>
 

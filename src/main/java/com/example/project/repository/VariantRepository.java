@@ -21,4 +21,10 @@ public interface VariantRepository extends JpaRepository<VariantEntity, Long> {
     @Query(nativeQuery = true, name = "getVariantDtos", countName = "getVariantDtos.count")
     Page<VariantDto> getVariantDtosPage(@Param("query") String query, Pageable pageable);
     List<VariantEntity> findByProductEntity(ProductEntity product);
+
+    @Query(nativeQuery = true, value = "SELECT DISTINCT v.color FROM variant v ORDER BY v.color")
+    List<String> getVariantColor();
+
+    @Query(nativeQuery = true, value = "SELECT DISTINCT v.size FROM variant v ORDER BY v.size")
+    List<String> getVariantSize();
 }

@@ -1,3 +1,12 @@
+$(document).ready(() => {
+    setActiveMenu();
+})
+
+function setActiveMenu(){
+    $('.header__menu__items li.active').removeClass('active');
+    $("#menu_home").addClass('active');
+}
+
 // format sang tiền Việt
 const formatVND = (obj) => {
     obj = obj.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
