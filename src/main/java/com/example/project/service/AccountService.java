@@ -1,6 +1,7 @@
 package com.example.project.service;
 
 import com.example.project.dto.AccountDto;
+import com.example.project.dto.WebCustomerOrder;
 import com.example.project.entity.AccountEntity;
 import com.example.project.entity.OrderEntity;
 import com.example.project.exception.BadRequestException;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -138,7 +140,9 @@ public class AccountService implements UserDetailsService {
         String userName = claims.getSubject();
 
         // Lấy thông tin khách hàng qua email
-        return accountRepository.findByEmail(userName).get();
+        return accountRepository.findByEmail(userName).orElseThrow(() -> {
+            throw new NotFoundException("Không tồn tại tài khoản có email " + userName);
+        });
     }
 
     // CHANGE PASSWORD
@@ -156,5 +160,19 @@ public class AccountService implements UserDetailsService {
         } else {
             throw new BadRequestException("Mật khẩu không chính xác");
         }
+    }
+
+    public WebCustomerOrder getOrderByCustomer(AccountEntity account, Pageable pageable, int currentPage) {
+        Page<OrderEntity> orderPage = orderRepository.findByCustomerPagination(account.getId(), pageable);
+        int totalPages = orderPage.getTotalPages();
+
+        List<Integer> pageNumbers = new ArrayList<>();
+        if(totalPages > 0){
+            pageNumbers = getPageNumbers(totalPages);
+        }
+        return WebCustomerOrder.builder()
+                .orderPage(orderPage)
+                .currentPage(currentPage)
+                .pageNumbers(pageNumbers).build();
     }
 }

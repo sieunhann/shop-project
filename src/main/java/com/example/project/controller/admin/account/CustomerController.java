@@ -55,20 +55,22 @@ public class CustomerController {
         return "admin/accounts/admin-customer";
     }
 
+    // Lấy thông tin KH cho đơn hàng
     @GetMapping("/api/v1/order/{id}/customer")
     public ResponseEntity<?> getByOrder(@PathVariable String id){
         return ResponseEntity.ok(accountService.getByOrder(id));
     }
 
+    // Lấy thông tin KH
     @GetMapping("/api/v1/customer/{id}")
     public ResponseEntity<?> getCustomer(@PathVariable Long id){
         return ResponseEntity.ok(accountService.getById(id));
     }
 
+    // Cập nhật thông tin KH
     @PutMapping("/api/v1/customer/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable Long id,
                                         @RequestBody AccountEntity request){
         return ResponseEntity.ok(accountService.updateCustomer(id, request));
     }
-
 }

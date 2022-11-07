@@ -49,7 +49,7 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
-        <a href="#">Login</a>
+        <a href="/admin">Login</a>
         <a href="#">Register</a>
     </div>
 </div>
@@ -85,7 +85,7 @@
                         </th:block>
                         <th:block sec:authorize="isAuthenticated()">
                             <a href="/admin/products" sec:authorize="hasAnyRole('ADMIN', 'INVENTORY', 'ORDER', 'CUSTOMER_CARE')">Quản trị</a>
-                            <a href="#" sec:authorize="hasAnyRole('CUSTOMER')">Tài khoản</a>
+                            <a href="/shop/detail" sec:authorize="hasAnyRole('CUSTOMER')">Tài khoản</a>
                             <a href="/logout">Đăng xuất</a>
                         </th:block>
                     </div>
@@ -159,7 +159,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-1.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-2.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-3.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-4.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-5.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                 <div class="instagram__item set-bg" data-setbg="/web/img/instagram/insta-6.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="/shop">@ ashion_shop</a>
                     </div>
                 </div>
             </div>
@@ -230,29 +230,29 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
                 <div class="footer__widget">
-                    <h6>Quick links</h6>
+                    <h6>Liên kết nhanh</h6>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="/shop/products">Tất cả sản phẩm</a></li>
+                        <li><a href="/shop/products?categpry=1">Nam</a></li>
+                        <li><a href="/shop/products?categpry=2">Nữ</a></li>
+                        <li><a href="/shop/products?categpry=13">Trẻ em</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4">
                 <div class="footer__widget">
-                    <h6>Account</h6>
+                    <h6>Tài khoản</h6>
                     <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="/admin">Đăng nhập</a></li>
+                        <li><a href="/shop/cart">Tài khoản</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
+                        <li><a href="#">Yêu thích</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-md-8 col-sm-8">
                 <div class="footer__newslatter">
-                    <h6>NEWSLETTER</h6>
+                    <h6>Đăng kí nhận tin</h6>
                     <form action="#">
                         <input type="text" placeholder="Email">
                         <button type="submit" class="site-btn">Subscribe</button>
@@ -271,7 +271,7 @@
             <div class="col-lg-12">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 <div class="footer__copyright__text">
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by Mạnh Cường</p>
                 </div>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>

@@ -62,7 +62,7 @@ const getProducts = async () => {
 
         let res = await axios.get(`/api/v1/shop/products?${urlParams}`);
         console.log(res.data);
-        renderShopInfo(res.data)
+        renderShopInfo(res.data, urlParams)
     } catch (e) {
         console.log(e.response.data.message)
     }
@@ -99,14 +99,24 @@ const renderProducts = (obj) => {
 }
 
 const itemsPagination = document.getElementById("pagination-items")
-const renderPagination = (obj) => {
+const renderPagination = (obj, urlParams) => {
     let arr = obj.pageNumbers
     let html = `<a href="javascript:void(0)"><i class="fa fa-angle-left"></i></a>`;
     arr.forEach(el => {
-        html += `<a href="javascript:void(0)" onclick="getProductsPage(${el})">${el}</a>`
+        html += `<a href="javascript:void(0)" class="page-number" data-num="${el}" onclick="getProductsPage(${el})">${el}</a>`
     })
     html += `<a href="javascript:void(0)"><i class="fa fa-angle-right"></i></a>`
     itemsPagination.innerHTML = html;
+
+    let number = urlParams.get("page");
+    if(number !== undefined){
+        const pageNumber = document.querySelectorAll(".page-number");
+        pageNumber.forEach(el => {
+            if(el.dataset.num === number){
+                el.classList.add("active")
+            }
+        })
+    }
 }
 
 function renderFilterColor(obj){
@@ -162,9 +172,9 @@ const getProductsPage = async (page) => {
 }
 
 // Hiển thị thông tin sp
-function renderShopInfo(obj){
+function renderShopInfo(obj, urlParams){
     renderProducts(obj);
-    renderPagination(obj);
+    renderPagination(obj, urlParams);
 }
 
 // Hiển thị bộ lọc

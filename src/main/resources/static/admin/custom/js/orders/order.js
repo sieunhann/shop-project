@@ -267,7 +267,7 @@ const getOrderItems = async () => {
         renderOrderItem(items.data);
         console.log("successful")
     } catch (e){
-        console.log(e.response.data.message);
+        console.log(e);
     }
 }
 

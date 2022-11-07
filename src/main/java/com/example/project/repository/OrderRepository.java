@@ -20,5 +20,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, String> {
             countQuery = "SELECT COUNT(o.id) AS count FROM orders o WHERE o.account_id = :id")
     Page<OrderEntity> findByCustomerPagination(Long id, Pageable pageable);
 
+
 //    Page<OrderEntity> findByAccountEntity(AccountEntity account, Pageable pageable);
 }

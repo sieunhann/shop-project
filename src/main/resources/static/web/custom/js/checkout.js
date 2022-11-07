@@ -4,8 +4,15 @@ $(document).ready(() => {
     getCartInfo();
     $("#create-order").on("click", function (event){
         event.preventDefault();
-        createOrder();
-        // console.log("hi")
+        const inputEles = document.querySelectorAll('.input-row');
+        Array.from(inputEles).map((ele) =>
+            ele.classList.remove('success', 'error')
+        );
+
+        let isCheck = checkShippingAddress()
+        if(isCheck){
+            createOrder();
+        }
     })
 })
 
@@ -56,7 +63,7 @@ const getMyProvinces = () => {
     provinceOptionEl.forEach(el => {
         if(el.selected){
             pCode = +el.value;
-            pValue = provinceElement.find(proEl => proEl.code === pCode);
+            pValue = provinceArr.find(proEl => proEl.code === pCode);
         }
     })
     if(pValue === undefined){
@@ -146,7 +153,8 @@ function getOrderItems(){
             variantColor: el.variant.color,
             variantSize: el.variant.size,
             price: el.variant.price,
-            quantity: el.quantity
+            quantity: el.quantity,
+            total: el.total
         }
         orderItems.push(obj);
     })
@@ -176,4 +184,55 @@ function createOrder(){
         }
 
     })
+}
+
+// Kiểm tra thông tin
+// Validate form
+// Validate dữ liệu trong các ô input và highlight
+function checkShippingAddress() {
+    const nameRequest = document.getElementById("name")
+    const phoneRequest = document.getElementById("phone")
+    const addressRequest = document.getElementById("address")
+    const cityRequest = document.getElementById("city")
+
+    let nameValue = nameRequest.value;
+    let phoneValue = phoneRequest.value;
+    let addressValue = addressRequest.value;
+
+    let isCheck = true;
+
+    // Kiểm tra trường name
+    if (nameValue === '') {
+        setError(nameRequest, 'Tên không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(nameRequest);
+    }
+
+    // Kiểm tra trường phone
+    if (phoneValue === '') {
+        setError(phoneRequest, 'Số điện thoại không được để trống');
+        isCheck = false;
+    } else if (!isPhone(phoneValue)) {
+        setError(phoneRequest, 'Số điện thoại không đúng định dạng');
+        isCheck = false;
+    } else {
+        setSuccess(phoneRequest);
+    }
+
+    // Kiểm tra địa chỉ
+    if (addressValue === '') {
+        setError(addressRequest, 'Địa chỉ không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(addressRequest);
+    }
+
+    if(getMyProvinces() === null){
+        setError(cityRequest, 'Thành phố không được để trống');
+        isCheck = false;
+    } else {
+        setSuccess(cityRequest);
+    }
+    return isCheck;
 }

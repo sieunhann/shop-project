@@ -253,7 +253,7 @@ function checkValidate() {
         setSuccess(shippingPhoneEL);
     }
 
-    // Kiểm tra trường name
+    // Kiểm tra trường địa chỉ
     if (addressValue === '') {
         setError(shippingAddressEL, 'Địa chỉ không được để trống');
         isCheck = false;

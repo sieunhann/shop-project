@@ -35,4 +35,9 @@ public class WebController {
     public String getCheckOutPage(){
         return "/web/checkout";
     }
+
+    @GetMapping("/shop/detail")
+    public String getDetailPage(){
+        return "/web/customer-detail";
+    }
 }

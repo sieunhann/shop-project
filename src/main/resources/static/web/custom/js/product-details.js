@@ -91,6 +91,7 @@ const renderProductInfo = (obj) => {
     renderSize(obj);
     renderProductImg(obj);
     setImgProduct();
+    $(".breadcrumb__links").find("span").html(obj.name);
 }
 
 const renderContentAndDes = (obj) => {

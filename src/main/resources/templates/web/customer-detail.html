@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/web/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .cart__product__img {
+            max-width: 60px;
+        }
+        .cart__product__item__title{
+            font-size: 11px;
+        }
+        .cart__product__item__title h6{
+            font-size: 14px;
+        }
+        .site-btn:hover{
+            background-color: #c83737;
+        }
+        .update-pass-btn,
+        .update-info-btn{
+            padding: 8px 16px 8px 16px;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: 600;
+            width: 200px;
+        }
+        .update-info-btn{
+            background-color: #007bff;
+        }
+        .update-pass-btn{
+            background-color: #ffc107;
+        }
+        .card-body{
+            background-color: #f9f9f9;
+        }
+
+         .page-number.active{
+             color: #ffffff;
+             background-color: #000000;
+         }
+
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div th:replace="~{/web/header-footer :: .offcanvas-menu-overlay}" class="offcanvas-menu-overlay"></div>
+    <div th:replace="~{/web/header-footer :: .offcanvas-menu-wrapper}" class="offcanvas-menu-wrapper">
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header th:replace="~{/web/header-footer :: .header}" class="header">
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/shop"><i class="fa fa-home"></i>Trang chủ</a>
+                        <span>Thông tin cá nhân</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <form action="#" class="checkout__form">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Tài khoản</h5>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 py-4">
+                                        <div class="checkout__form__input input-row">
+                                            <p>Họ và tên <span>*</span></p>
+                                            <input id="name" type="text">
+                                            <small></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pb-4">
+                                        <div class="checkout__form__input input-row">
+                                            <p>Số điện thoại <span>*</span></p>
+                                            <input id="phone" type="text">
+                                            <small></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pb-4">
+                                        <div class="checkout__form__input input-row">
+                                            <p>Email</p>
+                                            <input id="email" type="email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 pb-4">
+                                        <div class="checkout__form__input input-row">
+                                            <p>Địa chỉ <span>*</span></p>
+                                            <input id="address" type="text">
+                                            <small></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="checkout__form__input">
+                                            <p>Thành phố <span>*</span></p>
+                                            <select id="city" type="text" style="width: 100%; height: 50px"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 pb-3">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="checkout__form__input pt-5 pb-3">
+                                                    <button type="button" class="update-pass-btn" data-toggle="modal"
+                                                            data-target="#modal-change-password">Đổi mật khẩu</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="checkout__form__input pt-5 pb-3 d-flex justify-content-end">
+                                                    <button class="update-info-btn">Cập nhật</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                            <div class="checkout__order">
+                                <h5>lịch sử mua hàng</h5>
+                                <div class="order-info">
+                                    <div class="row">
+                                        <div class="order-id col-7 pb-2">
+                                            <a href="#">Đơn hàng DH-1</a>
+                                        </div>
+                                        <div class="order-id col-5 d-flex justify-content-end  pb-2">
+                                            30/08/22 15:22
+                                        </div>
+                                    </div>
+                                    <div class="order-create">150.000 VND</div>
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <div class="pagination__option" id="pagination-items">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </form>
+        </div>
+        <!-- Modal đổi mật khẩu-->
+        <div class="modal fade" id="modal-change-password" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold" id="staticBackdropLabel">Đổi mật khẩu</h5>
+                    </div>
+                    <div class="modal-body" id="change-password">
+                        <div class="mb-3 input-row">
+                            <label class="col-form-label">Mật khẩu cũ</label>
+                            <input type="password" id="old-password" class="form-control" />
+                            <small></small>
+                        </div>
+                        <div class="mb-3 input-row">
+                            <label class="col-form-label">Mật khẩu mới</label>
+                            <input type="password" id="new-password" class="form-control" />
+                            <small></small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" id="btn-change-password">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+        <!-- Checkout Section End -->
+
+    <!-- Instagram Begin -->
+    <div th:replace="~{/web/header-footer :: .instagram}" class="instagram">
+    </div>
+    <!-- Instagram End -->
+
+    <!-- Footer Section Begin -->
+    <footer th:replace="~{/web/header-footer :: .footer}" class="footer">
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div th:replace="~{/web/header-footer :: .search-model}" class="search-model">
+    </div>
+    <!-- Search End -->
+
+        <!-- Js Plugins -->
+        <script src="/web/js/jquery-3.3.1.min.js"></script>
+        <script src="/web/js/bootstrap.min.js"></script>
+        <script src="/web/js/jquery.magnific-popup.min.js"></script>
+        <script src="/web/js/jquery-ui.min.js"></script>
+        <script src="/web/js/mixitup.min.js"></script>
+        <script src="/web/js/jquery.countdown.min.js"></script>
+        <script src="/web/js/jquery.slicknav.js"></script>
+        <script src="/web/js/owl.carousel.min.js"></script>
+        <script src="/web/js/jquery.nicescroll.min.js"></script>
+        <script src="/web/js/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+                integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/admin/custom/js/toastr-config.js"></script>
+        <!--link axios-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/web/custom/js/header-footer.js"></script>
+        <script src="/web/custom/js/customer-detail.js"></script>
+    </body>
+
+    </html>
