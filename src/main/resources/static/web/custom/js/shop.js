@@ -6,15 +6,20 @@ $(document).ready(() => {
     getFilter();
 
     $(".price__list").on("change", function (event){
-
+        $("#loading").css("display", "block")
+        $("#list-product-items").css("display", "none")
         filterByPrice(event.target);
     })
 
     $(".size__list").on("change", function (event){
+        $("#loading").css("display", "block")
+        $("#list-product-items").css("display", "none")
         filterBySize(event.target);
     })
 
     $(".color__list").on("change", function (event){
+        $("#loading").css("display", "block")
+        $("#list-product-items").css("display", "none")
         filterByColor(event.target);
     })
 })
@@ -63,6 +68,10 @@ const getProducts = async () => {
         let res = await axios.get(`/api/v1/shop/products?${urlParams}`);
         console.log(res.data);
         renderShopInfo(res.data, urlParams)
+        setTimeout(function () {
+            $("#list-product-items").css("display", "")
+            $("#loading").css("display", "none")
+        }, 1000)
     } catch (e) {
         console.log(e.response.data.message)
     }
@@ -168,6 +177,8 @@ const getProductsPage = async (page) => {
     urlParams.set("page", page);
 
     window.history.replaceState(page, "page", `?${urlParams}`)
+    $("#loading").css("display", "block")
+    $("#list-product-items").css("display", "none")
     getProducts();
 }
 

@@ -19,6 +19,8 @@ const formatVND = (obj) => {
 const newProductBtn = document.getElementById("new-products-all");
 
 newProductBtn.addEventListener("click", () => {
+    $("#loading").css("display", "block")
+    $("#new-products").css("display", "none")
     getNewProducts();
 })
 
@@ -26,6 +28,10 @@ const getNewProducts = async () => {
     try {
         let res = await axios.get(`/api/v1/shop/products/new`);
         renderNewProducts(res.data);
+        setTimeout(function () {
+            $("#new-products").css("display", "")
+            $("#loading").css("display", "none")
+        }, 1000)
         console.log(res.data)
     } catch (e) {
         console.log(e.response.data.message);
@@ -77,6 +83,10 @@ const getNewWomenProducts = async () => {
     try {
         let res = await axios.get(`/api/v1/shop/products/new?query=2`);
         renderNewProducts(res.data);
+        setTimeout(function () {
+            $("#new-products").css("display", "")
+            $("#loading").css("display", "none")
+        }, 1000)
         console.log(res.data)
     } catch (e) {
         console.log(e.response.data.message);
@@ -84,6 +94,8 @@ const getNewWomenProducts = async () => {
 }
 
 newWonmenBtn.addEventListener("click", () => {
+    $("#loading").css("display", "block")
+    $("#new-products").css("display", "none")
     getNewWomenProducts();
 })
 
@@ -94,6 +106,10 @@ const getNewMenProducts = async () => {
     try {
         let res = await axios.get(`/api/v1/shop/products/new?query=1`);
         renderNewProducts(res.data);
+        setTimeout(function () {
+            $("#new-products").css("display", "")
+            $("#loading").css("display", "none")
+        }, 1000)
         console.log(res.data)
     } catch (e) {
         console.log(e.response.data.message);
@@ -101,6 +117,8 @@ const getNewMenProducts = async () => {
 }
 
 newMenBtn.addEventListener("click", () => {
+    $("#loading").css("display", "block")
+    $("#new-products").css("display", "none")
     getNewMenProducts();
 })
 
@@ -111,6 +129,10 @@ const getNewKidProducts = async () => {
     try {
         let res = await axios.get(`/api/v1/shop/products/new?query=13`);
         renderNewProducts(res.data);
+        setTimeout(function () {
+            $("#new-products").css("display", "")
+            $("#loading").css("display", "none")
+        }, 1000)
         console.log(res.data)
     } catch (e) {
         console.log(e.response.data.message);
@@ -118,6 +140,8 @@ const getNewKidProducts = async () => {
 }
 
 newKidBtn.addEventListener("click", () => {
+    $("#loading").css("display", "block")
+    $("#new-products").css("display", "none")
     getNewKidProducts();
 })
 

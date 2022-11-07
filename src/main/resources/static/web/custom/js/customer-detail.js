@@ -324,13 +324,13 @@ const newPassInput = document.getElementById("new-password");
 const inputEles = document.querySelectorAll('.input-row');
 
 changePassBtn.addEventListener("click", async () => {
-
     try {
         Array.from(inputEles).map((ele) =>
             ele.classList.remove('success', 'error')
         );
         let isCheck = checkPassword();
         if(isCheck) {
+            $("#btn-change-password").attr("disabled", true);
             let res = await axios.put("/api/v1/shop/detail/password", {
                 oldPassword: oldPassInput.value,
                 newPassword: newPassInput.value
@@ -340,6 +340,7 @@ changePassBtn.addEventListener("click", async () => {
     } catch (e) {
         toastr.error("Đã có lỗi xảy ra");
         console.log(e);
+        $("#btn-change-password").removeAttr('disabled')
     }
 })
 

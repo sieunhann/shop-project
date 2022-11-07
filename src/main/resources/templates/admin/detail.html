@@ -14,59 +14,103 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
           integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+
     <!--validation-->
     <link rel="stylesheet" href="/admin/custom/css/validation.css">
+    <style>
+        .card-body{
+            background-color: #e2e5e7;
+        }
+    </style>
 </head>
-<body>
-    <div class="container mt-5 mb-5">
-        <h2 class="text-center text-uppercase mb-3">Thông tin user</h2>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul th:replace="~{/admin/menu :: #left-navbar}"></ul>
 
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="bg-light p-4">
-                    <div class="mb-3 input-row pt-2">
-                        <label class="col-form-label">Họ và tên</label>
-                        <input type="text" id="name" class="form-control" />
-                        <small>error</small>
-                    </div>
-                    <div class="mb-3">
-                        <label class="col-form-label">Email</label>
-                        <input type="text" id="email" class="form-control" disabled />
-                    </div>
-                    <div class="mb-3 input-row pt-2">
-                        <label class="col-form-label">Số điện thoại</label>
-                        <input type="text" id="phone" class="form-control" />
-                        <small>error</small>
-                    </div>
-                    <div class="mb-3">
-                        <label class="col-form-label">Password</label>
-                        <div class="">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#modal-change-password">
-                                Đổi mật khẩu
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="/admin/products">
-                                <button class="btn btn-secondary btn-back">Quay lại</button>
-                            </a>
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <button class="btn btn-primary" id="btn-update">Cập nhật</button>
+        <!-- Right navbar links -->
+        <ul th:replace="~{/admin/menu :: #right-navbar}"></ul>
+    </nav>
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <div th:replace="~{/admin/menu :: #logo}"></div>
+
+        <!-- Sidebar -->
+        <div th:replace="~{/admin/menu :: #sidebar}" class="sidebar">
+        </div>
+    </aside>
+    <div class="content-wrapper">
+        <div class="container pt-2">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-center text-uppercase mb-3">Thông tin user</h2>
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="bg-light p-4">
+                                        <div class="mb-3 input-row pt-2">
+                                            <label class="col-form-label">Họ và tên</label>
+                                            <input type="text" id="name" class="form-control" />
+                                            <small>error</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Email</label>
+                                            <input type="text" id="email" class="form-control" disabled />
+                                        </div>
+                                        <div class="mb-3 input-row pt-2">
+                                            <label class="col-form-label">Số điện thoại</label>
+                                            <input type="text" id="phone" class="form-control" />
+                                            <small>error</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Password</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#modal-change-password">
+                                                    Đổi mật khẩu
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="/admin/products">
+                                                    <button class="btn btn-secondary btn-back">Quay lại</button>
+                                                </a>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end">
+                                                <button class="btn btn-primary" id="btn-update">Cập nhật</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <!-- Modal đổi mật khẩu-->
     <div class="modal fade" id="modal-change-password" data-bs-backdrop="static" data-bs-keyboard="false"
          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -74,7 +118,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Đổi mật khẩu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="change-password">
                     <div class="mb-3 input-row">
@@ -89,7 +133,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary" id="btn-change-password">Xác nhận</button>
                 </div>
             </div>
@@ -100,14 +144,21 @@
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Bootstrap 4 -->
+    <script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/admin/dist/js/adminlte.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/admin/custom/js/toastr-config.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
+<!--            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->
+<!--            crossorigin="anonymous"></script>-->
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 

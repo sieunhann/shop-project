@@ -95,6 +95,7 @@ function showFormRegister(){
     $("#createEmail").val("")
     $("#createPassword").val("")
     $("#createAddress").val("")
+    $("#create-customer").removeAttr("disabled")
 
     const inputEles = document.querySelectorAll('.input-row');
     Array.from(inputEles).map((ele) =>
@@ -109,6 +110,7 @@ function userRegister(){
     );
     let isCheck = checkValidate();
     if(isCheck){
+        $("#create-customer").attr("disabled", true)
         userRegisterAPI();
     }
 }
@@ -132,6 +134,7 @@ function userRegisterAPI(){
             toastr.success("Link kích hoạt đã được gửi tới email của bạn.");
         },
         error: function (e){
+            $("#create-customer").removeAttr("disabled")
             toastr.error("Đăng kí thất bại")
         }
     })

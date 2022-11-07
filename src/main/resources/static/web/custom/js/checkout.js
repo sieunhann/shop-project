@@ -11,7 +11,7 @@ $(document).ready(() => {
 
         let isCheck = checkShippingAddress()
         if(isCheck){
-            createOrder();
+            createOrder()
         }
     })
 })
@@ -162,6 +162,7 @@ function getOrderItems(){
 }
 
 function createOrder(){
+    $("#create-order").attr("disabled", true)
     $.ajax({
         url: `/api/v1/shop/checkout`,
         type: "POST",
@@ -177,10 +178,12 @@ function createOrder(){
         success: function (res) {
             localStorage.removeItem("cart_id");
             toastr.success("Đơn hàng được tạo thành công");
+
         },
         error: function (e) {
             toastr.error("Đã xảy ra lỗi, vui lòng thử lại");
             console.log(e);
+            $("#create-order").removeAttr('disabled')
         }
 
     })
