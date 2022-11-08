@@ -88,13 +88,13 @@ Sản phẩm:
 - Cập nhật, xóa nhóm sản phẩm 
 
 Tài khoản
-- Tài khoản cá nhân: 
-- -Đăng nhập, đăng xuất tài khoản
-- -Cập nhật thông tin (thay đổi mật khẩu, thông tin cá nhân)
-- Tài khoản nhân viên:
-- -Thêm, xóa, cập nhật thông tin (thông tin cá nhân, nhóm tài khoản) => Chỉ tài khoản có role Admin có quyền
-- Tài khoản khách hàng:
-- -Cập nhật thông tin khách hàng
-- -Xem thông tin khách hàng, lịch sử mua hàng
+* Tài khoản cá nhân: 
+- Đăng nhập, đăng xuất tài khoản
+- Cập nhật thông tin (thay đổi mật khẩu, thông tin cá nhân)
+* Tài khoản nhân viên:
+- Thêm, xóa, cập nhật thông tin (thông tin cá nhân, nhóm tài khoản) => Chỉ tài khoản có role Admin có quyền
+* Tài khoản khách hàng:
+- Cập nhật thông tin khách hàng
+- Xem thông tin khách hàng, lịch sử mua hàng
 
 2. Khách hàng
