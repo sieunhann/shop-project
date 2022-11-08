@@ -104,7 +104,6 @@ public class CartService {
             CartEntity cart = cartRepository.findById(request.getCartId()).orElseThrow(() -> {
                 throw new NotFoundException("Giỏ hàng không tồn tại");
             });
-            cart.setNote(request.getNote());
 
             List<CartItemEntity> items = cart.getCartItemEntities();
             Optional<CartItemEntity> myItem = items.stream()

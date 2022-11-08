@@ -49,7 +49,7 @@ function renderItem(arr){
             <td class="cart__product__item">
                <img class="cart__product__img" src="/api/v1/products/images/${obj.imageUrl}" alt="">
                <div class="cart__product__item__title">
-                    <h6>${obj.productName}</h6>
+               <a href="/shop/products/${obj.productId}"><h6>${obj.productName}</h6></a>
                <div class="variant__item__sku pt-2">
                     <i>Sku: ${obj.variant.sku}</i>
                </div>
