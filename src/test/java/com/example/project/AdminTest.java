@@ -10,6 +10,7 @@ import com.example.project.repository.RoleRepository;
 import com.example.project.request.CategoryRequest;
 import com.example.project.service.CategoryService;
 import com.example.project.service.ProductService;
+import com.example.project.service.RoleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,8 @@ class ProjectApplicationTests {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private RoleRepository roleRepository;
 
@@ -40,6 +43,7 @@ class ProjectApplicationTests {
     @Autowired
     private CartItemRepository cartItemRepository;
 
+    // Tạo nhóm tk mới
     @Test
     void save_role() {
         RoleEntity role6 = RoleEntity.builder()
@@ -60,7 +64,14 @@ class ProjectApplicationTests {
         roleRepository.saveAll(List.of(role6, role, role1, role2, role3));
     }
 
+    // Lấy danh sách nhóm tk nhân viên
+    @Test
+    void get_role_not_user(){
+        List<RoleEntity> list = roleService.getRolesExceptCustomer();
+        list.forEach(el -> System.out.println(el.getName()));
+    }
 
+    // Tạo tài khoản mới
     @Test
     void save_account(){
         AccountEntity account = AccountEntity.builder()
@@ -96,18 +107,20 @@ class ProjectApplicationTests {
         accountRepository.saveAll(List.of(account, account1, account2, account3, account4));
     }
 
+    // Tạo nhóm sản phẩm
     @Test
     void create_category(){
         CategoryRequest request = CategoryRequest.builder()
-                .name("Kid")
-                .description("Thời trang trẻ em")
+                .name("Discount")
+                .description("Sản phẩm khuyến mãi")
                 .build();
         categoryService.createCategory(request);
-        if(categoryRepository.findByNameContainingIgnoreCase("Kid").isPresent()){
+        if(categoryRepository.findByNameContainingIgnoreCase("Discount").isPresent()){
             System.out.println("Done");
         }
     }
 
+    // Xóa cart_item (Đã xóa thành công lần 1 nên chạy lại báo fail)
     @Test
     void delete_cart_item(){
         CartItemEntity item = cartItemRepository.findById(9L).get();
