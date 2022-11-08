@@ -15,7 +15,7 @@
 + Bootstrap 
 
 ## Cấu trúc Database
-1. account (Quản trị + khách hàng)
+### 1. account (Quản trị + khách hàng)
 
  Vì project triển khai trên một service nên thông tin nhà quản trị và khách hàng được lưu trên cùng 1 database
 
@@ -23,60 +23,60 @@
 - n-n: role
 - 1-n: token
 
-2. token (Lưu trữ token active)
+### 2. token (Lưu trữ token active)
  Mối quan hệ:
 - n-1: account
 
-3. role (Nhóm người dùng)
+### 3. role (Nhóm người dùng)
  Xác định phân quyền tài khoản
 
  Mối quan hệ:
 - n-n: account
 
-4. product (Sản phẩm)
+### 4. product (Sản phẩm)
  Mối quan hệ:
 - n-n: category
 - 1-n: variant, image
 
-5. category (Nhóm sản phẩm)
+### 5. category (Nhóm sản phẩm)
  Mối quan hệ
 - n-n: product
 
-6. variant (Phiên bản sản phẩm)
+### 6. variant (Phiên bản sản phẩm)
  Mối quan hệ
 - n-1: product
 
-7. image (Ảnh sản phẩm)
+### 7. image (Ảnh sản phẩm)
  Mối quan hệ
 - n-1: product
 
-8. cart(Giỏ hàng)
+### 8. cart(Giỏ hàng)
  Mối quan hệ
 - 1-n: cart_item
 
-9. cart_item(Thành phần chi tiết giỏ hàng)
+### 9. cart_item(Thành phần chi tiết giỏ hàng)
  Mối quan hệ
 - n-1: cart
 
-10. order(Đơn hàng)
+### 10. order(Đơn hàng)
  Mối quan hệ
 - n-1: account
 - 1-n: order_item
 
-11. order_item(Thành phần chi tiết đơn hàng)
+### 11. order_item(Thành phần chi tiết đơn hàng)
  Mối quan hệ
 - n-1: order
 
-12. shipping_address(Thông tin nhận hàng)
+### 12. shipping_address(Thông tin nhận hàng)
  Mối quan hệ
 - 1-1: order
 
-13. refund (Hoàn tiền)
+### 13. refund (Hoàn tiền)
  Todo
 
 ## Tính năng
 
-1. Admin (quản trị)
+### 1. Admin (quản trị)
  Đơn hàng:
 - Tạo đơn hàng mới
 - Cập nhật thông tin đơn hàng (Trạng thái, thông tin nhận hàng)
@@ -103,7 +103,7 @@
 - Cập nhật thông tin khách hàng
 - Xem thông tin khách hàng, lịch sử mua hàng
 
-2. Website
+### 2. Website
 
  Tài khoản:
 - Đăng kí, xác thực tài khoản
@@ -118,7 +118,7 @@
 - Thêm sản phẩm vào giỏ hàng (giỏ hàng được lưu trữ)
 - Đặt mua trên website
 
-3. Todo
+### 3. Todo
 
 - Hoàn tiền 
 
