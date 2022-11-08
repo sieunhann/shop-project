@@ -90,11 +90,14 @@ Sản phẩm:
 
 Tài khoản:
 - Lấy lại mật khẩu (Quên mật khẩu)
+
 Tài khoản cá nhân: 
 - Đăng nhập, đăng xuất tài khoản
 - Cập nhật thông tin (thay đổi mật khẩu, thông tin cá nhân)
+
 Tài khoản nhân viên:
 - Thêm, xóa, cập nhật thông tin (thông tin cá nhân, nhóm tài khoản) => Chỉ tài khoản có role Admin có quyền
+
 Tài khoản khách hàng:
 - Cập nhật thông tin khách hàng
 - Xem thông tin khách hàng, lịch sử mua hàng
@@ -108,7 +111,7 @@ Tài khoản:
 - Lấy lại mật khẩu (Quên mật khẩu)
 
 Mua hàng:
-- Xem thông tin sản phẩm
+- Xem thông tin sản phẩm (Hiển thị size, màu sắc => mã và giá sp thay đổi khi chọn phiên bản sp)
 - Lọc sản phẩm theo giá, màu sắc, size, nhóm sản phẩm
 - Thêm sản phẩm vào giỏ hàng (giỏ hàng được lưu trữ)
 - Đặt mua trên website
