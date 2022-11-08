@@ -15,7 +15,6 @@
 + Bootstrap 
 
 ## Cấu trúc Database
-
 1. account (Quản trị + khách hàng)
 Vì project triển khai trên một service nên thông tin nhà quản trị và khách hàng được lưu trên cùng 1 database
 
@@ -71,7 +70,31 @@ Mối quan hệ
 Mối quan hệ
 - 1-1: order
 
-//============ Todo =============//
-<br>
 13. refund (Hoàn tiền)
+Todo
 
+## Tính năng
+
+1. Admin
+Đơn hàng:
+- Tạo đơn hàng mới
+- Cập nhật thông tin đơn hàng (Trạng thái, thông tin nhận hàng)
+
+Sản phẩm:
+- Tạo sản phẩm mới, tạo phiên bản sản phẩm
+- Cập nhật thông tin sản phẩm, phiên bản sản phẩm, tồn kho theo phiên bản
+- Xóa sản phẩm, phiên bản sản phẩm
+- Tạo nhóm sản phẩm
+- Cập nhật, xóa nhóm sản phẩm 
+
+Tài khoản
+- Tài khoản cá nhân: 
+- -Đăng nhập, đăng xuất tài khoản
+- -Cập nhật thông tin (thay đổi mật khẩu, thông tin cá nhân)
+- Tài khoản nhân viên:
+- -Thêm, xóa, cập nhật thông tin (thông tin cá nhân, nhóm tài khoản) => Chỉ tài khoản có role Admin có quyền
+- Tài khoản khách hàng:
+- -Cập nhật thông tin khách hàng
+- -Xem thông tin khách hàng, lịch sử mua hàng
+
+2. Khách hàng
