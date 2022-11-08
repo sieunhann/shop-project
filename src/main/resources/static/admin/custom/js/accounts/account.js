@@ -2,7 +2,7 @@
 $(".select2").select2();
 
 // Query string tren url (id)
-const URL = "/admin/account/"
+const URL = "/admin/accounts/"
 const params = window.location.pathname;
 const paramId = params.replace(URL, "");
 
@@ -17,7 +17,7 @@ const inputEles = document.querySelectorAll('.input-row');
 // 1. Hiển thị thông tin nhân viên
 
 const getAccountAPI = () => {
-    return axios.get(`/api/v1/account/${paramId}`)
+    return axios.get(`/api/v1/accounts/${paramId}`)
 }
 
 const getAccount = async () => {
@@ -72,7 +72,7 @@ updateAccountBtn.addEventListener("click", async () => {
         let isCheck = checkValidate();
         if(isCheck)
         {
-            let res = await axios.put(`/api/v1/account/${paramId}`,
+            let res = await axios.put(`/api/v1/accounts/${paramId}`,
                 {
                     name: nameInput.value,
                     phone: phoneInput.value,
@@ -152,7 +152,7 @@ const deleteBtn = document.getElementById("btn-delete-account");
 
 deleteBtn.addEventListener("click", async () => {
     try{
-        await axios.delete(`/api/v1/account/${paramId}`);
+        await axios.delete(`/api/v1/accounts/${paramId}`);
         window.location.href = "/admin/accounts";
     } catch (e) {
         toastr.error(e.response.data.message);

@@ -1,6 +1,6 @@
 package com.example.project.request;
 
-import com.example.project.entity.VariantEntity;
+import com.example.project.entity.product.VariantEntity;
 import lombok.*;
 
 import java.util.List;

@@ -9,7 +9,7 @@ let varArr = []
 searchProductBtn.addEventListener("click", async () => {
     try {
         let queryVal = searchProductInput.value;
-        let vars = await axios.get(`/api/v1/order/variant?query=${queryVal}`);
+        let vars = await axios.get(`/api/v1/orders/variants?query=${queryVal}`);
         varArr = vars.data;
         console.log(varArr)
 
@@ -162,7 +162,7 @@ createOrderBtn.addEventListener("click", async () => {
         );
         if(isCheck) {
             console.log(getOrderItems())
-            await axios.post("/api/v1/admin/order",
+            await axios.post("/api/v1/admin/orders/create",
                 {
                     note: noteOrder.value,
                     total: +orderTotalEl.dataset.total,

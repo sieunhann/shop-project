@@ -111,7 +111,7 @@
                                                     <div class="order-info" th:each="order : ${orderPage.content}">
                                                         <div class="row">
                                                             <div class="order-id col-9 pb-2">
-                                                                <a th:href="@{/admin/order/{id}(id = ${order.id})}"
+                                                                <a th:href="@{/admin/orders/{id}(id = ${order.id})}"
                                                                    th:text="'Mã đơn hàng ' + ${order.id}"></a>
                                                             </div>
                                                             <div class="order-create col-3 d-flex justify-content-end pb-2"

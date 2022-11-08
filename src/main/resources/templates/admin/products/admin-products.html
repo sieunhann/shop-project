@@ -95,7 +95,7 @@
 							<form action="">
 								<div class="form-row align-items-center">
 									<div class="col-10">
-										<input type="text" class="form-control" id="search-products" placeholder="Nhập tên sản phẩm hoặc mã SKU">
+										<input type="text" class="form-control" id="search-products" placeholder="Nhập tên sản phẩm hoặc mã SKU phiên bản">
 									</div>
 									<div class="col-auto">
 										<button type="button" class="btn btn-secondary" id="search-products-btn">Tìm kiếm</button>
@@ -121,7 +121,7 @@
 											<tr th:each="product : ${productPage.content}">
 												<td th:text="'#SP'+${product.id}"></td>
 												<td>
-													<a th:href="@{/admin/product/{id}(id=${product.id})}" th:text="${product.name}"></a>
+													<a th:href="@{/admin/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
 												</td>
 												<td th:text="${product.description}"></td>
 												<td th:text="${#temporals.format(product.createdAt,'dd-MM-yyyy')}">06-07-2022</td>

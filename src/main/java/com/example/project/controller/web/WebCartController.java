@@ -1,9 +1,8 @@
 package com.example.project.controller.web;
 
-import com.example.project.entity.CartEntity;
-import com.example.project.entity.CartItemEntity;
+import com.example.project.entity.order.CartEntity;
 import com.example.project.request.CartRequest;
-import com.example.project.service.CartService;
+import com.example.project.service.order.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

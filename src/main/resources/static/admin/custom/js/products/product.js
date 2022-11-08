@@ -16,7 +16,7 @@ const formatVND = (obj) => {
 
 
 // Query string tren url (id)
-const URL = "/admin/product/"
+const URL = "/admin/products/"
 const params = window.location.pathname;
 const paramId = params.replace(URL, "");
 
@@ -30,10 +30,10 @@ const deleteProductBtn = document.getElementById("btn-delete-product")
 
 // Lấy thông tin sản phẩm
 const getProductAPI = (id) => {
-    return axios.get(`/api/v1/product/${id}`)
+    return axios.get(`/api/v1/products/${id}`)
 }
 
-let productObj = new Object();
+let productObj;
 
 const getProduct = async () => {
     try {
@@ -141,7 +141,7 @@ addVariant.addEventListener("click", () => {
 createVariant.addEventListener("click", async () => {
     try {
         let ids = productObj.id;
-        let newVar = await axios.post(`/api/v1/product/variant/${ids}`,{
+        let newVar = await axios.post(`/api/v1/products/${ids}/variant`,{
             sku: createSku.value,
             color: createColor.value,
             size: createSize.value,
@@ -158,7 +158,7 @@ createVariant.addEventListener("click", async () => {
 // 3. Xóa phiên bản
 const removeVariant = async (id) => {
     try {
-        await axios.delete(`/api/v1/variant/${id}`)
+        await axios.delete(`/api/v1/variants/${id}`)
         productObj.variantEntities = productObj.variantEntities.filter(el => el.id !== id);
         const removeEl = document.getElementById(`${id}`);
         removeEl.remove();
@@ -180,7 +180,7 @@ const renderImg = (imgs) => {
             <div class="col-2 m-2" id="${img.id}">
                     <div class="row">
                         <div class="image-item col-12">
-                            <img src="/api/v1/product/images/${img.url}" alt="">
+                            <img src="/api/v1/products/images/${img.url}" alt="">
                         </div>
                         <div class="col-12 mt-2">
                             <button class="btn-delete-img" onclick="removeImgProduct(${img.id})">Delete</button>
@@ -202,7 +202,7 @@ updateProductBtn.addEventListener("click", async () => {
         console.log(getCategoriesChose())
         console.log(nameEl.value)
         console.log(descriptionEl.value)
-        let updatePro = await axios.put(`/api/v1/product/${paramId}`, {
+        let updatePro = await axios.put(`/api/v1/products/${paramId}`, {
             name: nameEl.value,
             content: easyMDE.value(),
             description: descriptionEl.value,
@@ -217,7 +217,7 @@ updateProductBtn.addEventListener("click", async () => {
 // 2. Xóa sản phẩm
 deleteProductBtn.addEventListener("click", async () => {
     try {
-        await axios.delete(`/api/v1/product/${paramId}`);
+        await axios.delete(`/api/v1/products/${paramId}`);
         console.log("success")
         window.location.href = "/admin/products"
     } catch (e) {
@@ -238,7 +238,7 @@ inputFileEl.addEventListener("change", async (e) => {
             formData.append("file[]" ,files[i]);
         }
         console.log(formData.getAll("file[]"))
-        let newImgArr = await axios.post(`/api/v1/product/${productObj.id}/images`, formData);
+        let newImgArr = await axios.post(`/api/v1/products/${productObj.id}/images`, formData);
         console.log(newImgArr.data)
 
         newImgArr.data.forEach(newimg => {
@@ -257,7 +257,7 @@ inputFileEl.addEventListener("change", async (e) => {
 // 2. Xóa ảnh của sp
 const removeImgProduct = async (ids) => {
     try {
-        await axios.delete(`/api/v1/image/${ids}`)
+        await axios.delete(`/api/v1/images/${ids}`)
         productObj.imageEntities = productObj.imageEntities.filter(el => el.id !== ids)
         console.log(productObj.imageEntities)
         renderImg(productObj.imageEntities)

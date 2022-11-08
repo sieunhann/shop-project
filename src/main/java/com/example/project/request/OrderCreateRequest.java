@@ -1,8 +1,8 @@
 package com.example.project.request;
 
-import com.example.project.entity.AccountEntity;
-import com.example.project.entity.OrderItemEntity;
-import com.example.project.entity.ShippingAddressEntity;
+import com.example.project.entity.account.AccountEntity;
+import com.example.project.entity.order.OrderItemEntity;
+import com.example.project.entity.order.ShippingAddressEntity;
 import lombok.*;
 
 import java.util.List;

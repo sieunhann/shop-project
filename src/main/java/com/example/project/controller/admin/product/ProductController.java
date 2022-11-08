@@ -1,9 +1,9 @@
 package com.example.project.controller.admin.product;
 
-import com.example.project.entity.ProductEntity;
+import com.example.project.entity.product.ProductEntity;
 import com.example.project.request.ProductUpdateRequest;
-import com.example.project.service.CategoryService;
-import com.example.project.service.ProductService;
+import com.example.project.service.product.CategoryService;
+import com.example.project.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 
 @Controller
@@ -52,7 +50,7 @@ public class ProductController {
     }
 
     // Tạo sản phẩm mới
-    @PostMapping(value = "/api/v1/product",
+    @PostMapping(value = "/api/v1/products/create",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
                     MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
@@ -64,25 +62,25 @@ public class ProductController {
 
 
     // Truy cập trang chi tiết sp
-    @GetMapping("/admin/product/{id}")
+    @GetMapping("/admin/products/{id}")
     public String getProductPage(@PathVariable("id") Long id){
         return "/admin/products/admin-product";
     }
 
     // Lấy thông tin sp theo id
-    @GetMapping("/api/v1/product/{id}")
+    @GetMapping("/api/v1/products/{id}")
     public ResponseEntity<?> getProduct(@PathVariable("id") Long id){
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     // Cập nhật thông tin sp
-    @PutMapping("/api/v1/product/{id}")
+    @PutMapping("/api/v1/products/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable("id") Long id,
                                            @RequestBody ProductUpdateRequest request){
         return ResponseEntity.ok(productService.updateProduct(id, request));
     }
 
-    @DeleteMapping("/api/v1/product/{id}")
+    @DeleteMapping("/api/v1/products/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -91,7 +89,7 @@ public class ProductController {
     // Xem file
     // Hoac co the su dung
     // @GetMapping(value = "/product/{id}/images/{fileId}", produces = {MediaType.IMAGE_JPEG})
-    @GetMapping("/api/v1/product/images/{fileId}")
+    @GetMapping("/api/v1/products/images/{fileId}")
     public ResponseEntity<?> readImage(@PathVariable String fileId){
         byte[] bytes = productService.readFile(fileId);
         return ResponseEntity.ok()

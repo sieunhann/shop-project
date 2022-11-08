@@ -1,6 +1,5 @@
 package com.example.project.request;
 
-import com.example.project.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

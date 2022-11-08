@@ -1,11 +1,8 @@
 package com.example.project.request;
 
-import com.example.project.entity.ImageEntity;
-import com.example.project.entity.VariantEntity;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor

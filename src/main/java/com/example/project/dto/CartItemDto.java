@@ -1,6 +1,6 @@
 package com.example.project.dto;
 
-import com.example.project.entity.VariantEntity;
+import com.example.project.entity.product.VariantEntity;
 import lombok.*;
 
 @AllArgsConstructor

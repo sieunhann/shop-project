@@ -1,15 +1,13 @@
 package com.example.project.controller.admin.order;
 
-import com.example.project.dto.AccountDto;
 import com.example.project.dto.OrderDto;
-import com.example.project.repository.OrderRepository;
+import com.example.project.repository.order.OrderRepository;
 import com.example.project.request.OrderCreateRequest;
 import com.example.project.request.OrderUpdateRequest;
-import com.example.project.service.OrderService;
+import com.example.project.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,32 +39,32 @@ public class OrderController {
     }
 
     // Trang tạo đơn hàng
-    @GetMapping("/admin/order/create")
+    @GetMapping("/admin/orders/create")
     public String getOrderCreatePage(){
         return "/admin/orders/admin-order-create";
     }
 
 
     // Tạo đơn hàng
-    @PostMapping(value = "/api/v1/admin/order")
+    @PostMapping(value = "/api/v1/admin/orders/create")
     public ResponseEntity<?> createOrder(@RequestBody OrderCreateRequest request){
         return ResponseEntity.ok(orderService.createOrder(request));
     }
 
     // Trang chi tiết đơn hàng
-    @GetMapping("/admin/order/{id}")
+    @GetMapping("/admin/orders/{id}")
     public String getOrderPage(@PathVariable String id){
         return "admin/orders/admin-order";
     }
 
     // Lấy thông tin đơn hàng theo id
-    @GetMapping("/api/v1/order/{id}")
+    @GetMapping("/api/v1/orders/{id}")
     public ResponseEntity<?> getOrder(@PathVariable String id){
         return ResponseEntity.ok(orderService.getById(id));
     }
 
     // Cập nhật đơn hàng
-    @PutMapping("/api/v1/order/{id}")
+    @PutMapping("/api/v1/orders/{id}")
     public ResponseEntity<?> updateOrder(@PathVariable String id,
                                          @RequestBody OrderUpdateRequest request){
         return ResponseEntity.ok(orderService.updateOrder(id, request));

@@ -1,5 +1,5 @@
 // Query string tren url (id)
-const URL = "/admin/order/"
+const URL = "/admin/orders/"
 const params = window.location.pathname;
 const paramId = params.replace(URL, "");
 
@@ -24,7 +24,7 @@ let shipObj;
 // 1. Lấy thông tin nhận hàng
 const shippingInfo = document.getElementById("shipping-info");
 const getShippingAPI = () => {
-    return axios.get(`/api/v1/order/${paramId}/shipping`);
+    return axios.get(`/api/v1/orders/${paramId}/shipping`);
 }
 
 // 2. Hiển thị thông tin nhận hàng
@@ -117,7 +117,7 @@ updateShippingBtn.addEventListener("click", async () => {
         );
         let isCheck = checkValidate();
         if(isCheck) {
-            let res = await axios.put(`/api/v1/order/${paramId}/shipping`,
+            let res = await axios.put(`/api/v1/orders/${paramId}/shipping`,
                 {
                     name: updateNameInput.value,
                     phone: updatePhoneInput.value,
@@ -198,7 +198,7 @@ const customerInfo = document.getElementById("customer-info");
 
 // 1. Lấy thông tin khách hàng và hiển thị
 const getCustomerAPI = () => {
-    return axios.get(`/api/v1/order/${paramId}/customer`);
+    return axios.get(`/api/v1/orders/${paramId}/customer`);
 }
 
 const getCustomer = async () => {
@@ -263,7 +263,7 @@ const itemList = document.getElementById("list-items")
 // 1. Lấy thông tin
 const getOrderItems = async () => {
     try {
-        let items = await axios.get(`/api/v1/order/${paramId}/order-items`);
+        let items = await axios.get(`/api/v1/orders/${paramId}/order-items`);
         renderOrderItem(items.data);
         console.log("successful")
     } catch (e){
@@ -305,7 +305,7 @@ const totalEl = document.getElementById("order-total")
 // 1. Lấy thông tin
 const getOrder = async () => {
     try {
-        let order = await axios.get(`/api/v1/order/${paramId}`);
+        let order = await axios.get(`/api/v1/orders/${paramId}`);
         renderOrder(order.data);
         console.log("successful")
     } catch (e){
@@ -358,7 +358,7 @@ const updateOrderBtn = document.getElementById("btn-update-order");
 
 updateOrderBtn.addEventListener("click", async () => {
     try {
-        await axios.put(`/api/v1/order/${paramId}`,
+        await axios.put(`/api/v1/orders/${paramId}`,
             {
                 note: noteEl.value,
                 status: updateSelect(statusEl),

@@ -1,6 +1,6 @@
 package com.example.project.security;
 
-import com.example.project.service.AccountService;
+import com.example.project.service.account.AccountService;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

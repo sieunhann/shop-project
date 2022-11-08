@@ -50,7 +50,7 @@ const renderNewProducts = (arr) => {
         <div class="col-lg-3 col-md-4 col-sm-6 my-3">
                 <div class="product_item">
                     <div class="product__item__image">
-                    <img src="/api/v1/product/images/${img.url}" alt="">
+                    <img src="/api/v1/products/images/${img.url}" alt="">
                     </div>
                     <div class="product__item__text">
                         <h6><a href="/shop/products/${el.id}">${el.name}</a></h6>
@@ -157,7 +157,7 @@ const renderTrend = (objNode, arr) => {
         html += `
         <div class="trend__item">
             <div class="trend__item__pic">
-                 <img src="/api/v1/product/images/${img.url}" alt="" style="width: 90px; max-height: 90px; object-fit: cover">
+                 <img src="/api/v1/products/images/${img.url}" alt="" style="width: 90px; max-height: 90px; object-fit: cover">
             </div>
             <div class="trend__item__text">
                 <h6><a href="/shop/products/${el.id}">${el.name}</a></h6>

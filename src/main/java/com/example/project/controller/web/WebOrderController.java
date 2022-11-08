@@ -1,7 +1,7 @@
 package com.example.project.controller.web;
 
 import com.example.project.request.OrderCreateRequest;
-import com.example.project.service.OrderService;
+import com.example.project.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,9 +1,9 @@
 package com.example.project.controller.web;
 
-import com.example.project.entity.AccountEntity;
+import com.example.project.entity.account.AccountEntity;
 import com.example.project.request.PasswordRequest;
-import com.example.project.service.AccountService;
-import com.example.project.service.OrderItemService;
+import com.example.project.service.account.AccountService;
+import com.example.project.service.order.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;

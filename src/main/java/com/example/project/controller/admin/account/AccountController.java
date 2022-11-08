@@ -1,14 +1,13 @@
 package com.example.project.controller.admin.account;
 
 import com.example.project.dto.AccountDto;
-import com.example.project.entity.AccountEntity;
+import com.example.project.entity.account.AccountEntity;
 import com.example.project.request.PasswordRequest;
-import com.example.project.service.AccountService;
-import com.example.project.service.RoleService;
+import com.example.project.service.account.AccountService;
+import com.example.project.service.account.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,26 +46,26 @@ public class AccountController {
     }
 
     // Truy cập trang thông tin nhân viên
-    @GetMapping("/admin/account/{id}")
+    @GetMapping("/admin/accounts/{id}")
     public String getAccountPage(@PathVariable Long id){
         return "/admin/accounts/admin-account";
     }
 
     // Lấy thông tin nhân viên
-    @GetMapping("/api/v1/account/{id}")
+    @GetMapping("/api/v1/accounts/{id}")
     public ResponseEntity<?> getAccount(@PathVariable Long id){
         return ResponseEntity.ok(accountService.getById(id));
     }
 
     // Cập nhật thông tin nhân viên
-    @PutMapping("/api/v1/account/{id}")
+    @PutMapping("/api/v1/accounts/{id}")
     public ResponseEntity<?> updateAccount(@PathVariable Long id,
                                         @RequestBody AccountEntity request){
         return ResponseEntity.ok(accountService.updateAccount(id, request));
     }
 
     // Xóa nhân viên
-    @DeleteMapping("/api/v1/account/{id}")
+    @DeleteMapping("/api/v1/accounts/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable Long id){
         accountService.deleteAccount(id);
         return ResponseEntity.noContent().build();

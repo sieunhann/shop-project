@@ -1,12 +1,9 @@
 package com.example.project.utils;
 
-import com.example.project.entity.ProductEntity;
-import com.example.project.entity.VariantEntity;
-import org.thymeleaf.util.Validate;
+import com.example.project.entity.product.ProductEntity;
+import com.example.project.entity.product.VariantEntity;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 public class Utils {

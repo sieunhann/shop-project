@@ -1,8 +1,8 @@
 package com.example.project.controller.admin.product;
 
-import com.example.project.entity.CategoryEntity;
+import com.example.project.entity.product.CategoryEntity;
 import com.example.project.request.CategoryRequest;
-import com.example.project.service.CategoryService;
+import com.example.project.service.product.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,13 +35,14 @@ public class CategoryController {
         return "admin/products/admin-categories";
     }
 
-    @PostMapping("api/v1/category")
+    // Tạo nhóm sp mới
+    @PostMapping("api/v1/categories/create")
     @ResponseBody
     public void createCategory(@RequestBody CategoryRequest request){
         categoryService.createCategory(request);
     }
 
-    @PutMapping( "api/v1/category/{id}")
+    @PutMapping( "api/v1/categories/{id}")
     @ResponseBody
     public void updateCategory(@PathVariable("id") Long id,
                                @RequestBody CategoryRequest request){
@@ -49,7 +50,7 @@ public class CategoryController {
         categoryService.updateCategory(id, request);
     }
 
-    @DeleteMapping ("api/v1/category/{id}")
+    @DeleteMapping ("api/v1/categories/{id}")
     @ResponseBody
     public void deleteCategory(@PathVariable("id") Long id){
         categoryService.deleteCategory(id);

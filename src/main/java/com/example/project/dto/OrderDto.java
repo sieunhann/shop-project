@@ -1,8 +1,8 @@
 package com.example.project.dto;
 
-import com.example.project.entity.OrderFulfillment;
-import com.example.project.entity.OrderStatus;
-import com.example.project.entity.OrderPayment;
+import com.example.project.entity.order.OrderFulfillment;
+import com.example.project.entity.order.OrderStatus;
+import com.example.project.entity.order.OrderPayment;
 import lombok.*;
 
 import java.time.LocalDateTime;

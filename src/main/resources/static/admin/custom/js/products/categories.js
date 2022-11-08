@@ -31,7 +31,7 @@ const nameCreateInput = document.getElementById("createName");
 const desCreateInput = document.getElementById("createDescription");
 createBtn.addEventListener("click", async () => {
     try {
-        await axios.post("/api/v1/category",
+        await axios.post("/api/v1/categories/create",
             {
                 name: nameCreateInput.value,
                 description: desCreateInput.value
@@ -63,7 +63,7 @@ async function updateCategory(id) {
         const idUpdateEl = modalUpdate.querySelector(".updateId")
         const nameUpdateEl = modalUpdate.querySelector(".updateName")
         const descriptionUpdateEl = modalUpdate.querySelector(".updateDescription")
-        await axios.put(`/api/v1/category/${idUpdateEl.value}`,
+        await axios.put(`/api/v1/categories/${idUpdateEl.value}`,
             {
                 name: nameUpdateEl.value,
                 description: descriptionUpdateEl.value
@@ -78,7 +78,7 @@ async function updateCategory(id) {
 // delete category
 async function deleteCategory(id){
     try {
-        await axios.delete(`/api/v1/category/${id}`)
+        await axios.delete(`/api/v1/categories/${id}`)
         console.log("successful")
         window.location.href = "/admin/categories"
     } catch (ex){

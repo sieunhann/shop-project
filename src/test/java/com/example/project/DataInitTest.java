@@ -1,9 +1,9 @@
 package com.example.project;
 
-import com.example.project.entity.CategoryEntity;
-import com.example.project.entity.ProductEntity;
-import com.example.project.repository.CategoryRepository;
-import com.example.project.repository.ProductRepository;
+import com.example.project.entity.product.CategoryEntity;
+import com.example.project.entity.product.ProductEntity;
+import com.example.project.repository.product.CategoryRepository;
+import com.example.project.repository.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

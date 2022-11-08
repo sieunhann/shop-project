@@ -2,7 +2,7 @@ package com.example.project.controller;
 
 import com.example.project.request.LoginRequest;
 import com.example.project.request.RegisterRequest;
-import com.example.project.service.AuthService;
+import com.example.project.service.account.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

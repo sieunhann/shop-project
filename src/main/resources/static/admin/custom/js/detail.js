@@ -84,7 +84,7 @@ updateBtn.addEventListener("click", async () => {
         );
         let isCheck = checkValidate();
         if(isCheck){
-            let res = await axios.put(`/api/v1/account/${detObj.id}`, {
+            let res = await axios.put(`/api/v1/accounts/${detObj.id}`, {
                 name: nameInput.value,
                 phone: phoneInput.value,
                 roleEntities: detObj.roleEntities

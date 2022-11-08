@@ -1,5 +1,5 @@
 // Query string tren url (id)
-const API_URL = "/admin/customer/"
+const API_URL = "/admin/customers/"
 const urlParam = window.location.pathname;
 const paramId = urlParam.replace(API_URL, "");
 
@@ -91,7 +91,7 @@ let cusObj;
 // 1. Hiển thị
 const getCustomerAPI = () => {
     console.log(paramId)
-    return axios.get(`/api/v1/customer/${paramId}`);
+    return axios.get(`/api/v1/customers/${paramId}`);
 }
 
 // Lấy thông tin KH
@@ -139,7 +139,7 @@ updateBtn.addEventListener("click", async () => {
     try {
         let isCheck = checkValidate();
         if(isCheck) {
-            let res = await axios.put(`/api/v1/customer/${paramId}`,
+            let res = await axios.put(`/api/v1/customers/${paramId}`,
                 {
                     name: nameInput.value,
                     phone: phoneInput.value,

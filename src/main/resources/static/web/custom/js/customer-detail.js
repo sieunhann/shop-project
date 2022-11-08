@@ -81,12 +81,11 @@ function renderOrderInfo(obj, urlParams){
 
 // Hiển thị danh sách đơn hàng
 function renderOrder(obj){
+    console.log(obj.orderPage.content)
     let arr = obj.orderPage.content
     let html = "";
-    let a;
     arr.forEach(el => {
-        a = el.id;
-        html += `
+    html += `
     <div class="row">
         <div class="order-id col-7 pb-2">
             <a href="javascript:void(0)" data-toggle="modal" data-target="#order-items-${el.id}"

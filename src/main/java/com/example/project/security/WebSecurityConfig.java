@@ -1,10 +1,9 @@
 package com.example.project.security;
 
-import com.example.project.service.AccountService;
+import com.example.project.service.account.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -49,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/admin", "/api/v1/auth/**", "/openapi/**", "/admin/plugins/**",
                             "/admin/custom/**", "/admin/dist/**", "/api/v1/detail/forgot",
-                            "/api/v1/product/images/**", "/shop/**", "/api/v1/shop/**")
+                            "/api/v1/products/images/**", "/shop/**", "/api/v1/shop/**")
                         .permitAll()
                     .antMatchers("/admin/products/**", "/admin/product/**", "/api/v1/**",
                             "/admin/categories/**", "/admin/variants", "/admin/detail/**")

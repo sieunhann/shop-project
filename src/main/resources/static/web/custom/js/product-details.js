@@ -64,22 +64,22 @@ const renderProductImg = (obj) => {
     let images = obj.imageEntities;
     let leftHtml = `
         <a class="pt active" href="#product-1">
-            <img src="/api/v1/product/images/${images[0].url}" alt="">
+            <img src="/api/v1/products/images/${images[0].url}" alt="">
         </a>
     `
     let sliderHtml = `
          <img data-hash="product-1" class="product__big__img" 
-         src="/api/v1/product/images/${images[0].url}" alt="">
+         src="/api/v1/products/images/${images[0].url}" alt="">
     `
     if(images.length > 1){
         for(let i = 1; i < images.length; i++){
             leftHtml += `
                 <a class="pt" href="#product-${i+1}">
-                    <img src="/api/v1/product/images/${images[i].url}" alt="">
+                    <img src="/api/v1/products/images/${images[i].url}" alt="">
                 </a>
             `
             sliderHtml += `
-                <img data-hash="product-${i+1}" class="product__big__img" src="/api/v1/product/images/${images[i].url}" alt="">
+                <img data-hash="product-${i+1}" class="product__big__img" src="/api/v1/products/images/${images[i].url}" alt="">
             `
         }
     }
@@ -251,10 +251,10 @@ function setHotProductItems (el){
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg">
-                            <img src="/api/v1/product/images/${el.imageEntities[0].url}" alt="">
+                            <img src="/api/v1/products/images/${el.imageEntities[0].url}" alt="">
                             <div class="label new">New</div>
                             <ul class="product__hover">
-                                <li><a href="/api/v1/product/images/${el.imageEntities[0].url}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="/api/v1/products/images/${el.imageEntities[0].url}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                             </ul>

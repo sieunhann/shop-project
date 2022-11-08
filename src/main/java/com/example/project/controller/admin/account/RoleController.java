@@ -1,8 +1,7 @@
 package com.example.project.controller.admin.account;
 
-import com.example.project.dto.AccountDto;
-import com.example.project.entity.RoleEntity;
-import com.example.project.service.RoleService;
+import com.example.project.entity.account.RoleEntity;
+import com.example.project.service.account.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;

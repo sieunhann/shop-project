@@ -31,7 +31,7 @@ createBtn.addEventListener("click", async () => {
             }
         ))
         console.log(formData.getAll("file[]"));
-        await axios.post("/api/v1/product", formData);
+        await axios.post("/api/v1/products/create", formData);
         console.log("successful");
         formData.delete("file[]")
         formData.delete("applicant")

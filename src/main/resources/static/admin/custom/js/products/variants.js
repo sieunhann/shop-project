@@ -36,7 +36,7 @@ async function updateVariant(id) {
         const modalUpdate = document.querySelector(`#modal-update-${id}`);
         const priceInput = modalUpdate.querySelector(".updatePrice")
         const quantityInput = modalUpdate.querySelector(".updateQuantity")
-        let res = await axios.put(`/api/v1/variant/${id}`,
+        let res = await axios.put(`/api/v1/variants/${id}`,
             {
                 price: priceInput.value,
                 quantity: quantityInput.value
@@ -62,7 +62,7 @@ function renderUpdate(id, newPrice, newQuantity){
 // Xóa phiên bản sp
 async function deleteVariant(id){
     try {
-        await axios.delete(`/api/v1/variant/${id}`)
+        await axios.delete(`/api/v1/variants/${id}`)
         console.log("successful");
         const variantRow = document.getElementById(`${id}`);
         variantRow.remove();

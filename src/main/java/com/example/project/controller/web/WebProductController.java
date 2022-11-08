@@ -2,9 +2,9 @@ package com.example.project.controller.web;
 
 import com.example.project.dto.WebProductDto;
 import com.example.project.dto.WebProductFilter;
-import com.example.project.entity.ProductEntity;
-import com.example.project.service.ProductService;
-import com.example.project.service.VariantService;
+import com.example.project.entity.product.ProductEntity;
+import com.example.project.service.product.ProductService;
+import com.example.project.service.product.VariantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

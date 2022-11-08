@@ -180,7 +180,7 @@
 										<tbody>
 											<tr th:each="account,state:${accountPage.content}">
 												<td>
-													<a th:href="@{/admin/account/{id} (id=${account.id})}" th:text="${account.name}">Khai giảng khóa</a>
+													<a th:href="@{/admin/accounts/{id} (id=${account.id})}" th:text="${account.name}">Khai giảng khóa</a>
 												</td>
 												<td th:text="${account.email}"></td>
 												<td th:text="${account.phone}"></td>

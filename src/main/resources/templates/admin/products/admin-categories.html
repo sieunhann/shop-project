@@ -280,7 +280,7 @@
 														<!--Delete modal-->
 														<div class="modal fade" th:id="modal-delete- + ${category.id}" style="display: none;" aria-hidden="true">
 															<div class="modal-dialog">
-																<div class="modal-content bg-danger">
+																<div class="modal-content">
 																	<div class="modal-header">
 																		<h4 class="modal-title">Delete</h4>
 																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -291,8 +291,8 @@
 																		<p>Nhóm sản phẩm sẽ bị xóa hoàn toàn và không thể khôi phục lại. Bạn có chắc chắn muốn xóa nhóm sản phẩm này không?</p>
 																	</div>
 																	<div class="modal-footer justify-content-between">
-																		<button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy</button>
-																		<button type="button" class="btn btn-outline-light" th:onclick="|deleteCategory(${category.id})|">Xóa</button>
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+																		<button type="button" class="btn btn-primary" th:onclick="|deleteCategory(${category.id})|">Xóa</button>
 																	</div>
 																</div>
 

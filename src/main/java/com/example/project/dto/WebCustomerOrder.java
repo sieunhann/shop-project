@@ -1,6 +1,6 @@
 package com.example.project.dto;
 
-import com.example.project.entity.OrderEntity;
+import com.example.project.entity.order.OrderEntity;
 import lombok.*;
 import org.springframework.data.domain.Page;
 
