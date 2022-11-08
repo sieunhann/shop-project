@@ -37,14 +37,14 @@
 + 1-n: variant, image
 
 5. category (Nhóm sản phẩm)
-6. variant (Phiên bản sản phẩm)
-7. image (Ảnh sản phẩm)
-8. cart(Giỏ hàng)
-9. cart_item(Thành phần chi tiết giỏ hàng)
-10. order(Đơn hàng)
-11. order_item(Thành phần chi tiết đơn hàng)
-12. shipping_address(Thông tin nhận hàng)
+7. variant (Phiên bản sản phẩm)
+8. image (Ảnh sản phẩm)
+9. cart(Giỏ hàng)
+10. cart_item(Thành phần chi tiết giỏ hàng)
+11. order(Đơn hàng)
+12. order_item(Thành phần chi tiết đơn hàng)
+13. shipping_address(Thông tin nhận hàng)
 
-//============ Todo =============//
+============ Todo =============
 <br>
 13. refund (Hoàn tiền)
