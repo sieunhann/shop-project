@@ -120,11 +120,11 @@
 
 3. Todo
 
- Hoàn tiền 
+- Hoàn tiền 
 
- Dashboard (Theo dõi tình hình kinh doanh cho nhà quản trị)
+- Dashboard (Theo dõi tình hình kinh doanh cho nhà quản trị)
 
- Giới hạn số lượng sản phẩm được thêm vào giỏ hàng (Không vượt quá lượng tồn kho)
+- Giới hạn số lượng sản phẩm được thêm vào giỏ hàng (Không vượt quá lượng tồn kho)
 
-Lưu trữ sản phẩm yêu thích
+- Lưu trữ sản phẩm yêu thích
 
