@@ -116,3 +116,14 @@ Mua hàng:
 - Lọc sản phẩm theo giá, màu sắc, size, nhóm sản phẩm
 - Thêm sản phẩm vào giỏ hàng (giỏ hàng được lưu trữ)
 - Đặt mua trên website
+
+3. Todo
+
+Hoàn tiền 
+
+Dashboard (Theo dõi tình hình kinh doanh cho nhà quản trị)
+
+Giới hạn số lượng sản phẩm được thêm vào giỏ hàng (Không vượt quá lượng tồn kho)
+
+Lưu trữ sản phẩm yêu thích
+
