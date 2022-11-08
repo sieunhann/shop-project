@@ -73,16 +73,4 @@ n-1: order
 //============ Todo =============//
 <br>
 13. refund (Hoàn tiền)
-=======
-7. variant (Phiên bản sản phẩm)
-8. image (Ảnh sản phẩm)
-9. cart(Giỏ hàng)
-10. cart_item(Thành phần chi tiết giỏ hàng)
-11. order(Đơn hàng)
-12. order_item(Thành phần chi tiết đơn hàng)
-13. shipping_address(Thông tin nhận hàng)
 
-============ Todo =============
-<br>
-13. refund (Hoàn tiền)
->>>>>>> 6c5981d121f341915478483154144ba24515a5eb
