@@ -23,6 +23,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    // Lấy nhóm sp theo id
     public CategoryEntity getById(Long id){
         return categoryRepository.findById(id).get();
     }

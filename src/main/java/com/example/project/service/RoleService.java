@@ -32,8 +32,4 @@ public class RoleService {
                 .collect(Collectors.toList());
     }
 
-    // Lấy danh sách tất cả role
-    public List<RoleEntity> getAllRoles(){
-        return roleRepository.findByIdIsNot(1L);
-    }
 }

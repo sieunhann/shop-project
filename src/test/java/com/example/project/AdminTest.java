@@ -2,12 +2,14 @@ package com.example.project;
 
 import com.example.project.entity.AccountEntity;
 import com.example.project.entity.CartItemEntity;
+import com.example.project.entity.CategoryEntity;
 import com.example.project.entity.RoleEntity;
 import com.example.project.repository.AccountRepository;
 import com.example.project.repository.CartItemRepository;
 import com.example.project.repository.CategoryRepository;
 import com.example.project.repository.RoleRepository;
 import com.example.project.request.CategoryRequest;
+import com.example.project.service.AccountService;
 import com.example.project.service.CategoryService;
 import com.example.project.service.ProductService;
 import com.example.project.service.RoleService;
@@ -19,9 +21,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.List;
 
 @SpringBootTest
-class ProjectApplicationTests {
+class AdminTest {
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private RoleService roleService;
@@ -127,4 +132,57 @@ class ProjectApplicationTests {
         cartItemRepository.delete(item);
     }
 
+    // Xóa tài khoản
+    @Test
+    void delete_account(){
+        accountService.deleteAccount(45L);
+        if(accountRepository.findById(45L).isPresent()){
+            System.out.println("false");
+        } else {
+            System.out.println("true");
+        }
+    }
+
+    // Lấy thông tin KH của đơn hàng
+    @Test
+    void get_customer_by_order(){
+        AccountEntity account = accountService.getByOrder("DH-25");
+        System.out.println(account.getId() + " - " + account.getName());
+    }
+
+    // Lấy danh sách nhóm sp
+    @Test
+    void get_all_category(){
+        List<CategoryEntity> list = categoryService.getAllCategories();
+        list.forEach(el -> System.out.println(el.getName()));
+    }
+
+    // Lấy nhóm sp theo id
+    @Test
+    void get_category_by_id(){
+        CategoryEntity category = categoryService.getById(1L);
+        System.out.println(category.getName());
+    }
+
+    // Xóa nhóm sp
+    @Test
+    void delete_category(){
+        categoryService.deleteCategory(17L);
+        if(categoryRepository.findById(17L).isPresent()){
+            System.out.println("false");
+        }
+        else {
+            System.out.println("true");
+        }
+    }
+
+    // Cập nhật nhóm sp
+    @Test
+    void update_category(){
+        CategoryRequest request = CategoryRequest.builder()
+                .name("Discount")
+                .description("Sản phẩm thời trang giảm giá").build();
+        categoryService.updateCategory(18L , request);
+        System.out.println(categoryService.getById(18L).getName() + " - " +  categoryService.getById(18L).getDescription());
+    }
 }

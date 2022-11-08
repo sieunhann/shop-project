@@ -39,7 +39,7 @@ public class ProductService {
     private ImageService imageService;
 
 
-    // Lấy danh sách sản phẩm
+    // Lấy danh sách sản phẩm và phân trang
     public Page<ProductEntity> getProducts(String query, Pageable pageable){
         return productRepository.findByName(query, pageable);
     }

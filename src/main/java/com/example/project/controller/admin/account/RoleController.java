@@ -40,6 +40,6 @@ public class RoleController {
 
     @GetMapping("/api/v1/roles")
     public ResponseEntity<?> getAllRoles(){
-        return ResponseEntity.ok(roleService.getAllRoles());
+        return ResponseEntity.ok(roleService.getRolesExceptCustomer());
     }
 }
