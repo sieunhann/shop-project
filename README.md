@@ -75,10 +75,11 @@ Todo
 
 ## Tính năng
 
-1. Admin
+1. Admin (quản trị)
 Đơn hàng:
 - Tạo đơn hàng mới
 - Cập nhật thông tin đơn hàng (Trạng thái, thông tin nhận hàng)
+- Theo dõi thông tin chi tiết đơn hàng
 
 Sản phẩm:
 - Tạo sản phẩm mới, tạo phiên bản sản phẩm
@@ -87,14 +88,27 @@ Sản phẩm:
 - Tạo nhóm sản phẩm
 - Cập nhật, xóa nhóm sản phẩm 
 
-Tài khoản
-* Tài khoản cá nhân: 
+Tài khoản:
+- Lấy lại mật khẩu (Quên mật khẩu)
+Tài khoản cá nhân: 
 - Đăng nhập, đăng xuất tài khoản
 - Cập nhật thông tin (thay đổi mật khẩu, thông tin cá nhân)
-* Tài khoản nhân viên:
+Tài khoản nhân viên:
 - Thêm, xóa, cập nhật thông tin (thông tin cá nhân, nhóm tài khoản) => Chỉ tài khoản có role Admin có quyền
-* Tài khoản khách hàng:
+Tài khoản khách hàng:
 - Cập nhật thông tin khách hàng
 - Xem thông tin khách hàng, lịch sử mua hàng
 
-2. Khách hàng
+2. Website
+Tài khoản:
+- Đăng kí, xác thực tài khoản
+- Đăng nhập
+- Theo dõi thông tin cá nhân, lịch sử mua hàng (Chi tiết đơn hàng) => Chỉ có tài khoản đã đăng kí và được kích hoạt có quyền sử dụng
+- Cập nhật thông tin cá nhân, thay đổi mật khẩu
+- Lấy lại mật khẩu (Quên mật khẩu)
+
+Mua hàng:
+- Xem thông tin sản phẩm
+- Lọc sản phẩm theo giá, màu sắc, size, nhóm sản phẩm
+- Thêm sản phẩm vào giỏ hàng (giỏ hàng được lưu trữ)
+- Đặt mua trên website
