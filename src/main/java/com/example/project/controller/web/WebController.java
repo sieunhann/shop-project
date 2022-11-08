@@ -40,4 +40,9 @@ public class WebController {
     public String getDetailPage(){
         return "/web/customer-detail";
     }
+
+    @GetMapping("/shop/contact")
+    public String getContactPage(){
+        return "/web/contact";
+    }
 }

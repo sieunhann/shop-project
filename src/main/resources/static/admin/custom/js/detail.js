@@ -105,21 +105,24 @@ const oldPassInput = document.getElementById("old-password");
 const newPassInput = document.getElementById("new-password");
 
 changePassBtn.addEventListener("click", async () => {
-
     try {
         Array.from(inputEles).map((ele) =>
             ele.classList.remove('success', 'error')
         );
         let isCheck = checkPassword();
         if(isCheck) {
+            $("#btn-change-password").attr("disabled", true)
             let res = await axios.put("/api/v1/detail/password", {
                 oldPassword: oldPassInput.value,
                 newPassword: newPassInput.value
             })
             toastr.success("Thay đổi mật khẩu thành công");
+            oldPassInput.value = "";
+            newPassInput.value = "";
         }
     } catch (e) {
         toastr.error(e.response.data.message);
+        $("#btn-change-password").removeAttr("disabled")
     }
 })
 

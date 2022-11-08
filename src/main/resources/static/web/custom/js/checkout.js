@@ -1,4 +1,6 @@
 $(document).ready(() => {
+    $('.header__menu__items li.active').removeClass('active');
+
     console.log(localStorage.getItem("cart_id"))
     getProvinces();
     getCartInfo();

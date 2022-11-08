@@ -1,4 +1,6 @@
 $(document).ready(()=>{
+    $('.header__menu__items li.active').removeClass('active');
+
     getProduct();
 
     getHotProduct();
