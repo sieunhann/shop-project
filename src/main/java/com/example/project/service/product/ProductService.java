@@ -104,7 +104,7 @@ public class ProductService {
         if(files.length > 0) {
             Arrays.stream(files).toList().forEach(img -> {
 
-                String url = imageService.uploadFile(img).replace("/api/v1/product/images/", "");
+                String url = imageService.uploadFile(img);
                 ImageEntity image = ImageEntity.builder()
                         .url(url)
                         .productEntity(product)
@@ -114,18 +114,18 @@ public class ProductService {
         }
     }
 
-    // Xem image
-    public byte[] readFile(String fileId) {
-        return imageService.readFile(fileId);
-    }
+//    // Xem image
+//    public byte[] readFile(String fileId) {
+//        return imageService.readFile(fileId);
+//    }
 
-    // Lay danh sach image theo Id sản phẩm
-    public List<String> getFilesByProductId(Long id) {
-        ProductEntity product = productRepository.findById(id).orElseThrow(() -> {
-            throw new NotFoundException("Can not find user");
-        });
-        return imageService.getFilesByProductId(id);
-    }
+//    // Lay danh sach image theo Id sản phẩm
+//    public List<String> getFilesByProductId(Long id) {
+//        ProductEntity product = productRepository.findById(id).orElseThrow(() -> {
+//            throw new NotFoundException("Can not find user");
+//        });
+//        return imageService.getFilesByProductId(id);
+//    }
 
     // Tìm kiếm sản phẩm theo id
     public ProductEntity getProductById(Long id){

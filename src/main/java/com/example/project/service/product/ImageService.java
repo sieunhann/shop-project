@@ -6,6 +6,10 @@ import com.example.project.exception.BadRequestException;
 import com.example.project.exception.NotFoundException;
 import com.example.project.repository.product.ImageRepository;
 import com.example.project.repository.product.ProductRepository;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
+import io.minio.RemoveObjectArgs;
+import io.minio.errors.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -13,12 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,49 +37,42 @@ public class ImageService {
     @Autowired
     private ProductRepository productRepository;
 
-    private Path rootPath = Paths.get("uploads");
+    private MinioClient minioClient;
+
+    public ImageService() {
+        minioClient = MinioClient.builder()
+                        .endpoint("https://assets.miinho.click")
+                        .credentials("protripadmin", "protrippass")
+                        .build();
+    }
 
     // Lưu ảnh vào DB
     public ImageEntity saveToDB(ImageEntity image){
         return imageRepository.save(image);
     }
 
-    public ImageService(){
-        createFolder(rootPath.toString());
-    }
-    // Tao folder
-    private void createFolder(String path){
-        File file = new File(path);
-        if(!file.exists()){
-            file.mkdirs();
-        }
-    }
 
     // Upload file
     public String uploadFile(MultipartFile file) {
 
-        // Tao folder tuong ung voi userId
-//        Path userPath = rootPath.resolve(String.valueOf(id));
-//        createFolder(userPath.toString());
-
-        // Validate file
         validateFile(file);
 
+        String fileName = file.getOriginalFilename();
         // Tao fileId
         String fileId = String.valueOf(System.currentTimeMillis());
-        File serverFile = new File(rootPath + "/" + fileId);
         // todo
         //file.transferTo(serverFile);
         try {
-            // Sử dụng Buffer để lưu dữ liệu từ file
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+            InputStream targetStream = new BufferedInputStream(file.getInputStream());
 
-            stream.write(file.getBytes());
-            stream.close();
+            minioClient.putObject(
+                    PutObjectArgs.builder().bucket("images").object(fileId +  getExtensionFile(fileName))
+                            .stream(targetStream, targetStream.available(), -1)
+                            .build());
 
-            return "/api/v1/product/images/" + fileId;
-        } catch (Exception e) {
-            throw new RuntimeException("Lỗi khi upload file");
+            return "https://assets.miinho.click" + "/images/" + fileId + getExtensionFile(fileName);
+        } catch (Exception e){
+            throw new BadRequestException("Không thể tải file");
         }
     }
 
@@ -109,94 +105,33 @@ public class ImageService {
         if(lastIndex == -1){
             return "";
         }
-        return fileName.substring(lastIndex + 1);
+        return fileName.substring(lastIndex);
     }
 
     // Kiem tra duoi file
     public boolean checkFileExtension(String fileExtension){
-        List<String> extensions = new ArrayList<>(List.of("png", "jpeg", "jpg"));
+        List<String> extensions = new ArrayList<>(List.of(".png", ".jpeg", ".jpg"));
         return extensions.contains(fileExtension);
     }
 
-    // Xem file
-    public byte[] readFile(String fileId) {
-//        // Lấy ra đường dẫn file tương ứng với product_id
-//        Path userPath = rootPath.resolve(String.valueOf(id));
-//
-//        // Kiểm tra xem đường dẫn file có tồn tại hay không
-//        if(!Files.exists(userPath)) {
-//            throw new NotFoundException("Không thể đọc file " + fileId);
-//        }
-
-        try {
-            // Lấy ra đường dẫn file tương ứng với file_id
-            Path file = rootPath.resolve(fileId);
-            Resource resource = new UrlResource(file.toUri());
-
-            if(resource.exists() || resource.isReadable()) {
-                InputStream stream = resource.getInputStream();
-                byte[] bytes = StreamUtils.copyToByteArray(stream);
-
-                stream.close();
-                return bytes;
-            } else {
-                throw new RuntimeException("Không thể đọc file " + fileId);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Không thể đọc file " + fileId);
-        }
-    }
-
-    // Lay danh sach file
-    public List<String> getFilesByProductId(Long id) {
-//        // Lấy đường dẫn file tương ứng với product_id
-//        Path userPath = rootPath.resolve(String.valueOf(id));
-//
-//        // Kiểm tra đường dẫn file có tồn tại hay không
-//        // Nếu không tồn tại -> user chưa upload ảnh -> trả về danh sách rỗng
-//        if (!Files.exists(userPath)) {
-//            return new ArrayList<>();
-//        }
-//        List<File> files = List.of(userPath.toFile().listFiles());
-//
-//        // Tra ve ds duong dan voi tung file
-//        List<String> filesPath = files
-//                .stream()
-//                .map(File::getName)
-//                .sorted(Comparator.reverseOrder())
-//                .map(file -> "/admin/product/" + id + "/images/" + file)
-//                .toList();
-        List<ImageEntity> imageList = imageRepository.findByProduct(id);
-        List<String> filesPath = new ArrayList<>();
-        imageList.forEach(img -> filesPath.add("/api/v1/product/images/" + img.getUrl()));
-        return filesPath;
-    }
 
     // Xoa file
     public void deleteFile(Long imgId) {
-//        // Lấy ra đường dẫn file tương ứng với user_id
-//        Path userPath = rootPath.resolve(String.valueOf(id));
-//
-//        // Kiểm tra folder chứa file có tồn tại hay không
-//        if(!Files.exists(userPath)) {
-//            throw new NotFoundException("File " + fileId + " không tồn tại");
-//        }
-
         // Lấy ra đường dẫn file tương ứng với user_id và file_id
-        ImageEntity image = imageRepository.findById(imgId).get();
-        String fileId = image.getUrl();
+        ImageEntity image = imageRepository.findById(imgId).orElseThrow(() -> {
+            throw new NotFoundException("Không tìm thấy ảnh tương ứng");
+        });
+        String url = image.getUrl();
+        String fileName = url.replace("https://assets.miinho.click/images/", "");
 
-        Path file = rootPath.resolve(fileId);
-
-        // Kiểm tra file có tồn tại hay không
-        if(!file.toFile().exists()) {
-            throw new NotFoundException("File " + fileId + " không tồn tại");
+        try {
+            // Tiến hành xóa file
+            minioClient.removeObject(
+                    RemoveObjectArgs.builder().bucket("images").object(fileName).build());
+            imageRepository.delete(image);
+        } catch (Exception e) {
+            throw new BadRequestException("Đã có lỗi xảy ra");
         }
-
-        // Tiến hành xóa file
-        file.toFile().delete();
-        imageRepository.delete(image);
     }
 
     // Upload nhiều ảnh
@@ -208,7 +143,6 @@ public class ImageService {
         if(files.length > 0){
             Arrays.stream(files).toList().forEach(img -> {
                 String pathFile = uploadFile(img);
-                pathFile = pathFile.replace("/api/v1/product/images/", "");
                 ImageEntity image = ImageEntity.builder()
                         .url(pathFile)
                         .productEntity(product)

@@ -180,7 +180,7 @@ const renderImg = (imgs) => {
             <div class="col-2 m-2" id="${img.id}">
                     <div class="row">
                         <div class="image-item col-12">
-                            <img src="/api/v1/products/images/${img.url}" alt="">
+                            <img src="${img.url}" alt="">
                         </div>
                         <div class="col-12 mt-2">
                             <button class="btn-delete-img" onclick="removeImgProduct(${img.id})">Delete</button>

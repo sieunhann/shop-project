@@ -1,0 +1,44 @@
+version: "3.3"
+
+services:
+  # MySQL
+  mysql:
+    image: mysql:latest
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db-ashion.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+
+  # PhpMyAdmin
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "89:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: 123
+
+  # Mail
+  maildev:
+    image : maildev/maildev
+    restart: always
+    ports:
+      - "1080:1080"
+  #      - "1025:1025"
+
+  # App
+  app:
+    image: sieunhann/project-app:latest
+    depends_on:
+      - mysql
+    ports:
+      - "8888:8080"
+    restart: always
+
+volumes:
+  mysql-data:

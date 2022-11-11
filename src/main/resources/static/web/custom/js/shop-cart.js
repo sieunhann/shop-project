@@ -47,7 +47,7 @@ function renderItem(arr){
             html += `
         <tr>
             <td class="cart__product__item">
-               <img class="cart__product__img" src="/api/v1/products/images/${obj.imageUrl}" alt="">
+               <img class="cart__product__img" src="${obj.imageUrl}" alt="">
                <div class="cart__product__item__title">
                <a href="/shop/products/${obj.productId}"><h6>${obj.productName}</h6></a>
                <div class="variant__item__sku pt-2">

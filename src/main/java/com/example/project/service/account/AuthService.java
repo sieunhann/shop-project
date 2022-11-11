@@ -142,7 +142,7 @@ public class AuthService {
         tokenRepository.save(token);
 
         // Gửi email
-        String link = "<a href=\"" + "http://localhost:8686/api/v1/auth/confirm?token="
+        String link = "<a href=\"" + "http://localhost:8888/api/v1/auth/confirm?token="
                 + tokenString + "\"> Kích hoạt tài khoản </a>";
         try {
             mailService.send(account.getEmail(), "Xác thực tài khoản", link);

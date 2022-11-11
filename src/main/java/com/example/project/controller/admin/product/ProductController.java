@@ -64,7 +64,7 @@ public class ProductController {
     // Truy cập trang chi tiết sp
     @GetMapping("/admin/products/{id}")
     public String getProductPage(@PathVariable("id") Long id){
-        return "/admin/products/admin-product";
+        return "admin/products/admin-product";
     }
 
     // Lấy thông tin sp theo id
@@ -86,16 +86,14 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // Xem file
-    // Hoac co the su dung
-    // @GetMapping(value = "/product/{id}/images/{fileId}", produces = {MediaType.IMAGE_JPEG})
-    @GetMapping("/api/v1/products/images/{fileId}")
-    public ResponseEntity<?> readImage(@PathVariable String fileId){
-        byte[] bytes = productService.readFile(fileId);
-        return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(bytes);
-    }
-
-
+//    // Xem file
+//    // Hoac co the su dung
+//    // @GetMapping(value = "/product/{id}/images/{fileId}", produces = {MediaType.IMAGE_JPEG})
+//    @GetMapping("/api/v1/products/images/{fileId}")
+//    public ResponseEntity<?> readImage(@PathVariable String fileId){
+//        byte[] bytes = productService.readFile(fileId);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.IMAGE_JPEG)
+//                .body(bytes);
+//    }
 }

@@ -87,7 +87,7 @@ const renderProducts = (obj) => {
         <div class="col-lg-4 col-md-6 my-3">
            <div class="product_item">
               <div class="product__item__image">
-                    <img src="/api/v1/products/images/${img.url}" alt="">
+                    <img src="${img.url}" alt="">
               </div>
               <div class="product__item__text">
                  <h6><a href="/shop/products/${el.id}">${el.name}</a></h6>

@@ -27,22 +27,22 @@ public class WebController {
     // Truy cập trang giỏ hàng
     @GetMapping("/shop/cart")
     public String getCartPage(){
-        return "/web/shop-cart";
+        return "web/shop-cart";
     }
 
     // Truy cập trang checkout
     @GetMapping("/shop/checkout")
     public String getCheckOutPage(){
-        return "/web/checkout";
+        return "web/checkout";
     }
 
     @GetMapping("/shop/detail")
     public String getDetailPage(){
-        return "/web/customer-detail";
+        return "web/customer-detail";
     }
 
     @GetMapping("/shop/contact")
     public String getContactPage(){
-        return "/web/contact";
+        return "web/contact";
     }
 }

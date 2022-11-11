@@ -104,7 +104,7 @@ function renderCartItemInfo(arr){
             <td class="cart__product__item">
                 <div class="row py-3">
                     <div class="col-3">
-                        <img class="cart__product__img" src="/api/v1/products/images/${obj.imageUrl}" alt="">
+                        <img class="cart__product__img" src="${obj.imageUrl}" alt="">
                     </div>
                     <div class="col-8">
                         <div class="cart__product__item__title">

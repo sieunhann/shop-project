@@ -35,13 +35,13 @@ public class OrderController {
         if(totalPages > 0){
             model.addAttribute("pageNumbers", orderService.getPageNumbers(totalPages));
         }
-        return "/admin/orders/admin-orders";
+        return "admin/orders/admin-orders";
     }
 
     // Trang tạo đơn hàng
     @GetMapping("/admin/orders/create")
     public String getOrderCreatePage(){
-        return "/admin/orders/admin-order-create";
+        return "admin/orders/admin-order-create";
     }
 
 

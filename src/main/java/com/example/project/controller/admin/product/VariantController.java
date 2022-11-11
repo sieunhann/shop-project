@@ -29,7 +29,7 @@ public class VariantController {
         if(totalPages > 0){
             model.addAttribute("pageNumbers", variantService.getPageNumbers(totalPages));
         }
-        return "/admin/products/admin-variants";
+        return "admin/products/admin-variants";
     }
 
     // Lấy tất cả phiên bản sp cho order

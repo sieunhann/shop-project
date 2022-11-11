@@ -48,7 +48,7 @@ public class AccountController {
     // Truy cập trang thông tin nhân viên
     @GetMapping("/admin/accounts/{id}")
     public String getAccountPage(@PathVariable Long id){
-        return "/admin/accounts/admin-account";
+        return "admin/accounts/admin-account";
     }
 
     // Lấy thông tin nhân viên
