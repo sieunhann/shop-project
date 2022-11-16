@@ -114,19 +114,6 @@ public class ProductService {
         }
     }
 
-//    // Xem image
-//    public byte[] readFile(String fileId) {
-//        return imageService.readFile(fileId);
-//    }
-
-//    // Lay danh sach image theo Id sản phẩm
-//    public List<String> getFilesByProductId(Long id) {
-//        ProductEntity product = productRepository.findById(id).orElseThrow(() -> {
-//            throw new NotFoundException("Can not find user");
-//        });
-//        return imageService.getFilesByProductId(id);
-//    }
-
     // Tìm kiếm sản phẩm theo id
     public ProductEntity getProductById(Long id){
         return productRepository.findById(id).orElseThrow(() -> {

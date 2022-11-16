@@ -9,19 +9,12 @@ import com.example.project.repository.product.ProductRepository;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
-import io.minio.errors.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
