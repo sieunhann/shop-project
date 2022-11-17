@@ -92,8 +92,8 @@ public class OrderService {
             item.setVariantSize(variant.getSize());
 
             // Cập nhật tồn kho phiên bản sp
-            int varQty = (int) variant.getQuantity();
-            int iteQty = (int) item.getQuantity();
+            int varQty = variant.getQuantity();
+            int iteQty = item.getQuantity();
             variant.setQuantity(varQty-iteQty);
             variantRepository.save(variant);
             orderItemRepository.save(item);
@@ -161,8 +161,8 @@ public class OrderService {
             VariantEntity variant = variantRepository.findById(item.getVariantId()).get();
 
             // Cập nhật tồn kho phiên bản sp
-            int varQty = (int) variant.getQuantity();
-            int iteQty = (int) item.getQuantity();
+            int varQty = variant.getQuantity();
+            int iteQty = item.getQuantity();
             variant.setQuantity(varQty + iteQty);
             variantRepository.save(variant);
             orderItemRepository.save(item);
@@ -195,8 +195,8 @@ public class OrderService {
             VariantEntity variant = variantRepository.findById(item.getVariantId()).orElseThrow(() -> {
                 throw new NotFoundException("Không tồn tại " + item.getVariantId());
             });
-            int varQty = (int) variant.getQuantity();
-            int itemQty = (int) item.getQuantity();
+            int varQty = variant.getQuantity();
+            int itemQty = item.getQuantity();
             if(itemQty > varQty){
                 throw new BadRequestException("Số lượng tồn kho của sản phẩm" + item.getProductName()
                         + "(" + item.getVariantSize() + "/" + item.getVariantColor() + ") không đủ");
