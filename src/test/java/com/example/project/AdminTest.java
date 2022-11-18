@@ -112,6 +112,22 @@ class AdminTest {
         accountRepository.saveAll(List.of(account, account1, account2, account3, account4));
     }
 
+    // Tạo tk trùng email
+    @Test
+    void save_account_equal_email(){
+        try {
+            AccountEntity account = AccountEntity.builder()
+                    .name("Ngọc Mai 1")
+                    .email("macie@gmail.com")
+                    .phone("0933001997")
+                    .password(encoder.encode("1111"))
+                    .build();
+            accountRepository.save(account);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     // Tạo nhóm sản phẩm
     @Test
     void create_category(){

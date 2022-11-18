@@ -192,15 +192,18 @@ public class OrderService {
     public void createOderItem(OrderEntity order, OrderCreateRequest orderRequest){
         List<OrderItemEntity> orderItems = orderRequest.getOrderItems();
         orderItems.forEach(item -> {
+            // Kiểm tra xem phiên bản sản phẩm còn tồn tại hay không
             VariantEntity variant = variantRepository.findById(item.getVariantId()).orElseThrow(() -> {
                 throw new NotFoundException("Không tồn tại " + item.getVariantId());
             });
             int varQty = variant.getQuantity();
             int itemQty = item.getQuantity();
+            // Kiểm tra số lượng tồn kho của phiên bản sản phẩm
             if(itemQty > varQty){
                 throw new BadRequestException("Số lượng tồn kho của sản phẩm" + item.getProductName()
                         + "(" + item.getVariantSize() + "/" + item.getVariantColor() + ") không đủ");
             } else {
+                // Nếu số lượng tại kho > orderitem -> cập nhật số lượng tồn kho sp
                 variant.setQuantity(varQty - itemQty);
                 variantRepository.save(variant);
 
